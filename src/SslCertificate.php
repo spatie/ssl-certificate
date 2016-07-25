@@ -2,25 +2,50 @@
 
 namespace Spatie\SslCertificate;
 
-class SslCertificateClass
+use Carbon\Carbon;
+
+class SslCertificate
 {
-    /**
-     * Create a new SslCertificate Instance
-     */
-    public function __construct()
+    /** @var array */
+    protected $rawCertificateFields = [];
+
+    public static function createFromUrl(string $url, int $timeout = 30): SslCertificate
     {
-        // constructor body
+        $rawCertificateFields = Downloader::downloadCertificateFromUrl($url);
+
+        return new static($rawCertificateFields);
     }
 
-    /**
-     * Friendly welcome
-     *
-     * @param string $phrase Phrase to return
-     *
-     * @return string Returns the phrase passed in
-     */
-    public function echoPhrase($phrase)
+    public static function createFromFile(string $path)
     {
-        return $phrase;
+    }
+
+    public function __construct(array $rawCertificateFields)
+    {
+        $this->rawCertificateFields = $rawCertificateFields;
+    }
+
+    public function getRawCertificateFields(): array
+    {
+        return $this->rawCertificateFields;
+    }
+
+    public function getDomain(): string
+    {
+        return $this->rawCertificateFields['subject']['CN'] ?? '';
+    }
+
+    public function getAdditionalDomains(): array
+    {
+        $additionalDomains = explode(', ', $this->rawCertificateFields['extensions']['subjectAltName'] ?? '');
+
+        return array_map(function (string $domain) {
+            return str_replace('DNS:', '', $domain);
+        }, $additionalDomains);
+    }
+
+    public function getExpirationDate(): Carbon
+    {
+        return Carbon::createFromTimestampUTC($this->rawCertificateFields['validTo_time_t']);
     }
 }
