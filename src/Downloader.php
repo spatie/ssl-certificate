@@ -4,7 +4,7 @@ namespace Spatie\SslCertificate;
 
 class Downloader
 {
-    public static function downloadCertificateFromUrl(string $url): array
+    public static function downloadCertificateFromUrl(string $url, int $timeout = 30): array
     {
         $hostName = (new Url($url))->getHostName();
 

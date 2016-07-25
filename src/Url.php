@@ -23,10 +23,12 @@ class Url
         $this->parsedUrl = parse_url($url);
     }
 
-    public function getHostName()
+    public function getHostName(): string
     {
         if (!isset($this->parsedUrl['host'])) {
             throw InvalidUrl::couldNotDetermineHost($this->url);
         }
+
+        return $this->parsedUrl['host'];
     }
 }

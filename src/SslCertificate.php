@@ -11,7 +11,7 @@ class SslCertificate
 
     public static function createFromUrl(string $url, int $timeout = 30): SslCertificate
     {
-        $rawCertificateFields = Downloader::downloadCertificateFromUrl($url);
+        $rawCertificateFields = Downloader::downloadCertificateFromUrl($url, $timeout);
 
         return new static($rawCertificateFields);
     }
