@@ -1,11 +1,11 @@
 <?php
 
-namespace Spatie\Skeleton;
+namespace Spatie\SslCertificate;
 
-class SkeletonClass
+class SslCertificateClass
 {
     /**
-     * Create a new Skeleton Instance
+     * Create a new SslCertificate Instance
      */
     public function __construct()
     {
