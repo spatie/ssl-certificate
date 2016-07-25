@@ -1,4 +1,4 @@
-# A class to easily query the properties of an SslCertificate
+# A class to easily query the properties of an ssl certificate
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/ssl-certificate.svg?style=flat-square)](https://packagist.org/packages/spatie/ssl-certificate)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
