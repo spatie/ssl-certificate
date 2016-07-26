@@ -3,7 +3,6 @@
 namespace Spatie\SslCertificate;
 
 use Spatie\SslCertificate\Exceptions\InvalidUrl;
-use Spatie\SslCertificate\starts_with;
 
 class Url
 {

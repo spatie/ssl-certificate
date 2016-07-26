@@ -21,7 +21,7 @@ function starts_with($haystack, $needles): bool
  *
  * @return bool
  */
-function ends_with($haystack, $needles)
+function ends_with(string $haystack, $needles): bool
 {
     foreach ((array) $needles as $needle) {
         if ((string) $needle === substr($haystack, -length($needle))) {
@@ -41,7 +41,7 @@ function ends_with($haystack, $needles)
  *
  * @return string
  */
-function substr($string, $start, $length = null)
+function substr(string $string, int $start, int $length = null): string
 {
     return mb_substr($string, $start, $length, 'UTF-8');
 }
@@ -53,7 +53,7 @@ function substr($string, $start, $length = null)
  *
  * @return int
  */
-function length($value)
+function length(string $value): int
 {
     return mb_strlen($value);
 }
