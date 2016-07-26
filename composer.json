@@ -25,7 +25,10 @@
     "autoload": {
         "psr-4": {
             "Spatie\\SslCertificate\\": "src"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

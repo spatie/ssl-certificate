@@ -3,6 +3,7 @@
 namespace Spatie\SslCertificate;
 
 use Spatie\SslCertificate\Exceptions\InvalidUrl;
+use Spatie\SslCertificate\starts_with;
 
 class Url
 {
@@ -14,6 +15,10 @@ class Url
 
     public function __construct(string $url)
     {
+        if (!starts_with($url, ['http://', 'https://'])) {
+            $url = "https://{$url}";
+        }
+
         if (!filter_var($url, FILTER_VALIDATE_URL)) {
             throw InvalidUrl::couldNotValidate($url);
         }
