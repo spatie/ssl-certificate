@@ -19,12 +19,12 @@ class Downloader
 
         try {
             $client = stream_socket_client(
-            "ssl://{$hostName}:443",
-            $errorNumber,
-            $errorDescription,
-            $timeout,
-            STREAM_CLIENT_CONNECT,
-            $streamContext);
+                "ssl://{$hostName}:443",
+                $errorNumber,
+                $errorDescription,
+                $timeout,
+                STREAM_CLIENT_CONNECT,
+                $streamContext);
         } catch (Throwable $thrown) {
             if (str_contains($thrown->getMessage(), 'getaddrinfo failed')) {
                 throw CouldNotDownloadCertificate::hostDoesNotExist($hostName);
