@@ -31,7 +31,7 @@ class Downloader
             }
 
             if (str_contains($thrown->getMessage(), 'error:14090086')) {
-                throw CouldNotDownloadCertificate::noCertifcateInstalled($hostName);
+                throw CouldNotDownloadCertificate::noCertificateInstalled($hostName);
             }
 
             throw CouldNotDownloadCertificate::unknownError($hostName, $thrown->getMessage());
