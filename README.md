@@ -10,7 +10,7 @@
 The class provided by this package makes it incredibly easy to query the properties on an ssl certificate. Here's an example
 
 ```php
-$certificate = SslCertificate::createFromHostName('spatie.be');
+$certificate = SslCertificate::createForHostName('spatie.be');
 
 $certificate->getIssuer(); // returns "Let's Encrypt Authority X3"
 $certificate->isValid(); // returns a boolean if the certificate is currently valid
@@ -33,7 +33,7 @@ composer require spatie/ssl-certificate
 You can create an instance of `Spatie\SslCertificate\SslCertificate` with this named constructor:
 
 ```php
-$certificate = SslCertificate::createFromHostName('spatie.be');
+$certificate = SslCertificate::createForHostName('spatie.be');
 ```
 
 If the given `hostName` is invalid `Spatie\SslCertificate\InvalidUrl` will be thrown.

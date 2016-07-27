@@ -113,7 +113,7 @@ class SslCertificateTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function it_can_create_an_instance_for_the_given_host()
     {
-        $downloadedCertificate = SslCertificate::createFromHostName('spatie.be');
+        $downloadedCertificate = SslCertificate::createForHostName('spatie.be');
 
         $this->assertSame('spatie.be', $downloadedCertificate->getDomain());
     }

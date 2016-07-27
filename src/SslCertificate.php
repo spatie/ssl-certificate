@@ -9,7 +9,7 @@ class SslCertificate
     /** @var array */
     protected $rawCertificateFields = [];
 
-    public static function createFromHostName(string $url, int $timeout = 30): SslCertificate
+    public static function createForHostName(string $url, int $timeout = 30): SslCertificate
     {
         $rawCertificateFields = Downloader::downloadCertificateFromUrl($url, $timeout);
 
