@@ -15,7 +15,7 @@ class SslCertificateTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        Carbon::setTestNow(Carbon::create('2016', '06', '01'));
+        Carbon::setTestNow(Carbon::create('2016', '06', '01', '00', '00', '00', 'utc'));
 
         $rawCertificateFields = json_decode(file_get_contents(__DIR__.'/stubs/spatieCertificateFields.json'), true);
 
@@ -63,32 +63,32 @@ class SslCertificateTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function it_can_determine_if_the_certificate_is_valid()
     {
-        Carbon::setTestNow(Carbon::create('2016', '05', '19', '16', '45'));
+        Carbon::setTestNow(Carbon::create('2016', '05', '19', '16', '45', '00', 'utc'));
         $this->assertFalse($this->certificate->isValid());
 
-        Carbon::setTestNow(Carbon::create('2016', '05', '19', '16', '51'));
+        Carbon::setTestNow(Carbon::create('2016', '05', '19', '16', '51', '00', 'utc'));
         $this->assertTrue($this->certificate->isValid());
 
-        Carbon::setTestNow(Carbon::create('2016', '08', '17', '16', '49'));
+        Carbon::setTestNow(Carbon::create('2016', '08', '17', '16', '49', '00', 'utc'));
         $this->assertTrue($this->certificate->isValid());
 
-        Carbon::setTestNow(Carbon::create('2016', '08', '17', '16', '51'));
+        Carbon::setTestNow(Carbon::create('2016', '08', '17', '16', '51', '00', 'utc'));
         $this->assertFalse($this->certificate->isValid());
     }
 
     /** @test */
     public function it_can_determine_if_the_certificate_is_expired()
     {
-        Carbon::setTestNow(Carbon::create('2016', '05', '19', '16', '45'));
+        Carbon::setTestNow(Carbon::create('2016', '05', '19', '16', '45', '00', 'utc'));
         $this->assertFalse($this->certificate->isExpired());
 
-        Carbon::setTestNow(Carbon::create('2016', '05', '19', '16', '51'));
+        Carbon::setTestNow(Carbon::create('2016', '05', '19', '16', '51', '00', 'utc'));
         $this->assertFalse($this->certificate->isExpired());
 
-        Carbon::setTestNow(Carbon::create('2016', '08', '17', '16', '49'));
+        Carbon::setTestNow(Carbon::create('2016', '08', '17', '16', '49', '00', 'utc'));
         $this->assertFalse($this->certificate->isExpired());
 
-        Carbon::setTestNow(Carbon::create('2016', '08', '17', '16', '51'));
+        Carbon::setTestNow(Carbon::create('2016', '08', '17', '16', '51', '00', 'utc'));
         $this->assertTrue($this->certificate->isExpired());
     }
 
