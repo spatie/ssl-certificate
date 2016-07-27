@@ -62,7 +62,7 @@ class SslCertificate
 
     public function isValid(string $url = null)
     {
-        if (! Carbon::now()->between($this->validFromDate(), $this->expirationDate())) {
+        if (!Carbon::now()->between($this->validFromDate(), $this->expirationDate())) {
             return false;
         }
 
