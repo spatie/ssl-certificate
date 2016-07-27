@@ -109,4 +109,12 @@ class SslCertificateTest extends PHPUnit_Framework_TestCase
 
         $this->assertFalse($this->certificate->isValid('facebook.com'));
     }
+
+    /** @test */
+    public function it_can_create_an_instance_for_the_given_host()
+    {
+        $downloadedCertificate = SslCertificate::createFromHostName('spatie.be');
+
+        $this->assertSame('spatie.be', $downloadedCertificate->getDomain());
+    }
 }

@@ -7,7 +7,16 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/spatie/ssl-certificate.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/ssl-certificate)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/ssl-certificate.svg?style=flat-square)](https://packagist.org/packages/spatie/ssl-certificate)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+The class provided by this package makes it incredibly easy to query the properties on an ssl certificate. Here's an example
+
+```php
+$certificate = SslCertificate::createFromHostName('spatie.be');
+
+$certificate->getIssuer(); // returns "Let's Encrypt Authority X3"
+$certificate->isValid(); // returns a boolean if the certificate is currently valid
+$certificate->getExpirationDate(); // returns an instance of Carbon
+$certificate->getExpirationDate()->diffInDays(); // returns an int
+```
 
 Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
 
@@ -15,15 +24,71 @@ Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview 
 
 You can install the package via composer:
 
-``` bash
+```bash
 composer require spatie/ssl-certificate
 ```
 
 ## Usage
 
-``` php
-$sslCertificate = new Spatie\SslCertificate();
-echo $sslCertificate->echoPhrase('Hello, Spatie!');
+You can create an instance of `Spatie\SslCertificate\SslCertificate` with this named constructor:
+
+```php
+$certificate = SslCertificate::createFromHostName('spatie.be');
+```
+
+If the given `hostName` is invalid `Spatie\SslCertificate\InvalidUrl` will be thrown.
+
+If the given `hostName` is valid but there was a problem download the certifcate `Spatie\SllCertificate\CouldNotDownloadCertificate` will be thrown.
+
+### Getting the issuer name
+
+```php
+$certificate->getIssuer(); // returns "Let's Encrypt Authority X3"
+```
+
+### Getting the domain name
+
+Returns the primary domain name for the certificate
+
+```php
+$certificate->getDomain(); // returns "spatie.be"
+```
+
+### Getting the additional domain names
+
+A certificate can cover multiple (sub)domains. Here's how to get them.
+
+```php
+$certificate->getAdditionalDomains(); // returns ["spatie.be", "www.spatie.be]
+```
+
+A domain name return with this method can start with `*` meaning it is valid for all subdomains of that domain.
+
+### Getting the date when the certificate becomes valid
+
+```php
+$this->certificate->validFromDate(); // returns an instance of Carbon
+```
+
+### Getting the expiration date
+
+```php
+$this->certificate->expirationDate(); // returns an instance of Carbon
+```
+
+### Determining if the certificate is still valid
+
+Returns true if the current Date and time is between `validFromDate` and `expirationDate`.
+
+```php
+$this->certificate->isValid(); // returns a boolean
+```
+
+You also use this method to determine if a given domain is covered by the certificate. Of course it'll keep checking if the current Date and time is between `validFromDate` and `expirationDate`.
+
+```php
+$this->certificate->isValid('spatie.be'); // returns true;
+$this->certificate->isValid('laravel.com'); // returns false;
 ```
 
 ## Changelog
