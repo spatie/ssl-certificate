@@ -13,7 +13,7 @@ class CouldNotDownloadCertificate extends Exception
 
     public static function noCertificateInstalled(string $hostName): CouldNotDownloadCertificate
     {
-        return new static("Could not find a certifcate on  host named `{$hostName}`.");
+        return new static("Could not find a certificate on  host named `{$hostName}`.");
     }
 
     public static function unknownError(string $hostName, string $errorMessage): CouldNotDownloadCertificate
