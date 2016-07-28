@@ -13,7 +13,10 @@ class Downloader
 
         $streamContext = stream_context_create([
             'ssl' => [
+                'verify_peer'       => false,
                 'capture_peer_cert' => true,
+                'verify_peer_name'  => false,
+                'allow_self_signed' => true,
             ],
         ]);
 
@@ -28,10 +31,6 @@ class Downloader
         } catch (Throwable $thrown) {
             if (str_contains($thrown->getMessage(), 'getaddrinfo failed')) {
                 throw CouldNotDownloadCertificate::hostDoesNotExist($hostName);
-            }
-
-            if (str_contains($thrown->getMessage(), 'error:14090086')) {
-                throw CouldNotDownloadCertificate::noCertificateInstalled($hostName);
             }
 
             throw CouldNotDownloadCertificate::unknownError($hostName, $thrown->getMessage());
