@@ -28,6 +28,10 @@ You can install the package via composer:
 composer require spatie/ssl-certificate
 ```
 
+## Important notice
+
+Currently this package [does not check](https://github.com/spatie/ssl-certificate/blob/master/src/SslCertificate.php#L63-L74) if the certificate is signed by a trusted authority. We'll add this check soon in a next point release.
+
 ## Usage
 
 You can create an instance of `Spatie\SslCertificate\SslCertificate` with this named constructor:
