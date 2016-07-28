@@ -94,7 +94,7 @@ class SslCertificate
 
     protected function wildcardHostCoversHost(string $wildcardHost, string $host): bool
     {
-        if ($host == $wildcardHost) {
+        if ($host === $wildcardHost) {
             return true;
         }
 
