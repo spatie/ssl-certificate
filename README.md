@@ -13,7 +13,7 @@ The class provided by this package makes it incredibly easy to query the propert
 $certificate = SslCertificate::createForHostName('spatie.be');
 
 $certificate->getIssuer(); // returns "Let's Encrypt Authority X3"
-$certificate->isValid(); // returns a boolean if the certificate is currently valid
+$certificate->isValid(); // returns true if the certificate is currently valid
 $certificate->getExpirationDate(); // returns an instance of Carbon
 $certificate->getExpirationDate()->diffInDays(); // returns an int
 ```
