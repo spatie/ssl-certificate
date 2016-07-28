@@ -93,6 +93,26 @@ class SslCertificateTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function it_can_determine_if_expire_in_given_days()
+    {
+        // Expire date of certificate is: 17/08/2016 16:50
+        Carbon::setTestNow(Carbon::create('2016', '08', '1', '16', '49', '00', 'utc'));
+        $this->assertFalse($this->certificate->willExpireIn(7));
+
+        Carbon::setTestNow(Carbon::create('2016', '08', '10', '16', '49', '00', 'utc'));
+        $this->assertFalse($this->certificate->willExpireIn(7));
+
+        Carbon::setTestNow(Carbon::create('2016', '08', '10', '16', '51', '00', 'utc'));
+        $this->assertTrue($this->certificate->willExpireIn(7));
+
+        Carbon::setTestNow(Carbon::create('2016', '08', '17', '16', '49', '00', 'utc'));
+        $this->assertTrue($this->certificate->willExpireIn(7));
+
+        Carbon::setTestNow(Carbon::create('2016', '08', '17', '16', '51', '00', 'utc'));
+        $this->assertFalse($this->certificate->willExpireIn(7)); // already expired
+    }
+
+    /** @test */
     public function it_can_determine_if_the_certificate_is_valid_for_a_certain_domain()
     {
         $this->assertTrue($this->certificate->isValid('spatie.be'));
