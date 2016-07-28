@@ -1,4 +1,4 @@
-# A class to easily query the properties of an ssl certificate
+# A class to validate SSL certificates
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/ssl-certificate.svg?style=flat-square)](https://packagist.org/packages/spatie/ssl-certificate)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
@@ -7,7 +7,7 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/spatie/ssl-certificate.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/ssl-certificate)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/ssl-certificate.svg?style=flat-square)](https://packagist.org/packages/spatie/ssl-certificate)
 
-The class provided by this package makes it incredibly easy to query the properties on an ssl certificate. Here's an example
+The class provided by this package makes it incredibly easy to query the properties on an ssl certificate. Here's an example:
 
 ```php
 $certificate = SslCertificate::createForHostName('spatie.be');
