@@ -75,7 +75,7 @@ class SslCertificate
 
     public function isValidUntil(Carbon $date, string $url = null): bool
     {
-        if($this->expirationDate()->gt($date)) {
+        if ($this->expirationDate()->gt($date)) {
             return false;
         }
 
