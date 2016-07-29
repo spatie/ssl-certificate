@@ -95,17 +95,18 @@ $this->certificate->isValid('spatie.be'); // returns true;
 $this->certificate->isValid('laravel.com'); // returns false;
 ```
 
+### Determining if the certificate is still valid until a given date
+
+Returns true if the certificate is valid and if the `expirationDate` is before the given date.
+
+```php
+$this->certificate->isValidUntil(Carbon::now()->addDays(7)); // returns a boolean
+```
+
 ### Determining if the certificate is expired
 
 ```php
 $this->certificate->isExpired(); // returns a boolean if expired
-```
-
-### Determining if the certificate will expire within given days
-
-E.g. if you want to determine if the certificate will expire within 7 days
-```php
-$this->certificate->willExpireIn(7); // returns a boolean
 ```
 
 ## Changelog
