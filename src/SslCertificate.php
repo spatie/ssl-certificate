@@ -60,15 +60,6 @@ class SslCertificate
         return $this->expirationDate()->isPast();
     }
 
-    public function willExpireIn(int $days) : bool
-    {
-        if($this->isExpired()) {
-            return false;
-        }
-
-        return $this->expirationDate()->subDay($days)->isPast();
-    }
-
     public function isValid(string $url = null)
     {
         if (!Carbon::now()->between($this->validFromDate(), $this->expirationDate())) {
@@ -77,6 +68,19 @@ class SslCertificate
 
         if (!empty($url)) {
             return $this->appliesToUrl($url ?? $this->getDomain());
+        }
+
+        return true;
+    }
+
+    public function isValidUntil(Carbon $date, string $url = null) : bool
+    {
+        if (!$this->isValid($url)) {
+            return false;
+        }
+
+        if($this->expirationDate()->gt($date)) {
+            return false;
         }
 
         return true;
