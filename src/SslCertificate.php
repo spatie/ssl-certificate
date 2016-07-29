@@ -73,17 +73,13 @@ class SslCertificate
         return true;
     }
 
-    public function isValidUntil(Carbon $date, string $url = null) : bool
+    public function isValidUntil(Carbon $date, string $url = null): bool
     {
-        if (!$this->isValid($url)) {
-            return false;
-        }
-
         if($this->expirationDate()->gt($date)) {
             return false;
         }
 
-        return true;
+        return $this->isValid($url);
     }
 
     public function appliesToUrl(string $url): bool
