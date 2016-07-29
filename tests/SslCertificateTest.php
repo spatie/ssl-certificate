@@ -93,6 +93,29 @@ class SslCertificateTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function it_can_determine_if_the_certificate_is_valid_until_a_date()
+    {
+        // Expire date of certificate is: 17/08/2016 16:50
+        Carbon::setTestNow(Carbon::create('2016', '08', '10', '16', '49', '00', 'utc'));     // 10/08   16:49
+        $this->assertFalse($this->certificate->isValidUntil(Carbon::now()->addDays(2)));     // 12/08
+
+        Carbon::setTestNow(Carbon::create('2016', '08', '10', '16', '49', '00', 'utc'));     // 10/08   16:49
+        $this->assertTrue($this->certificate->isValidUntil(Carbon::now()->addDays(8)));      // 18/08
+
+        Carbon::setTestNow(Carbon::create('2016', '08', '16', '16', '49', '00', 'utc'));     // 16/08   16:49
+        $this->assertFalse($this->certificate->isValidUntil(Carbon::now()->addDays(1)));     // 17/08
+
+        Carbon::setTestNow(Carbon::create('2016', '08', '16', '16', '51', '00', 'utc'));     // 16/08   16:51
+        $this->assertTrue($this->certificate->isValidUntil(Carbon::now()->addDays(1)));      // 17/08
+
+        Carbon::setTestNow(Carbon::create('2016', '08', '17', '16', '49', '00', 'utc'));     // 17/08   16:49
+        $this->assertTrue($this->certificate->isValidUntil(Carbon::now()->addDays(1)));      // 18/08
+
+        Carbon::setTestNow(Carbon::create('2016', '08', '17', '16', '51', '00', 'utc'));     // 17/08   16:51
+        $this->assertFalse($this->certificate->isValidUntil(Carbon::now()->addDays(1)));     // 17/08
+    }
+
+    /** @test */
     public function it_can_determine_if_the_certificate_is_valid_for_a_certain_domain()
     {
         $this->assertTrue($this->certificate->isValid('spatie.be'));
