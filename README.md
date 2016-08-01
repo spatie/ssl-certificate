@@ -50,7 +50,7 @@ $certificate = SslCertificate::createForHostName('spatie.be');
 
 If the given `hostName` is invalid `Spatie\SslCertificate\InvalidUrl` will be thrown.
 
-If the given `hostName` is valid but there was a problem downloading the certifcate `Spatie\SllCertificate\CouldNotDownloadCertificate` will be thrown.
+If the given `hostName` is valid but there was a problem downloading the certifcate `Spatie\SslCertificate\CouldNotDownloadCertificate` will be thrown.
 
 ### Getting the issuer name
 
