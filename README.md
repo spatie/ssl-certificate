@@ -14,8 +14,8 @@ $certificate = SslCertificate::createForHostName('spatie.be');
 
 $certificate->getIssuer(); // returns "Let's Encrypt Authority X3"
 $certificate->isValid(); // returns true if the certificate is currently valid
-$certificate->getExpirationDate(); // returns an instance of Carbon
-$certificate->getExpirationDate()->diffInDays(); // returns an int
+$certificate->expirationDate(); // returns an instance of Carbon
+$certificate->expirationDate()->diffInDays(); // returns an int
 ```
 
 Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
