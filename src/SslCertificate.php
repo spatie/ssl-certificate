@@ -36,6 +36,11 @@ class SslCertificate
         return $this->rawCertificateFields['subject']['CN'] ?? '';
     }
 
+    public function getSignatureAlgorithm(): string
+    {
+        return $this->rawCertificateFields['signatureTypeSN'] ?? '';
+    }
+
     public function getAdditionalDomains(): array
     {
         $additionalDomains = explode(', ', $this->rawCertificateFields['extensions']['subjectAltName'] ?? '');

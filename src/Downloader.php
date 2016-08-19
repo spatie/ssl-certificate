@@ -24,7 +24,8 @@ class Downloader
                 $errorDescription,
                 $timeout,
                 STREAM_CLIENT_CONNECT,
-                $streamContext);
+                $streamContext
+            );
         } catch (Throwable $thrown) {
             if (str_contains($thrown->getMessage(), 'getaddrinfo failed')) {
                 throw CouldNotDownloadCertificate::hostDoesNotExist($hostName);
