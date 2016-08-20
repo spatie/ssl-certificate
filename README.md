@@ -66,6 +66,14 @@ Returns the primary domain name for the certificate
 $certificate->getDomain(); // returns "spatie.be"
 ```
 
+### Getting the certificate's signing algorithm
+
+Returns the algorithm used for signing the certificate
+
+```php
+$certificate->getSignatureAlgorithm(); // returns "RSA-SHA256"
+```
+
 ### Getting the additional domain names
 
 A certificate can cover multiple (sub)domains. Here's how to get them.

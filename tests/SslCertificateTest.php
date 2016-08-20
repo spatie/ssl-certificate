@@ -35,6 +35,12 @@ class SslCertificateTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function it_can_determine_the_alogorithm()
+    {
+        $this->assertSame('RSA-SHA256', $this->certificate->getSignatureAlgorithm());
+    }
+
+    /** @test */
     public function it_can_determine_the_additional_domains()
     {
         $this->assertCount(3, $this->certificate->getAdditionalDomains());
