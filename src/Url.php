@@ -14,11 +14,11 @@ class Url
 
     public function __construct(string $url)
     {
-        if (!starts_with($url, ['http://', 'https://'])) {
+        if (! starts_with($url, ['http://', 'https://'])) {
             $url = "https://{$url}";
         }
 
-        if (!filter_var($url, FILTER_VALIDATE_URL)) {
+        if (! filter_var($url, FILTER_VALIDATE_URL)) {
             throw InvalidUrl::couldNotValidate($url);
         }
 
@@ -26,7 +26,7 @@ class Url
 
         $this->parsedUrl = parse_url($url);
 
-        if (!isset($this->parsedUrl['host'])) {
+        if (! isset($this->parsedUrl['host'])) {
             throw InvalidUrl::couldNotDetermineHost($this->url);
         }
     }
