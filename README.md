@@ -5,6 +5,7 @@
 [![Build Status](https://img.shields.io/travis/spatie/ssl-certificate/master.svg?style=flat-square)](https://travis-ci.org/spatie/ssl-certificate)
 [![SensioLabsInsight](https://img.shields.io/sensiolabs/i/533fbcef-7363-41af-8d1c-ab53bb6a1d76.svg?style=flat-square)](https://insight.sensiolabs.com/projects/533fbcef-7363-41af-8d1c-ab53bb6a1d76)
 [![Quality Score](https://img.shields.io/scrutinizer/g/spatie/ssl-certificate.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/ssl-certificate)
+[![StyleCI](https://styleci.io/repos/64165510/shield)](https://styleci.io/repos/64165510)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/ssl-certificate.svg?style=flat-square)](https://packagist.org/packages/spatie/ssl-certificate)
 
 The class provided by this package makes it incredibly easy to query the properties on an ssl certificate. Here's an example:
@@ -16,6 +17,7 @@ $certificate->getIssuer(); // returns "Let's Encrypt Authority X3"
 $certificate->isValid(); // returns true if the certificate is currently valid
 $certificate->expirationDate(); // returns an instance of Carbon
 $certificate->expirationDate()->diffInDays(); // returns an int
+$certificate->getSignatureAlgorithm(); // returns a string
 ```
 
 Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).

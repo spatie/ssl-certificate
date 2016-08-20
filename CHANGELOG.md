@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.2.0 - 2016-08-20
+
+- added `getSignatureAlgorithm`
+
 ## 1.1.0 - 2016-07-29
 
 - added `isValidUntil`
