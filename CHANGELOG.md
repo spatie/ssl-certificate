@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.2.1 - 2016-11-15
+
+- lower required version of Carbon
+
 ## 1.2.0 - 2016-08-20
 
 - added `getSignatureAlgorithm`
