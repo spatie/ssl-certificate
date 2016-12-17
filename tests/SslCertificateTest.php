@@ -22,6 +22,16 @@ class SslCertificateTest extends PHPUnit_Framework_TestCase
         $this->certificate = new SslCertificate($rawCertificateFields);
     }
 
+    public function it_can_get_the_raw_certificate_fiels()
+    {
+        $rawCertificateFields = $this->certificate->getRawCertificateFields();
+
+        $expectedFields = json_decode(file_get_contents(__DIR__.'/stubs/spatieCertificateFields.json'));
+
+        $this->assertEquals($expectedFields, $rawCertificateFields);
+    }
+
+
     /** @test */
     public function it_can_determine_the_issuer()
     {
@@ -143,6 +153,17 @@ class SslCertificateTest extends PHPUnit_Framework_TestCase
     public function it_can_create_an_instance_for_the_given_host()
     {
         $downloadedCertificate = SslCertificate::createForHostName('spatie.be');
+
+        $this->assertSame('spatie.be', $downloadedCertificate->getDomain());
+    }
+
+    /** @test */
+    public function it_provides_a_fluent_interface_to_set_all_options()
+    {
+        $downloadedCertificate = SslCertificate::download()
+            ->usingPort(443)
+            ->setTimeout(30)
+            ->forHostName('spatie.be');
 
         $this->assertSame('spatie.be', $downloadedCertificate->getDomain());
     }

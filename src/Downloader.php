@@ -7,9 +7,39 @@ use Throwable;
 
 class Downloader
 {
-    public static function downloadCertificateFromUrl(string $url, int $timeout = 30): array
+    /** @var int */
+    protected $port = 443;
+
+    /** @var int */
+    protected $timeout;
+
+    /**
+     * @param int $port
+     *
+     * @return $this
+     */
+    public function usingPort(int $port)
     {
-        $hostName = (new Url($url))->getHostName();
+        $this->port = $port;
+
+        return $this;
+    }
+
+    /**
+     * @param int $timeOutInSeconds
+     *
+     * @return $this
+     */
+    public function setTimeout(int $timeOutInSeconds)
+    {
+        $this->timeout = $timeOutInSeconds;
+
+        return $this;
+    }
+
+    public function forHostName(string $hostName): SslCertificate
+    {
+        $hostName = (new Url($hostName))->getHostName();
 
         $streamContext = stream_context_create([
             'ssl' => [
@@ -19,10 +49,10 @@ class Downloader
 
         try {
             $client = stream_socket_client(
-                "ssl://{$hostName}:443",
+                "ssl://{$hostName}:{$this->port}",
                 $errorNumber,
                 $errorDescription,
-                $timeout,
+                $this->timeout,
                 STREAM_CLIENT_CONNECT,
                 $streamContext
             );
@@ -40,6 +70,15 @@ class Downloader
 
         $response = stream_context_get_params($client);
 
-        return openssl_x509_parse($response['options']['ssl']['peer_certificate']);
+        $certificateFields = openssl_x509_parse($response['options']['ssl']['peer_certificate']);
+
+        return new SslCertificate($certificateFields);
+    }
+
+    public static function downloadCertificateFromUrl(string $url, int $timeout = 30): SslCertificate
+    {
+        return (new static())
+            ->setTimeout(30)
+            ->forHostName($url);
     }
 }

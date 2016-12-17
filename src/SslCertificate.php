@@ -9,11 +9,16 @@ class SslCertificate
     /** @var array */
     protected $rawCertificateFields = [];
 
+    public static function download(): Downloader
+    {
+        return new Downloader();
+    }
+
     public static function createForHostName(string $url, int $timeout = 30): SslCertificate
     {
-        $rawCertificateFields = Downloader::downloadCertificateFromUrl($url, $timeout);
+        $sslCertificate = Downloader::downloadCertificateFromUrl($url, $timeout);
 
-        return new static($rawCertificateFields);
+        return $sslCertificate;
     }
 
     public function __construct(array $rawCertificateFields)
