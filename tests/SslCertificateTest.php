@@ -163,7 +163,7 @@ class SslCertificateTest extends PHPUnit_Framework_TestCase
         $downloadedCertificate = SslCertificate::download()
             ->usingPort(443)
             ->setTimeout(30)
-            ->forHostName('spatie.be');
+            ->forHost('spatie.be');
 
         $this->assertSame('spatie.be', $downloadedCertificate->getDomain());
     }

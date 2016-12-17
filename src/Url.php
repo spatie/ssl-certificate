@@ -14,7 +14,7 @@ class Url
 
     public function __construct(string $url)
     {
-        if (! starts_with($url, ['http://', 'https://'])) {
+        if (! starts_with($url, ['http://', 'https://', 'ssl://'])) {
             $url = "https://{$url}";
         }
 

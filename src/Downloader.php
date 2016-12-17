@@ -37,7 +37,7 @@ class Downloader
         return $this;
     }
 
-    public function forHostName(string $hostName): SslCertificate
+    public function forHost(string $hostName): SslCertificate
     {
         $hostName = (new Url($hostName))->getHostName();
 
@@ -79,6 +79,6 @@ class Downloader
     {
         return (new static())
             ->setTimeout(30)
-            ->forHostName($url);
+            ->forHost($url);
     }
 }
