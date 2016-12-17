@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.3.0 (still unreleased) - 2016-12-1X
+
+- add fluent interface to download certificates
+
 ## 1.2.1 - 2016-11-15
 
 - lower required version of Carbon
