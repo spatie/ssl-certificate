@@ -4,8 +4,8 @@ namespace Spatie\SslCertificate\Test;
 
 use PHPUnit_Framework_TestCase;
 use Spatie\SslCertificate\Downloader;
-use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate;
 use Spatie\SslCertificate\SslCertificate;
+use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate;
 
 class DownloaderTest extends PHPUnit_Framework_TestCase
 {
