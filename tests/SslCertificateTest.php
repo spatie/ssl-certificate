@@ -31,7 +31,6 @@ class SslCertificateTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expectedFields, $rawCertificateFields);
     }
 
-
     /** @test */
     public function it_can_determine_the_issuer()
     {
