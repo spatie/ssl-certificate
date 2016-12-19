@@ -50,6 +50,14 @@ You can create an instance of `Spatie\SslCertificate\SslCertificate` with this n
 $certificate = SslCertificate::createForHostName('spatie.be');
 ```
 
+You can use this fluent style to specify a specific port to connect to.
+
+```php
+SslCertificate::download()
+   ->usingPort($customPort)
+   ->forHost($hostName);
+```
+
 If the given `hostName` is invalid `Spatie\SslCertificate\InvalidUrl` will be thrown.
 
 If the given `hostName` is valid but there was a problem downloading the certifcate `Spatie\SslCertificate\CouldNotDownloadCertificate` will be thrown.

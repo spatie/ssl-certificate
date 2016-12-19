@@ -11,7 +11,7 @@ class Downloader
     protected $port = 443;
 
     /** @var int */
-    protected $timeout;
+    protected $timeout = 30;
 
     /**
      * @param int $port
@@ -68,6 +68,10 @@ class Downloader
             throw CouldNotDownloadCertificate::unknownError($hostName, $thrown->getMessage());
         }
 
+        if (! $client) {
+            throw CouldNotDownloadCertificate::unknownError($hostName, "Could not connect to `{$hostName}`.");
+        }
+
         $response = stream_context_get_params($client);
 
         $certificateFields = openssl_x509_parse($response['options']['ssl']['peer_certificate']);
@@ -78,7 +82,7 @@ class Downloader
     public static function downloadCertificateFromUrl(string $url, int $timeout = 30): SslCertificate
     {
         return (new static())
-            ->setTimeout(30)
+            ->setTimeout($timeout)
             ->forHost($url);
     }
 }
