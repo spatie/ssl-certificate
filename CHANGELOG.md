@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## unreleased
+
+- fix `isValidUntil`
+
 ## 1.3.0 - 2016-12-17
 
 - add fluent interface to download certificates
