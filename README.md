@@ -123,7 +123,7 @@ $this->certificate->isValid('laravel.com'); // returns false;
 
 ### Determining if the certificate is still valid until a given date
 
-Returns true if the certificate is valid and if the `expirationDate` is before the given date.
+Returns true if the certificate is valid and if the `expirationDate` is after the given date.
 
 ```php
 $this->certificate->isValidUntil(Carbon::now()->addDays(7)); // returns a boolean
