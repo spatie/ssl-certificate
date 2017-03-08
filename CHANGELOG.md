@@ -2,7 +2,7 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
-## unreleased
+## 1.3.1
 
 - fix `isValidUntil`
 
