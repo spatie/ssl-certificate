@@ -1,0 +1,8 @@
+before_script:
+  - bash .gitlab-ci.sh
+  - composer update --no-interaction --prefer-source
+
+phpunit:php7.0:
+  image: php:7.0
+  script:
+    - php vendor/bin/phpunit --colors --coverage-text --coverage-clover=coverage.clover

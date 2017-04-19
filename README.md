@@ -134,7 +134,6 @@ $this->certificate->isValidUntil(Carbon::now()->addDays(7)); // returns a boolea
 ```php
 $this->certificate->isExpired(); // returns a boolean if expired
 ```
-
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
@@ -144,6 +143,8 @@ Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recen
 ``` bash
 $ composer test
 ```
+
+When working to test your implementation of this library you can use [BadSSL](https://badssl.com/) to simulate various SSL scenarios.
 
 ## Contributing
 
