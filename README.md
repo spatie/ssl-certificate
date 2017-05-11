@@ -11,6 +11,8 @@
 The class provided by this package makes it incredibly easy to query the properties on an ssl certificate. Here's an example:
 
 ```php
+use Spatie\SslCertificate\SslCertificate;
+
 $certificate = SslCertificate::createForHostName('spatie.be');
 
 $certificate->getIssuer(); // returns "Let's Encrypt Authority X3"
