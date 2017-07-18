@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.3.2 - 2017-07-18
+
+- fix wildcard matching
+
 ## 1.3.1 - 2017-03-08
 
 - fix `isValidUntil`
