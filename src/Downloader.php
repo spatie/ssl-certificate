@@ -77,7 +77,7 @@ class Downloader
 
         $fullCertificateChain = array_merge([$peerCertificate], $peerCertificateChain);
 
-        return array_map(function($certificate) {
+        return array_map(function ($certificate) {
             $certificateFields = openssl_x509_parse($certificate);
 
             return new SslCertificate($certificateFields);
@@ -127,11 +127,12 @@ class Downloader
             $this->handleRequestFailure($hostName, $thrown);
         }
 
-        if (!$client) {
+        if (! $client) {
             throw CouldNotDownloadCertificate::unknownError($hostName, "Could not connect to `{$hostName}`.");
         }
 
         $response = stream_context_get_params($client);
+
         return $response;
     }
 
