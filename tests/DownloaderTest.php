@@ -18,6 +18,14 @@ class DownloaderTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function it_can_download_all_certificates_from_a_host_name()
+    {
+        $sslCertificates = (new Downloader)->getCertificates('spatie.be');
+
+        $this->assertCount(1, $sslCertificates);
+    }
+
+    /** @test */
     public function it_throws_an_exception_for_non_existing_host()
     {
         $this->expectException(CouldNotDownloadCertificate::class);

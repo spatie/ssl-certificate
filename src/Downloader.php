@@ -14,10 +14,10 @@ class Downloader
     protected $timeout = 30;
 
     /** @var bool */
-    protected $sni = true;
+    protected $enableSni = true;
 
     /** @var bool */
-    protected $ca_chain = false;
+    protected $capturePeerChain = false;
 
     /**
      * @param int $port
@@ -38,7 +38,7 @@ class Downloader
      */
     public function usingSni(bool $sni)
     {
-        $this->sni = $sni;
+        $this->enableSni = $sni;
 
         return $this;
     }
@@ -50,7 +50,7 @@ class Downloader
      */
     public function withFullChain(bool $ca_chain)
     {
-        $this->ca_chain = $ca_chain;
+        $this->capturePeerChain = $ca_chain;
 
         return $this;
     }
@@ -69,56 +69,19 @@ class Downloader
 
     public function getCertificates(string $hostName): array
     {
-        $hostName = (new Url($hostName))->getHostName();
+        $response = $this->fetchCertificates($hostName);
 
-        $ssl_options = [
-            'capture_peer_cert' => true,
-            'capture_peer_cert_chain' => $this->ca_chain,
-            'SNI_enabled' => $this->sni,
-        ];
+        $peerCertificate = $response['options']['ssl']['peer_certificate'];
 
-        $streamContext = stream_context_create([
-            'ssl' => $ssl_options,
-        ]);
+        $peerCertificateChain = $response['options']['ssl']['peer_certificate_chain'] ?? [];
 
-        try {
-            $client = stream_socket_client(
-                "ssl://{$hostName}:{$this->port}",
-                $errorNumber,
-                $errorDescription,
-                $this->timeout,
-                STREAM_CLIENT_CONNECT,
-                $streamContext
-            );
-        } catch (Throwable $thrown) {
-            if (str_contains($thrown->getMessage(), 'getaddrinfo failed')) {
-                throw CouldNotDownloadCertificate::hostDoesNotExist($hostName);
-            }
+        $fullCertificateChain = array_merge([$peerCertificate], $peerCertificateChain);
 
-            if (str_contains($thrown->getMessage(), 'error:14090086')) {
-                throw CouldNotDownloadCertificate::noCertificateInstalled($hostName);
-            }
-
-            throw CouldNotDownloadCertificate::unknownError($hostName, $thrown->getMessage());
-        }
-
-        if (! $client) {
-            throw CouldNotDownloadCertificate::unknownError($hostName, "Could not connect to `{$hostName}`.");
-        }
-
-        $response = stream_context_get_params($client);
-
-        $peer_certificate = $response['options']['ssl']['peer_certificate'];
-        $peer_certificate_chain = $response['options']['ssl']['peer_certificate_chain'] ?? [];
-        $certificates = array_merge([$peer_certificate], $peer_certificate_chain);
-
-        $return = [];
-        foreach ($certificates as $certificate) {
+        return array_map(function($certificate) {
             $certificateFields = openssl_x509_parse($certificate);
-            $return[] = new SslCertificate($certificateFields);
-        }
 
-        return $return;
+            return new SslCertificate($certificateFields);
+        }, $fullCertificateChain);
     }
 
     public function forHost(string $hostName): SslCertificate
@@ -135,5 +98,53 @@ class Downloader
         return (new static())
             ->setTimeout($timeout)
             ->forHost($url);
+    }
+
+    protected function fetchCertificates(string $hostName): array
+    {
+        $hostName = (new Url($hostName))->getHostName();
+
+        $sslOptions = [
+            'capture_peer_cert' => true,
+            'capture_peer_cert_chain' => $this->capturePeerChain,
+            'SNI_enabled' => $this->enableSni,
+        ];
+
+        $streamContext = stream_context_create([
+            'ssl' => $sslOptions,
+        ]);
+
+        try {
+            $client = stream_socket_client(
+                "ssl://{$hostName}:{$this->port}",
+                $errorNumber,
+                $errorDescription,
+                $this->timeout,
+                STREAM_CLIENT_CONNECT,
+                $streamContext
+            );
+        } catch (Throwable $thrown) {
+            $this->handleRequestFailure($hostName, $thrown);
+        }
+
+        if (!$client) {
+            throw CouldNotDownloadCertificate::unknownError($hostName, "Could not connect to `{$hostName}`.");
+        }
+
+        $response = stream_context_get_params($client);
+        return $response;
+    }
+
+    protected function handleRequestFailure(string $hostName, Throwable $thrown)
+    {
+        if (str_contains($thrown->getMessage(), 'getaddrinfo failed')) {
+            throw CouldNotDownloadCertificate::hostDoesNotExist($hostName);
+        }
+
+        if (str_contains($thrown->getMessage(), 'error:14090086')) {
+            throw CouldNotDownloadCertificate::noCertificateInstalled($hostName);
+        }
+
+        throw CouldNotDownloadCertificate::unknownError($hostName, $thrown->getMessage());
     }
 }
