@@ -110,12 +110,12 @@ class Downloader
 
         $peer_certificate = $response['options']['ssl']['peer_certificate'];
         $peer_certificate_chain = $response['options']['ssl']['peer_certificate_chain'] ?? [];
-        $certificates = array_merge ([ $peer_certificate ], $peer_certificate_chain);
+        $certificates = array_merge([ $peer_certificate ], $peer_certificate_chain);
 
         $return = [];
         foreach ($certificates as $certificate) {
-          $certificateFields = openssl_x509_parse($certificate);
-          $return[] = new SslCertificate($certificateFields);
+            $certificateFields = openssl_x509_parse($certificate);
+            $return[] = new SslCertificate($certificateFields);
         }
 
         return $return;
