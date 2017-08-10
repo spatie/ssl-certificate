@@ -32,7 +32,7 @@ class Downloader
     }
 
     /**
-     * @param int $port
+     * @param int $sni
      *
      * @return $this
      */
@@ -44,7 +44,7 @@ class Downloader
     }
 
     /**
-     * @param int $port
+     * @param int $ca_chain
      *
      * @return $this
      */
