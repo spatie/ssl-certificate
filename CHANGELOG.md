@@ -6,6 +6,7 @@ All notable changes to `ssl-certificate` will be documented in this file
 
 - add `withVerifyPeer` and `withVerifyPeerName` methods on Downloader.
 - add `getRawCertificateFieldsJson`, `getHash` and `__toString` methods on `SslCertificate`
+- fixes bug where a peer certificate appears twice in a chain
 
 ## 1.4.0 - 2017-08-10
 
