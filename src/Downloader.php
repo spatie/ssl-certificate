@@ -71,17 +71,20 @@ class Downloader
     {
         $response = $this->fetchCertificates($hostName);
 
+
         $peerCertificate = $response['options']['ssl']['peer_certificate'];
 
         $peerCertificateChain = $response['options']['ssl']['peer_certificate_chain'] ?? [];
 
         $fullCertificateChain = array_merge([$peerCertificate], $peerCertificateChain);
 
-        return array_map(function ($certificate) {
+        // Filter duplicates: wildcard SSL certs are reported in both
+        // 'peer_certificate' as well as 'peer_certificate_chain'
+        return array_unique(array_map(function ($certificate) {
             $certificateFields = openssl_x509_parse($certificate);
 
             return new SslCertificate($certificateFields);
-        }, $fullCertificateChain);
+        }, $fullCertificateChain));
     }
 
     public function forHost(string $hostName): SslCertificate

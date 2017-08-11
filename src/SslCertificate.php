@@ -125,4 +125,19 @@ class SslCertificate
 
         return substr_count($wildcardHost, '.') >= substr_count($host, '.') && ends_with($host, $wildcardHostWithoutWildcard);
     }
+
+    public function getRawCertificateFieldsJson(): string
+    {
+      return json_encode($this->getRawCertificateFields());
+    }
+
+    public function getHash(): string
+    {
+      return md5(json_encode($this->getRawCertificateFieldsJson()));
+    }
+
+    public function __toString(): string
+    {
+      return $this->getRawCertificateFieldsJson();
+    }
 }
