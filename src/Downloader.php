@@ -71,7 +71,6 @@ class Downloader
     {
         $response = $this->fetchCertificates($hostName);
 
-
         $peerCertificate = $response['options']['ssl']['peer_certificate'];
 
         $peerCertificateChain = $response['options']['ssl']['peer_certificate_chain'] ?? [];
