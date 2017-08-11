@@ -133,7 +133,7 @@ class SslCertificate
 
     public function getHash(): string
     {
-        return md5(json_encode($this->getRawCertificateFieldsJson()));
+        return md5($this->getRawCertificateFieldsJson());
     }
 
     public function __toString(): string
