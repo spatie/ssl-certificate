@@ -19,6 +19,12 @@ class Downloader
     /** @var bool */
     protected $capturePeerChain = false;
 
+    /** @var bool */
+    protected $verifyPeer = true;
+
+    /** @var bool */
+    protected $verifyPeerName = true;
+
     /**
      * @param int $port
      *
@@ -51,6 +57,30 @@ class Downloader
     public function withFullChain(bool $ca_chain)
     {
         $this->capturePeerChain = $ca_chain;
+
+        return $this;
+    }
+
+    /**
+     * @param int $verify_peer
+     *
+     * @return $this
+     */
+    public function withVerifyPeer(bool $verify_peer)
+    {
+        $this->verifyPeer = $verify_peer;
+
+        return $this;
+    }
+
+    /**
+     * @param int $verify_peer_name
+     *
+     * @return $this
+     */
+    public function withVerifyPeerName(bool $verify_peer_name)
+    {
+        $this->verifyPeerName = $verify_peer_name;
 
         return $this;
     }
@@ -110,6 +140,8 @@ class Downloader
             'capture_peer_cert' => true,
             'capture_peer_cert_chain' => $this->capturePeerChain,
             'SNI_enabled' => $this->enableSni,
+            'verify_peer' => $this->verifyPeer,
+            'verify_peer_name' => $this->verifyPeerName,
         ];
 
         $streamContext = stream_context_create([
