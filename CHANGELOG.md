@@ -2,10 +2,14 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.5.0 - 2017-08-11
+
+- add `withVerifyPeer` and `withVerifyPeerName` methods on Downloader.
+- add `getRawCertificateFieldsJson`, `getHash` and `__toString` methods on `SslCertificate`
+
 ## 1.4.0 - 2017-08-10
 
-- add `getCertificates` method on Downloader.
-- add `usingSni`, `withFullChain`, `withVerifyPeer` and `withVerifyPeerName` method on Downloader.
+- add `getCertificates`, `usingSni`, `withFullChain` methods on Downloader.
 
 ## 1.3.2 - 2017-07-18
 

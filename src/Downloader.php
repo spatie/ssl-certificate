@@ -38,7 +38,7 @@ class Downloader
     }
 
     /**
-     * @param int $sni
+     * @param bool $sni
      *
      * @return $this
      */
@@ -50,37 +50,37 @@ class Downloader
     }
 
     /**
-     * @param int $ca_chain
+     * @param bool $fullChain
      *
      * @return $this
      */
-    public function withFullChain(bool $ca_chain)
+    public function withFullChain(bool $fullChain)
     {
-        $this->capturePeerChain = $ca_chain;
+        $this->capturePeerChain = $fullChain;
 
         return $this;
     }
 
     /**
-     * @param int $verify_peer
+     * @param bool $verifyPeer
      *
      * @return $this
      */
-    public function withVerifyPeer(bool $verify_peer)
+    public function withVerifyPeer(bool $verifyPeer)
     {
-        $this->verifyPeer = $verify_peer;
+        $this->verifyPeer = $verifyPeer;
 
         return $this;
     }
 
     /**
-     * @param int $verify_peer_name
+     * @param bool $verifyPeerName
      *
      * @return $this
      */
-    public function withVerifyPeerName(bool $verify_peer_name)
+    public function withVerifyPeerName(bool $verifyPeerName)
     {
-        $this->verifyPeerName = $verify_peer_name;
+        $this->verifyPeerName = $verifyPeerName;
 
         return $this;
     }
@@ -107,13 +107,13 @@ class Downloader
 
         $fullCertificateChain = array_merge([$peerCertificate], $peerCertificateChain);
 
-        // Filter duplicates: wildcard SSL certs are reported in both
-        // 'peer_certificate' as well as 'peer_certificate_chain'
-        return array_unique(array_map(function ($certificate) {
+        $certificates = array_map(function ($certificate) {
             $certificateFields = openssl_x509_parse($certificate);
 
             return new SslCertificate($certificateFields);
-        }, $fullCertificateChain));
+        }, $fullCertificateChain);
+
+        return array_unique($certificates);
     }
 
     public function forHost(string $hostName): SslCertificate
@@ -161,7 +161,7 @@ class Downloader
             $this->handleRequestFailure($hostName, $thrown);
         }
 
-        if (! $client) {
+        if (!$client) {
             throw CouldNotDownloadCertificate::unknownError($hostName, "Could not connect to `{$hostName}`.");
         }
 
