@@ -161,7 +161,7 @@ class Downloader
             $this->handleRequestFailure($hostName, $thrown);
         }
 
-        if (!$client) {
+        if (! $client) {
             throw CouldNotDownloadCertificate::unknownError($hostName, "Could not connect to `{$hostName}`.");
         }
 
