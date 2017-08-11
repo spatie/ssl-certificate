@@ -19,6 +19,12 @@ class Downloader
     /** @var bool */
     protected $capturePeerChain = false;
 
+    /** @var bool */
+    protected $verifyPeer = true;
+
+    /** @var bool */
+    protected $verifyPeerName = true;
+
     /**
      * @param int $port
      *
@@ -56,6 +62,30 @@ class Downloader
     }
 
     /**
+     * @param int $verify_peer
+     *
+     * @return $this
+     */
+    public function withVerifyPeer(bool $verify_peer)
+    {
+        $this->verifyPeer = $verify_peer;
+
+        return $this;
+    }
+
+    /**
+     * @param int $verify_peer_name
+     *
+     * @return $this
+     */
+    public function withVerifyPeerName(bool $verify_peer_name)
+    {
+        $this->verifyPeerName = $verify_peer_name;
+
+        return $this;
+    }
+
+    /**
      * @param int $timeOutInSeconds
      *
      * @return $this
@@ -77,11 +107,13 @@ class Downloader
 
         $fullCertificateChain = array_merge([$peerCertificate], $peerCertificateChain);
 
-        return array_map(function ($certificate) {
+        // Filter duplicates: wildcard SSL certs are reported in both
+        // 'peer_certificate' as well as 'peer_certificate_chain'
+        return array_unique(array_map(function ($certificate) {
             $certificateFields = openssl_x509_parse($certificate);
 
             return new SslCertificate($certificateFields);
-        }, $fullCertificateChain);
+        }, $fullCertificateChain));
     }
 
     public function forHost(string $hostName): SslCertificate
@@ -108,6 +140,8 @@ class Downloader
             'capture_peer_cert' => true,
             'capture_peer_cert_chain' => $this->capturePeerChain,
             'SNI_enabled' => $this->enableSni,
+            'verify_peer' => $this->verifyPeer,
+            'verify_peer_name' => $this->verifyPeerName,
         ];
 
         $streamContext = stream_context_create([
