@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.4.0 - 2017-08-10
+
+- add `getCertificates` method on Downloader.
+
 ## 1.3.2 - 2017-07-18
 
 - fix wildcard matching
