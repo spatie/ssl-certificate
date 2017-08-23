@@ -92,11 +92,16 @@ class SslCertificate
         return $this->isValid($url);
     }
 
+    public function getDomains(): array
+    {
+        return array_filter(array_merge([$this->getDomain()], $this->getAdditionalDomains()));
+    }
+
     public function appliesToUrl(string $url): bool
     {
         $host = (new Url($url))->getHostName();
 
-        $certificateHosts = array_merge([$this->getDomain()], $this->getAdditionalDomains());
+        $certificateHosts = $this->getDomains();
 
         foreach ($certificateHosts as $certificateHost) {
             if ($host === $certificateHost) {
