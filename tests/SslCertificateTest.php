@@ -4,10 +4,13 @@ namespace Spatie\SslCertificate\Test;
 
 use Carbon\Carbon;
 use PHPUnit_Framework_TestCase;
+use Spatie\Snapshots\MatchesSnapshots;
 use Spatie\SslCertificate\SslCertificate;
 
 class SslCertificateTest extends PHPUnit_Framework_TestCase
 {
+    use MatchesSnapshots;
+
     /** @var SslCertificate */
     protected $certificate;
 
@@ -177,5 +180,23 @@ class SslCertificateTest extends PHPUnit_Framework_TestCase
             ->forHost('spatie.be');
 
         $this->assertSame('spatie.be', $downloadedCertificate->getDomain());
+    }
+
+    /** @test */
+    public function it_can_convert_the_certificate_to_json()
+    {
+        $this->assertMatchesJsonSnapshot($this->certificate->getRawCertificateFieldsJson());
+    }
+
+    /** @test */
+    public function it_can_convert_the_certificate_to_a_string()
+    {
+        $this->assertEquals($this->certificate->getRawCertificateFieldsJson(), (string) $this->certificate);
+    }
+
+    /** @test */
+    public function it_can_get_the_hash_of_a_certificate()
+    {
+        $this->assertEquals('7469a491af5f1a5cc5dc5775608ec0ab', $this->certificate->getHash());
     }
 }
