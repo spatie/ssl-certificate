@@ -199,4 +199,15 @@ class SslCertificateTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals('7469a491af5f1a5cc5dc5775608ec0ab', $this->certificate->getHash());
     }
+
+    /** @test */
+    public function it_can_get_all_domains()
+    {
+        $this->assertEquals([
+            0 => 'spatie.be',
+            1 => 'spatie.be',
+            2 => 'www.spatie.be',
+            3 => '*.otherdomain.com'
+        ], $this->certificate->getDomains());
+    }
 }

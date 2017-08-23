@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.6.0 - 2017-08-23
+
+- add `getDomains`
+
 ## 1.5.0 - 2017-08-11
 
 - add `withVerifyPeer` and `withVerifyPeerName` methods on Downloader.
