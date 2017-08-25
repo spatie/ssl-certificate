@@ -2,11 +2,15 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
-## 1.8.0 - 2017-08-28
+## 1.9.0 - 2017-08-25
+
+- add `usesSha1Hash`
+
+## 1.8.0 - 2017-08-25
 
 - add `isSelfSigned`
 
-## 1.7.0 - 2017-08-28
+## 1.7.0 - 2017-08-25
 
 - add `getDaysUntilExpirationDate`
 

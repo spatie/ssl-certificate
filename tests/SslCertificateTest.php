@@ -222,4 +222,10 @@ class SslCertificateTest extends PHPUnit_Framework_TestCase
     {
         $this->assertFalse($this->certificate->isSelfSigned());
     }
+
+    /** @test */
+    public function it_can_determine_if_it_uses_sha1_hasing()
+    {
+        $this->assertFalse($this->certificate->usesSha1Hash());
+    }
 }

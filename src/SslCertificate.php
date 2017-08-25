@@ -72,11 +72,11 @@ class SslCertificate
 
     public function isValid(string $url = null)
     {
-        if (! Carbon::now()->between($this->validFromDate(), $this->expirationDate())) {
+        if (!Carbon::now()->between($this->validFromDate(), $this->expirationDate())) {
             return false;
         }
 
-        if (! empty($url)) {
+        if (!empty($url)) {
             return $this->appliesToUrl($url ?? $this->getDomain());
         }
 
@@ -86,6 +86,21 @@ class SslCertificate
     public function isSelfSigned(): bool
     {
         return $this->getIssuer() === $this->getDomain();
+    }
+
+    public function usesSha1Hash(): bool
+    {
+        $certificateFields = $this->getRawCertificateFields();
+
+        if ($certificateFields['signatureTypeSN'] === 'RSA-SHA1') {
+            return true;
+        }
+
+        if ($certificateFields['signatureTypeLN'] === 'sha1WithRSAEncryption') {
+            return true;
+        }
+
+        return false;
     }
 
     public function isValidUntil(Carbon $carbon, string $url = null): bool
@@ -136,7 +151,7 @@ class SslCertificate
             return true;
         }
 
-        if (! starts_with($wildcardHost, '*')) {
+        if (!starts_with($wildcardHost, '*')) {
             return false;
         }
 
