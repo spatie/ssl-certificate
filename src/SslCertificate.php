@@ -83,6 +83,11 @@ class SslCertificate
         return true;
     }
 
+    public function isSelfSigned(): bool
+    {
+        return $this->getIssuer() === $this->getDomain();
+    }
+
     public function isValidUntil(Carbon $carbon, string $url = null): bool
     {
         if ($this->expirationDate()->lte($carbon)) {

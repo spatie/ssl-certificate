@@ -216,4 +216,10 @@ class SslCertificateTest extends PHPUnit_Framework_TestCase
     {
          $this->assertEquals(77, $this->certificate->daysUntilExpirationDate());
     }
+
+    /** @test */
+    public function it_can_determine_if_it_is_self_signed()
+    {
+        $this->assertFalse($this->certificate->isSelfSigned());
+    }
 }
