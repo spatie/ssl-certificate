@@ -98,7 +98,7 @@ class SslCertificate
 
         $interval = Carbon::now()->diff($endDate);
 
-        return (int)$interval->format("%r%a");
+        return (int) $interval->format('%r%a');
     }
 
     public function getDomains(): array

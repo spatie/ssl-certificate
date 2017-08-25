@@ -214,6 +214,6 @@ class SslCertificateTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function it_can_get_the_days_until_the_expiration_date()
     {
-         $this->assertEquals(77, $this->certificate->daysUntilExpirationDate());
+        $this->assertEquals(77, $this->certificate->daysUntilExpirationDate());
     }
 }
