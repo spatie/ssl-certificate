@@ -72,11 +72,11 @@ class SslCertificate
 
     public function isValid(string $url = null)
     {
-        if (!Carbon::now()->between($this->validFromDate(), $this->expirationDate())) {
+        if (! Carbon::now()->between($this->validFromDate(), $this->expirationDate())) {
             return false;
         }
 
-        if (!empty($url)) {
+        if (! empty($url)) {
             return $this->appliesToUrl($url ?? $this->getDomain());
         }
 
@@ -118,7 +118,7 @@ class SslCertificate
 
         $interval = Carbon::now()->diff($endDate);
 
-        return (int)$interval->format("%r%a");
+        return (int) $interval->format('%r%a');
     }
 
     public function getDomains(): array
@@ -151,7 +151,7 @@ class SslCertificate
             return true;
         }
 
-        if (!starts_with($wildcardHost, '*')) {
+        if (! starts_with($wildcardHost, '*')) {
             return false;
         }
 
