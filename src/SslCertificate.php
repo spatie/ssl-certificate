@@ -33,7 +33,7 @@ class SslCertificate
 
     public function getIssuer(): string
     {
-        return $this->rawCertificateFields['issuer']['CN'];
+        return $this->rawCertificateFields['issuer']['CN'] ?? '';
     }
 
     public function getDomain(): string

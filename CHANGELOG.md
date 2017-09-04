@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.9.1 - 2017-09-04
+
+- avoid error when issuer is empty
+
 ## 1.9.0 - 2017-08-25
 
 - add `usesSha1Hash`
