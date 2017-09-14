@@ -2,6 +2,26 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.9.1 - 2017-09-04
+
+- avoid error when issuer is empty
+
+## 1.9.0 - 2017-08-25
+
+- add `usesSha1Hash`
+
+## 1.8.0 - 2017-08-25
+
+- add `isSelfSigned`
+
+## 1.7.0 - 2017-08-25
+
+- add `getDaysUntilExpirationDate`
+
+## 1.6.0 - 2017-08-23
+
+- add `getDomains`
+
 ## 1.5.0 - 2017-08-11
 
 - add `withVerifyPeer` and `withVerifyPeerName` methods on Downloader.

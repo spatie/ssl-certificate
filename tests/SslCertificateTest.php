@@ -199,4 +199,33 @@ class SslCertificateTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals('7469a491af5f1a5cc5dc5775608ec0ab', $this->certificate->getHash());
     }
+
+    /** @test */
+    public function it_can_get_all_domains()
+    {
+        $this->assertEquals([
+            0 => 'spatie.be',
+            1 => 'spatie.be',
+            2 => 'www.spatie.be',
+            3 => '*.otherdomain.com',
+        ], $this->certificate->getDomains());
+    }
+
+    /** @test */
+    public function it_can_get_the_days_until_the_expiration_date()
+    {
+        $this->assertEquals(77, $this->certificate->daysUntilExpirationDate());
+    }
+
+    /** @test */
+    public function it_can_determine_if_it_is_self_signed()
+    {
+        $this->assertFalse($this->certificate->isSelfSigned());
+    }
+
+    /** @test */
+    public function it_can_determine_if_it_uses_sha1_hasing()
+    {
+        $this->assertFalse($this->certificate->usesSha1Hash());
+    }
 }

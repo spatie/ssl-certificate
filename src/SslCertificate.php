@@ -33,7 +33,7 @@ class SslCertificate
 
     public function getIssuer(): string
     {
-        return $this->rawCertificateFields['issuer']['CN'];
+        return $this->rawCertificateFields['issuer']['CN'] ?? '';
     }
 
     public function getDomain(): string
@@ -81,6 +81,26 @@ class SslCertificate
         }
 
         return true;
+    }
+
+    public function isSelfSigned(): bool
+    {
+        return $this->getIssuer() === $this->getDomain();
+    }
+
+    public function usesSha1Hash(): bool
+    {
+        $certificateFields = $this->getRawCertificateFields();
+
+        if ($certificateFields['signatureTypeSN'] === 'RSA-SHA1') {
+            return true;
+        }
+
+        if ($certificateFields['signatureTypeLN'] === 'sha1WithRSAEncryption') {
+            return true;
+        }
+
+        return false;
     }
 
     public function isValidUntil(Carbon $carbon, string $url = null): bool
