@@ -117,7 +117,7 @@ class SslCertificate
         $endDate = $this->expirationDate();
 
         $interval = Carbon::now()->diff($endDate);
-        
+
         return (int) $interval->format('%r%a');
     }
 
