@@ -112,6 +112,15 @@ class SslCertificate
         return $this->isValid($url);
     }
 
+    public function daysUntilExpirationDate(): int
+    {
+        $endDate = $this->expirationDate();
+
+        $interval = Carbon::now()->diff($endDate);
+        
+        return (int) $interval->format('%r%a');
+    }
+
     public function getDomains(): array
     {
         return array_filter(array_merge([$this->getDomain()], $this->getAdditionalDomains()));
