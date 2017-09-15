@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.10.1 - 2017-09-15
+
+- add `containsDomain`
+
 ## 1.9.1 - 2017-09-04
 
 - avoid error when issuer is empty
