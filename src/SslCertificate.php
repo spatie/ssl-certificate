@@ -177,11 +177,6 @@ class SslCertificate
 
     public function containsDomain(string $domain): bool
     {
-        // This function checks if a certificate contains a particular domain.
-        // It doesn't have to cover it like a wildcard, just *have* the domain
-        // in it. It's used in certificate transparency reports, to report
-        // on certificates that are issued for a particular domain.
-
         $certificateHosts = $this->getDomains();
 
         foreach ($certificateHosts as $certificateHost) {
