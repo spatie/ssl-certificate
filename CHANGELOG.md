@@ -2,7 +2,7 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
-## 1.10.1 - 2017-09-15
+## 1.10.0 - 2017-09-15
 
 - add `containsDomain`
 
