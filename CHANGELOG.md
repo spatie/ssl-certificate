@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.11.0 - 2017-09-16
+
+- make `SslCertificate` macroable
+
 ## 1.10.0 - 2017-09-15
 
 - add `containsDomain`
