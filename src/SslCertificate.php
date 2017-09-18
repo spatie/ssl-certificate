@@ -3,9 +3,12 @@
 namespace Spatie\SslCertificate;
 
 use Carbon\Carbon;
+use Spatie\Macroable\Macroable;
 
 class SslCertificate
 {
+    use Macroable;
+
     /** @var array */
     protected $rawCertificateFields = [];
 
