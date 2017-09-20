@@ -11,6 +11,7 @@ class SslCertificate
 
     /** @var array */
     protected $rawCertificateFields = [];
+    protected $rawCertificate = "";
 
     public static function download(): Downloader
     {
@@ -24,9 +25,10 @@ class SslCertificate
         return $sslCertificate;
     }
 
-    public function __construct(array $rawCertificateFields)
+    public function __construct(array $rawCertificateFields, string $rawCertificate = "")
     {
         $this->rawCertificateFields = $rawCertificateFields;
+        $this->rawCertificate = $rawCertificate;
     }
 
     public function getRawCertificateFields(): array
@@ -171,6 +173,16 @@ class SslCertificate
     public function getHash(): string
     {
         return md5($this->getRawCertificateFieldsJson());
+    }
+
+    public function getFingerprint(): string
+    {
+        if (strlen($this->rawCertificate) > 0) {
+            return openssl_x509_fingerprint($this->rawCertificate);
+        } else {
+            // Raw certificate wasn't provided, can't get fingerprint
+            return "";
+        }
     }
 
     public function __toString(): string
