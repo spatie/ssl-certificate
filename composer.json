@@ -18,11 +18,11 @@
     "require": {
         "php": "^7.0",
         "nesbot/carbon": "^1.15",
-        "spatie/macroable": "^1.0",
-        "spatie/phpunit-snapshot-assertions": "^1.0"
+        "spatie/macroable": "^1.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "5.*"
+        "phpunit/phpunit": "5.*",
+        "spatie/phpunit-snapshot-assertions": "^1.0"
     },
     "autoload": {
         "psr-4": {
