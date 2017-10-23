@@ -4,8 +4,8 @@ namespace Spatie\SslCertificate\Test;
 
 use Carbon\Carbon;
 use PHPUnit_Framework_TestCase;
-use Spatie\Snapshots\MatchesSnapshots;
 use Spatie\SslCertificate\Downloader;
+use Spatie\Snapshots\MatchesSnapshots;
 use Spatie\SslCertificate\SslCertificate;
 
 class SslCertificateTest extends PHPUnit_Framework_TestCase
