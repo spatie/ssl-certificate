@@ -126,7 +126,7 @@ class SslCertificate
 
     public function getDomains(): array
     {
-        return array_filter(array_merge([$this->getDomain()], $this->getAdditionalDomains()));
+        return array_unique(array_filter(array_merge([$this->getDomain()], $this->getAdditionalDomains())));
     }
 
     public function appliesToUrl(string $url): bool
