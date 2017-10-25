@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.11.2 - 2017-10-25
+
+- only return unique domain names
+
 ## 1.11.1 - 2017-10-23
 
 - fix dependencies
