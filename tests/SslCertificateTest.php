@@ -206,9 +206,8 @@ class SslCertificateTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals([
             0 => 'spatie.be',
-            1 => 'spatie.be',
-            2 => 'www.spatie.be',
-            3 => '*.otherdomain.com',
+            1 => 'www.spatie.be',
+            2 => '*.otherdomain.com',
         ], $this->certificate->getDomains());
     }
 
