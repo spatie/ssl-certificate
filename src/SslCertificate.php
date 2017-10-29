@@ -140,15 +140,11 @@ class SslCertificate
 
     public function getDomains(): array
     {
-<<<<<<< HEAD
-        return array_unique(array_filter(array_merge([$this->getDomain()], $this->getAdditionalDomains())));
-=======
         $allDomains = array_merge([$this->getDomain()], $this->getAdditionalDomains());
 
         $uniqueDomains = array_unique($allDomains);
 
         return array_values(array_filter($uniqueDomains));
->>>>>>> b08f83f2e0322781d4cacb44d7bd2fabe3943202
     }
 
     public function appliesToUrl(string $url): bool
