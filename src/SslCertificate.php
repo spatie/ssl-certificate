@@ -41,7 +41,21 @@ class SslCertificate
 
     public function getDomain(): string
     {
-        return $this->rawCertificateFields['subject']['CN'] ?? '';
+        if (! array_key_exists('CN', $this->rawCertificateFields['subject'])) {
+            return '';
+        }
+
+        /* Common Name is a string */
+        if (is_string($this->rawCertificateFields['subject']['CN'])) {
+            return $this->rawCertificateFields['subject']['CN'];
+        }
+
+        /* Common name is an array consisting of multiple domains, take the first one */
+        if (is_array($this->rawCertificateFields['subject']['CN'])) {
+            return $this->rawCertificateFields['subject']['CN'][0];
+        }
+
+        return '';
     }
 
     public function getSignatureAlgorithm(): string
