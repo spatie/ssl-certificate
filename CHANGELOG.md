@@ -2,6 +2,18 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.11.3 - 2017-10-25
+
+- fix keys of array with all domain names
+
+## 1.11.2 - 2017-10-25
+
+- only return unique domain names
+
+## 1.11.1 - 2017-10-23
+
+- fix dependencies
+
 ## 1.11.0 - 2017-09-16
 
 - make `SslCertificate` macroable

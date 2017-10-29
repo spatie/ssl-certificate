@@ -4,6 +4,7 @@ namespace Spatie\SslCertificate\Test;
 
 use Carbon\Carbon;
 use PHPUnit_Framework_TestCase;
+use Spatie\SslCertificate\Downloader;
 use Spatie\Snapshots\MatchesSnapshots;
 use Spatie\SslCertificate\SslCertificate;
 
@@ -205,9 +206,8 @@ class SslCertificateTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals([
             0 => 'spatie.be',
-            1 => 'spatie.be',
-            2 => 'www.spatie.be',
-            3 => '*.otherdomain.com',
+            1 => 'www.spatie.be',
+            2 => '*.otherdomain.com',
         ], $this->certificate->getDomains());
     }
 
@@ -234,5 +234,21 @@ class SslCertificateTest extends PHPUnit_Framework_TestCase
     {
         $this->assertTrue($this->certificate->containsDomain('www.spatie.be'));
         $this->assertFalse($this->certificate->containsDomain('www.example.com'));
+    }
+
+    /** @test */
+    public function it_can_be_encoded_as_json()
+    {
+        $sslCertificate = Downloader::downloadCertificateFromUrl('spatie.be');
+
+        $serializable = serialize($sslCertificate);
+
+        $this->assertGreaterThan(1000, strlen($serializable));
+
+        $sslCertificate = Downloader::downloadCertificateFromUrl('www.facebook.com');
+
+        $serializable = serialize($sslCertificate);
+
+        $this->assertGreaterThan(1000, strlen($serializable));
     }
 }
