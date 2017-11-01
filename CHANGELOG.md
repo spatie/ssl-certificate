@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.11.6 - 2017-11-01
+
+- fix `getDomains`
+
 ## 1.11.5 - 2017-10-30
 
 - fix `getDomains`
