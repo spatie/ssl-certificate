@@ -201,7 +201,7 @@ class SslCertificate
         $certificateHosts = $this->getDomains();
 
         foreach ($certificateHosts as $certificateHost) {
-            if (in_array($domain, [$certificateHost, '.' .$certificateHost])) {
+            if (in_array($domain, [$certificateHost, '.'.$certificateHost])) {
                 return true;
             }
         }
