@@ -17,7 +17,7 @@ class SslCertificate
         return new Downloader();
     }
 
-    public static function createForHostName(string $url, int $timeout = 30): SslCertificate
+    public static function createForHostName(string $url, int $timeout = 30): self
     {
         $sslCertificate = Downloader::downloadCertificateFromUrl($url, $timeout);
 
