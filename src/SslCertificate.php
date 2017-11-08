@@ -17,7 +17,7 @@ class SslCertificate
         return new Downloader();
     }
 
-    public static function createForHostName(string $url, int $timeout = 30): SslCertificate
+    public static function createForHostName(string $url, int $timeout = 30): self
     {
         $sslCertificate = Downloader::downloadCertificateFromUrl($url, $timeout);
 
@@ -201,7 +201,11 @@ class SslCertificate
         $certificateHosts = $this->getDomains();
 
         foreach ($certificateHosts as $certificateHost) {
-            if (in_array($domain, [$certificateHost, '.' .$certificateHost])) {
+            if ($certificateHost == $domain) {
+                return true;
+            }
+
+            if (ends_with($domain, '.'.$certificateHost)) {
                 return true;
             }
         }
