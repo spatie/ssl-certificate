@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.11.7 - 2017-11-08
+
+- fixes for `containsDomain`: add literal and wildcard match for domains 
+
 ## 1.11.6 - 2017-11-01
 
 - fix `getDomains`
