@@ -232,8 +232,12 @@ class SslCertificateTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function it_can_determine_if_the_certificate_has_a_certain_domain()
     {
+        $this->assertTrue($this->certificate->containsDomain('spatie.be'));
         $this->assertTrue($this->certificate->containsDomain('www.spatie.be'));
+
         $this->assertFalse($this->certificate->containsDomain('www.example.com'));
+        $this->assertFalse($this->certificate->containsDomain('notreallyspatie.be'));
+        $this->assertFalse($this->certificate->containsDomain('spatie.be.example.com'));
     }
 
     /** @test */
