@@ -205,7 +205,7 @@ class SslCertificate
                 return true;
             }
 
-            if (ends_with($domain, '.'. $certificateHost)) {
+            if (ends_with($domain, '.'.$certificateHost)) {
                 return true;
             }
         }
