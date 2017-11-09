@@ -2,12 +2,12 @@
 
 namespace Spatie\SslCertificate\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Spatie\SslCertificate\Downloader;
 use Spatie\SslCertificate\SslCertificate;
 use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate;
 
-class DownloaderTest extends PHPUnit_Framework_TestCase
+class DownloaderTest extends TestCase
 {
     /** @test */
     public function it_can_download_a_certificate_from_a_host_name()

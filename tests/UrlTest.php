@@ -3,10 +3,10 @@
 namespace Spatie\SslCertificate\Test;
 
 use Spatie\SslCertificate\Url;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Spatie\SslCertificate\Exceptions\InvalidUrl;
 
-class UrlTest extends PHPUnit_Framework_TestCase
+class UrlTest extends TestCase
 {
     /** @test */
     public function it_can_determine_a_host_name()
