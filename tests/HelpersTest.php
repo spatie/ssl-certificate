@@ -2,9 +2,9 @@
 
 namespace Spatie\SslCertificate\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class HelpersTest extends PHPUnit_Framework_TestCase
+class HelpersTest extends TestCase
 {
     /** @test */
     public function it_can_determine_if_a_string_starts_with_a_given_string()
