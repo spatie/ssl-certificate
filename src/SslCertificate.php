@@ -133,7 +133,9 @@ class SslCertificate
     {
         $endDate = $this->expirationDate();
 
-        return Carbon::now()->diffInDays($endDate);
+        $interval = Carbon::now()->diff($endDate);
+
+        return (int) $interval->format('%r%a');
     }
 
     public function getDomains(): array
