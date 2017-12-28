@@ -27,9 +27,11 @@ class SslCertificate
         return $sslCertificate;
     }
 
-    public function __construct(array $rawCertificateFields)
+    public function __construct(array $rawCertificateFields, string $fingerprint = '')
     {
         $this->rawCertificateFields = $rawCertificateFields;
+
+        $this->fingerprint = $fingerprint;
     }
 
     public function getRawCertificateFields(): array
@@ -64,6 +66,11 @@ class SslCertificate
     public function getSignatureAlgorithm(): string
     {
         return $this->rawCertificateFields['signatureTypeSN'] ?? '';
+    }
+
+    public function getFingerprint(): string
+    {
+        return $this->fingerprint;
     }
 
     public function getAdditionalDomains(): array
@@ -214,15 +221,5 @@ class SslCertificate
         }
 
         return false;
-    }
-
-    public function setFingerprint(string $fingerprint)
-    {
-        $this->fingerprint = $fingerprint;
-    }
-
-    public function getFingerprint(): string
-    {
-        return $this->fingerprint;
     }
 }
