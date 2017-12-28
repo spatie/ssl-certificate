@@ -88,6 +88,12 @@ $certificate->getAdditionalDomains(); // returns ["spatie.be", "www.spatie.be]
 
 A domain name return with this method can start with `*` meaning it is valid for all subdomains of that domain.
 
+### Getting the fingerprint
+
+```php
+$this->certificate->getFingerprint(); // returns a fingerprint for the certificate
+```
+
 ### Getting the date when the certificate becomes valid
 
 ```php
@@ -99,6 +105,8 @@ $this->certificate->validFromDate(); // returns an instance of Carbon
 ```php
 $this->certificate->expirationDate(); // returns an instance of Carbon
 ```
+
+
 
 ### Determining if the certificate is still valid
 
@@ -166,7 +174,7 @@ The helper functions and tests were copied from the [Laravel Framework](https://
 
 Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
 
-Does your business depend on our contributions? Reach out and support us on [Patreon](https://www.patreon.com/spatie). 
+Does your business depend on our contributions? Reach out and support us on [Patreon](https://www.patreon.com/spatie).
 All pledges will be dedicated to allocating workforce on maintenance and new awesome stuff.
 
 ## License

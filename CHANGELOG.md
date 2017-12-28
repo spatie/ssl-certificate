@@ -2,9 +2,13 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.12.0 - 2017-12-28
+
+- add `getFingerprint()`
+
 ## 1.11.7 - 2017-11-08
 
-- fixes for `containsDomain`: add literal and wildcard match for domains 
+- fixes for `containsDomain`: add literal and wildcard match for domains
 
 ## 1.11.6 - 2017-11-01
 
