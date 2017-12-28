@@ -18,6 +18,14 @@ class DownloaderTest extends TestCase
     }
 
     /** @test */
+    public function it_sets_a_fingerprint_on_the_downloaded_certificate()
+    {
+        $sslCertificate = Downloader::downloadCertificateFromUrl('spatie.be');
+
+        $this->assertNotEmpty($sslCertificate->getFingerprint());
+    }
+
+    /** @test */
     public function it_can_download_all_certificates_from_a_host_name()
     {
         $sslCertificates = (new Downloader)->getCertificates('spatie.be');
