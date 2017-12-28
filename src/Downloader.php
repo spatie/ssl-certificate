@@ -110,7 +110,10 @@ class Downloader
         $certificates = array_map(function ($certificate) {
             $certificateFields = openssl_x509_parse($certificate);
 
-            return new SslCertificate($certificateFields);
+            $sslCertificate = new SslCertificate($certificateFields);
+            $sslCertificate->setFingerprint(openssl_x509_fingerprint($certificate));
+
+            return $sslCertificate;
         }, $fullCertificateChain);
 
         return array_unique($certificates);

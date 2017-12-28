@@ -12,6 +12,9 @@ class SslCertificate
     /** @var array */
     protected $rawCertificateFields = [];
 
+    /** @var string */
+    protected $fingerprint = '';
+
     public static function download(): Downloader
     {
         return new Downloader();
@@ -211,5 +214,15 @@ class SslCertificate
         }
 
         return false;
+    }
+
+    public function setFingerprint(string $fingerprint)
+    {
+        $this->fingerprint = $fingerprint;
+    }
+
+    public function getFingerprint(): string
+    {
+        return $this->fingerprint;
     }
 }
