@@ -13,7 +13,7 @@ class SslCertificate
     protected $rawCertificateFields = [];
 
     /** @var string */
-    protected $fingerprint = "";
+    protected $fingerprint = '';
 
     public static function download(): Downloader
     {
