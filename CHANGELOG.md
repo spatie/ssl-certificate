@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.12.1 - 2018-02-02
+
+- close socket connection in `Downloader::fetchCertificates()`
+
 ## 1.12.0 - 2017-12-28
 
 - add `getFingerprint()`
