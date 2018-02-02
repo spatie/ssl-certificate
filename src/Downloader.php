@@ -169,6 +169,8 @@ class Downloader
 
         $response = stream_context_get_params($client);
 
+        fclose($client);
+
         return $response;
     }
 
