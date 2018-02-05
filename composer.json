@@ -1,6 +1,6 @@
 {
     "name": "spatie/ssl-certificate",
-    "description": "A class to easily query the properties of an ssl certificate ",
+    "description": "A class to easily query the properties of an ssl certificate",
     "keywords": [
         "spatie",
         "ssl-certificate"
