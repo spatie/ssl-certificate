@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.12.2 - 2018-02-05
+
+- fix bug where wildcard matching could be wrong
+
 ## 1.12.1 - 2018-02-02
 
 - close socket connection in `Downloader::fetchCertificates()`
