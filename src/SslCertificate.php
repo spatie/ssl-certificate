@@ -50,12 +50,10 @@ class SslCertificate
             return '';
         }
 
-        /* Common Name is a string */
         if (is_string($this->rawCertificateFields['subject']['CN'])) {
             return $this->rawCertificateFields['subject']['CN'];
         }
 
-        /* Common name is an array consisting of multiple domains, take the first one */
         if (is_array($this->rawCertificateFields['subject']['CN'])) {
             return $this->rawCertificateFields['subject']['CN'][0];
         }
