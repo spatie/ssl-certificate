@@ -188,7 +188,7 @@ class SslCertificate
 
         $wildcardHostWithoutWildcard = substr($wildcardHost, 2);
 
-        return substr_count($wildcardHost, '.') >= substr_count($host, '.') && ends_with('.'. $host, '.'. $wildcardHostWithoutWildcard);
+        return substr_count($wildcardHost, '.') >= substr_count($host, '.') && ends_with('.'.$host, '.'.$wildcardHostWithoutWildcard);
     }
 
     public function getRawCertificateFieldsJson(): string
