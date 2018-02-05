@@ -186,9 +186,17 @@ class SslCertificate
             return false;
         }
 
-        $wildcardHostWithoutWildcard = substr($wildcardHost, 2);
+        if (substr_count($wildcardHost, '.') < substr_count($host, '.')) {
+            return false;
+        }
 
-        return substr_count($wildcardHost, '.') >= substr_count($host, '.') && ends_with($host, $wildcardHostWithoutWildcard);
+        $wildcardHostWithoutWildcard = substr($wildcardHost, 1);
+        $hostWithDottedPrefix = '.'.$host;
+        if (ends_with($hostWithDottedPrefix, $wildcardHostWithoutWildcard)) {
+            return true;
+        }
+
+        return false;
     }
 
     public function getRawCertificateFieldsJson(): string

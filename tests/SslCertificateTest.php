@@ -255,4 +255,14 @@ class SslCertificateTest extends TestCase
 
         $this->assertGreaterThan(1000, strlen($serializable));
     }
+
+    /** @test */
+    public function does_not_notify_on_wrong_domains()
+    {
+        $rawCertificateFields = json_decode(file_get_contents(__DIR__.'/stubs/certificateWithRandomWildcardDomains.json'), true);
+
+        $this->certificate = new SslCertificate($rawCertificateFields);
+
+        $this->assertFalse($this->certificate->appliesToUrl('https://coinmarketcap.com'));
+    }
 }
