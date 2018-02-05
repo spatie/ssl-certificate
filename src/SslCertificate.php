@@ -189,12 +189,10 @@ class SslCertificate
         }
 
         $wildcardHostWithoutWildcard = substr($wildcardHost, 1);
-        $hostWithDottedPrefix = '.'.$host;
-        if (ends_with($hostWithDottedPrefix, $wildcardHostWithoutWildcard)) {
-            return true;
-        }
 
-        return false;
+        $hostWithDottedPrefix = ".{$host}";
+
+        return ends_with($hostWithDottedPrefix, $wildcardHostWithoutWildcard);
     }
 
     public function getRawCertificateFieldsJson(): string
