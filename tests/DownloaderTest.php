@@ -18,6 +18,14 @@ class DownloaderTest extends TestCase
     }
 
     /** @test */
+    public function it_can_download_a_certificate_from_a_host_name_with_strange_characters()
+    {
+        $sslCertificate = Downloader::downloadCertificateFromUrl('https://www.hüpfburg.de');
+
+        $this->assertInstanceOf(SslCertificate::class, $sslCertificate);
+    }
+
+    /** @test */
     public function it_sets_a_fingerprint_on_the_downloaded_certificate()
     {
         $sslCertificate = Downloader::downloadCertificateFromUrl('spatie.be');
