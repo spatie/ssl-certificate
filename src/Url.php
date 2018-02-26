@@ -18,6 +18,8 @@ class Url
             $url = "https://{$url}";
         }
 
+        $url = idn_to_ascii($url);
+
         if (! filter_var($url, FILTER_VALIDATE_URL)) {
             throw InvalidUrl::couldNotValidate($url);
         }
