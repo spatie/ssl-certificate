@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.12.3 - 2018-02-26
+
+- convert IDN to ASCII before attempting to validate
+
 ## 1.12.2 - 2018-02-05
 
 - fix bug where wildcard matching could be wrong
