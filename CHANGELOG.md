@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.12.4 - 2018-03-02
+
+- add `ext-intl` dep to `composer.json`
+
 ## 1.12.3 - 2018-02-26
 
 - convert IDN to ASCII before attempting to validate
