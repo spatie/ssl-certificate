@@ -149,7 +149,7 @@ class SslCertificate
     public function getDomains(): array
     {
         $allDomains = $this->getAdditionalDomains();
-
+        $allDomains[] = $this->getDomain();
         $uniqueDomains = array_unique($allDomains);
 
         return array_values(array_filter($uniqueDomains));
