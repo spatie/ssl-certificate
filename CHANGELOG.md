@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.12.5 - 2018-04-24
+
+- fix `appliesToUrl`
+
 ## 1.12.4 - 2018-03-02
 
 - add `ext-intl` dep to `composer.json`
