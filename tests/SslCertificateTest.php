@@ -273,12 +273,6 @@ class SslCertificateTest extends TestCase
 
         $this->certificate = new SslCertificate($rawCertificateFields);
 
-        $this->assertEquals([
-            0 => 'spatie.be',
-            1 => 'www.spatie.be',
-            2 => '*.otherdomain.com',
-        ], $this->certificate->getDomains());
-
         $this->assertTrue($this->certificate->appliesToUrl('spatie.be'));
         $this->assertTrue($this->certificate->appliesToUrl('www.spatie.be'));
     }
