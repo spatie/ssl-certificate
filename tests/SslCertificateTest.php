@@ -265,4 +265,21 @@ class SslCertificateTest extends TestCase
 
         $this->assertFalse($this->certificate->appliesToUrl('https://coinmarketcap.com'));
     }
+
+    /** @test */
+    public function it_correctly_compares_uppercase_domain_names()
+    {
+        $rawCertificateFields = json_decode(file_get_contents(__DIR__.'/stubs/certificateWithUppercaseDomains.json'), true);
+
+        $this->certificate = new SslCertificate($rawCertificateFields);
+
+        $this->assertEquals([
+            0 => 'spatie.be',
+            1 => 'www.spatie.be',
+            2 => '*.otherdomain.com',
+        ], $this->certificate->getDomains());
+
+        $this->assertTrue($this->certificate->appliesToUrl('spatie.be'));
+        $this->assertTrue($this->certificate->appliesToUrl('www.spatie.be'));
+    }
 }
