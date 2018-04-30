@@ -91,19 +91,19 @@ A domain name return with this method can start with `*` meaning it is valid for
 ### Getting the fingerprint
 
 ```php
-$this->certificate->getFingerprint(); // returns a fingerprint for the certificate
+$certificate->getFingerprint(); // returns a fingerprint for the certificate
 ```
 
 ### Getting the date when the certificate becomes valid
 
 ```php
-$this->certificate->validFromDate(); // returns an instance of Carbon
+$certificate->validFromDate(); // returns an instance of Carbon
 ```
 
 ### Getting the expiration date
 
 ```php
-$this->certificate->expirationDate(); // returns an instance of Carbon
+$certificate->expirationDate(); // returns an instance of Carbon
 ```
 
 
@@ -113,14 +113,14 @@ $this->certificate->expirationDate(); // returns an instance of Carbon
 Returns true if the current Date and time is between `validFromDate` and `expirationDate`.
 
 ```php
-$this->certificate->isValid(); // returns a boolean
+$certificate->isValid(); // returns a boolean
 ```
 
 You also use this method to determine if a given domain is covered by the certificate. Of course it'll keep checking if the current Date and time is between `validFromDate` and `expirationDate`.
 
 ```php
-$this->certificate->isValid('spatie.be'); // returns true;
-$this->certificate->isValid('laravel.com'); // returns false;
+$certificate->isValid('spatie.be'); // returns true;
+$certificate->isValid('laravel.com'); // returns false;
 ```
 
 ### Determining if the certificate is still valid until a given date
@@ -128,13 +128,13 @@ $this->certificate->isValid('laravel.com'); // returns false;
 Returns true if the certificate is valid and if the `expirationDate` is after the given date.
 
 ```php
-$this->certificate->isValidUntil(Carbon::now()->addDays(7)); // returns a boolean
+$certificate->isValidUntil(Carbon::now()->addDays(7)); // returns a boolean
 ```
 
 ### Determining if the certificate is expired
 
 ```php
-$this->certificate->isExpired(); // returns a boolean if expired
+$certificate->isExpired(); // returns a boolean if expired
 ```
 
 ## Changelog
