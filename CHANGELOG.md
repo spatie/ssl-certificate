@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.12.6 - 2018-04-30
+
+- normalize all hostnames to lowercase when checking validity
+
 ## 1.12.5 - 2018-04-24
 
 - fix `appliesToUrl`
