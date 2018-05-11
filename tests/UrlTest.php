@@ -31,4 +31,20 @@ class UrlTest extends TestCase
 
         new Url('');
     }
+
+    /** @test */
+    public function it_can_assume_a_default_port_when_not_explicitly_defined()
+    {
+        $url = new Url('spatie.be');
+
+        $this->assertSame(443, $url->getPort());
+    }
+
+    /** @test */
+    public function it_can_retrieve_the_custom_port_when_defined()
+    {
+        $url = new Url('https://spatie.be:12345');
+
+        $this->assertSame(12345, $url->getPort());
+    }
 }
