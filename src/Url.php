@@ -37,4 +37,9 @@ class Url
     {
         return $this->parsedUrl['host'];
     }
+
+    public function getPort(): int
+    {
+        return array_key_exists('port', $this->parsedUrl) ? (int) $this->parsedUrl['port'] : 443;
+    }
 }
