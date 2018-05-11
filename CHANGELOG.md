@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.12.7 - 2018-05-11
+
+- use port 443 by default
+
 ## 1.12.6 - 2018-04-30
 
 - normalize all hostnames to lowercase when checking validity
