@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.12.8 - 2018-06-24
+
+- `idn_to_ascii` is not required anymore
+
 ## 1.12.7 - 2018-05-11
 
 - use port 443 by default
