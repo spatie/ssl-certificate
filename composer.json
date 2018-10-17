@@ -18,7 +18,7 @@
     "require": {
         "php": "^7.0",
         "ext-intl" : "*",
-        "nesbot/carbon": "^1.15",
+        "nesbot/carbon": "^1.15|^2.0",
         "spatie/macroable": "^1.0"
     },
     "require-dev": {
