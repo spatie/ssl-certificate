@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.12.9 - 2018-10-18
+
+- allow Carbon v2
+
 ## 1.12.8 - 2018-06-24
 
 - `idn_to_ascii` is not required anymore
