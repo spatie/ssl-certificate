@@ -54,6 +54,6 @@ class DownloaderTest extends TestCase
     {
         $this->expectException(CouldNotDownloadCertificate::class);
 
-        Downloader::downloadCertificateFromUrl('www.kutfilm.be');
+        Downloader::downloadCertificateFromUrl('3564020356.org');
     }
 }
