@@ -18,8 +18,10 @@ class Url
             $url = "https://{$url}";
         }
 
-        if (function_exists('idn_to_ascii')) {
-            $url = idn_to_ascii($url, false, INTL_IDNA_VARIANT_UTS46);
+        if (strlen($url) < 61) {
+            if (function_exists('idn_to_ascii')) {
+                $url = idn_to_ascii($url, false, INTL_IDNA_VARIANT_UTS46);
+            }
         }
 
         if (! filter_var($url, FILTER_VALIDATE_URL)) {
