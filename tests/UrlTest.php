@@ -47,4 +47,12 @@ class UrlTest extends TestCase
 
         $this->assertSame(12345, $url->getPort());
     }
+
+    /** @test */
+    public function it_can_parse_really_long_paths()
+    {
+        $url = new Url('https://random.host/this-is-a-very/and-i-mean-very/long-path/to-work/with/and-somehow/the-idna-functions-in-php/are-limited-to/61-chars/yes?really=true&ohmy');
+
+        $this->assertSame('random.host', $url->getHostName());
+    }
 }
