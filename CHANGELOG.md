@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.12.10 - 2018-12-03
+
+- take into account that IDN functions in PHP are limited to 61 characters
+
 ## 1.12.9 - 2018-10-18
 
 - allow Carbon v2
