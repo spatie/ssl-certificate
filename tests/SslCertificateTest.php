@@ -287,6 +287,6 @@ class SslCertificateTest extends TestCase
         $this->certificatePreCertificate = new SslCertificate($rawCertificateFieldsPreCertificate);
 
         $this->assertFalse($this->certificateNormal->isPreCertificate());
-        $this->assert($this->certificatePreCertificate->isPreCertificate());
+        $this->assertTrue($this->certificatePreCertificate->isPreCertificate());
     }
 }
