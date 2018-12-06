@@ -228,4 +228,10 @@ class SslCertificate
 
         return false;
     }
+
+    public function isPreCertificate()
+    {
+        return array_key_exists('extensions', $this->rawCertificateFields)
+                && array_key_exists('ct_precert_poison', $this->rawCertificateFields['extensions']);
+    }
 }
