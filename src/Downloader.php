@@ -151,7 +151,7 @@ class Downloader
         ]);
 
         try {
-            $client = stream_socket_client(
+            $client = @stream_socket_client(
                 "ssl://{$hostName}:{$this->port}",
                 $errorNumber,
                 $errorDescription,
