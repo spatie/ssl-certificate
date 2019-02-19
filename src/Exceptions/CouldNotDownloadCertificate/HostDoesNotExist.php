@@ -2,8 +2,6 @@
 
 namespace Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate;
 
-use Throwable;
-
 class HostDoesNotExist extends CouldNotDownloadCertificate
 {
     public function __construct(string $hostName)

@@ -4,11 +4,10 @@ namespace Spatie\SslCertificate\Test;
 
 use PHPUnit\Framework\TestCase;
 use Spatie\SslCertificate\Downloader;
+use Spatie\SslCertificate\SslCertificate;
+use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate\UnknownError;
 use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate\HostDoesNotExist;
 use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate\NoCertificateInstalled;
-use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate\UnknownError;
-use Spatie\SslCertificate\SslCertificate;
-use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate\CouldNotDownloadCertificate;
 
 class DownloaderTest extends TestCase
 {
@@ -65,5 +64,6 @@ class DownloaderTest extends TestCase
     {
         $this->expectException(NoCertificateInstalled::class);
 
-        Downloader::downloadCertificateFromUrl('hipsteadresjes.gent');}
+        Downloader::downloadCertificateFromUrl('hipsteadresjes.gent');
+    }
 }
