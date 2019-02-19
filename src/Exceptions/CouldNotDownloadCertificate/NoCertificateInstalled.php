@@ -10,5 +10,4 @@ class NoCertificateInstalled extends CouldNotDownloadCertificate
     {
         parent::__construct("Could not find a certificate on  host named `{$hostName}`.");
     }
-
 }
