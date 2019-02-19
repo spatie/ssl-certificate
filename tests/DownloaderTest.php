@@ -4,8 +4,11 @@ namespace Spatie\SslCertificate\Test;
 
 use PHPUnit\Framework\TestCase;
 use Spatie\SslCertificate\Downloader;
+use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate\HostDoesNotExist;
+use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate\NoCertificateInstalled;
+use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate\UnknownError;
 use Spatie\SslCertificate\SslCertificate;
-use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate;
+use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate\CouldNotDownloadCertificate;
 
 class DownloaderTest extends TestCase
 {
@@ -44,7 +47,7 @@ class DownloaderTest extends TestCase
     /** @test */
     public function it_throws_an_exception_for_non_existing_host()
     {
-        $this->expectException(CouldNotDownloadCertificate::class);
+        $this->expectException(HostDoesNotExist::class);
 
         Downloader::downloadCertificateFromUrl('spatie-non-existing.be');
     }
@@ -52,8 +55,15 @@ class DownloaderTest extends TestCase
     /** @test */
     public function it_throws_an_exception_when_downloading_a_certificate_from_a_host_that_contains_none()
     {
-        $this->expectException(CouldNotDownloadCertificate::class);
+        $this->expectException(UnknownError::class);
 
         Downloader::downloadCertificateFromUrl('3564020356.org');
     }
+
+    /** @test */
+    public function it_tests()
+    {
+        $this->expectException(NoCertificateInstalled::class);
+
+        Downloader::downloadCertificateFromUrl('hipsteadresjes.gent');}
 }

@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.13.0 - 2019-02-19
+
+- add specific exceptions
+
 ## 1.12.11 - 2018-12-06
 
 - add support for detecting pre-certificates

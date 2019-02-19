@@ -3,7 +3,7 @@
 namespace Spatie\SslCertificate;
 
 use Throwable;
-use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate;
+use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate\CouldNotDownloadCertificate;
 
 class Downloader
 {
