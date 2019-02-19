@@ -61,9 +61,10 @@ class DownloaderTest extends TestCase
     }
 
     /** @test */
-    public function it_tests()
+    public function it_can_detect_when_no_certificate_is_installed()
     {
         $this->expectException(NoCertificateInstalled::class);
 
-        Downloader::downloadCertificateFromUrl('hipsteadresjes.gent');}
+        Downloader::downloadCertificateFromUrl('hipsteadresjes.gent');
+    }
 }
