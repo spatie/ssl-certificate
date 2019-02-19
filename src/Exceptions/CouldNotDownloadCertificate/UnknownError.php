@@ -10,6 +10,4 @@ class UnknownError extends CouldNotDownloadCertificate
     {
         parent::__construct("Could not download certificate for host `{$hostName}` because {$errorMessage}");
     }
-
-
 }
