@@ -2,6 +2,8 @@
 
 namespace Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate;
 
+use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate;
+
 class UnknownError extends CouldNotDownloadCertificate
 {
     public function __construct(string $hostName, string $errorMessage)

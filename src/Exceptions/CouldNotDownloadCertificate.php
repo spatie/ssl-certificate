@@ -1,8 +1,11 @@
 <?php
 
-namespace Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate;
+namespace Spatie\SslCertificate\Exceptions;
 
 use Exception;
+use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate\HostDoesNotExist;
+use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate\NoCertificateInstalled;
+use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate\UnknownError;
 
 class CouldNotDownloadCertificate extends Exception
 {

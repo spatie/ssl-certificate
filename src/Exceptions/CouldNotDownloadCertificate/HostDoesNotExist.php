@@ -2,7 +2,7 @@
 
 namespace Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate;
 
-use Throwable;
+use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate;
 
 class HostDoesNotExist extends CouldNotDownloadCertificate
 {
