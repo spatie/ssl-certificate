@@ -55,4 +55,24 @@ class UrlTest extends TestCase
 
         $this->assertSame('random.host', $url->getHostName());
     }
+
+    /** @test */
+    public function it_can_parse_long_hostname()
+    {
+        $url = new Url('llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch.co.uk/as/as?as=1');
+
+        $this->assertSame('llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch.co.uk', $url->getHostName());
+    }
+
+    /** @test */
+    public function it_can_transform_idn_to_ascii()
+    {
+        if (function_exists('idn_to_ascii')) {
+            $url = new Url('économiessanté.ca/as/as?as=1');
+
+            $this->assertSame('xn--conomiessant-9dbm.ca', $url->getHostName());
+        } else {
+            $this->assertTrue(true, 'The "idn_to_ascii()" is not available.');
+        }
+    }
 }
