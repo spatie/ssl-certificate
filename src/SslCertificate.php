@@ -157,13 +157,18 @@ class SslCertificate
 
     public function appliesToUrl(string $url): bool
     {
-        $host = (new Url($url))->getHostName();
+        if(filter_var($url, FILTER_VALIDATE_IP))
+        {
+            $host = $url;
+        } else
+        {
+            $host = (new Url($url))->getHostName();
+        }
 
         $certificateHosts = $this->getDomains();
 
         foreach ($certificateHosts as $certificateHost) {
-            $certificateHost = strtolower($certificateHost);
-
+            $certificateHost = str_replace('ip address:', '', strtolower($certificateHost));
             if ($host === $certificateHost) {
                 return true;
             }
