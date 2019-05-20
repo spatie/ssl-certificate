@@ -157,11 +157,9 @@ class SslCertificate
 
     public function appliesToUrl(string $url): bool
     {
-        if(filter_var($url, FILTER_VALIDATE_IP))
-        {
+        if(filter_var($url, FILTER_VALIDATE_IP)) {
             $host = $url;
-        } else
-        {
+        } else {
             $host = (new Url($url))->getHostName();
         }
 
