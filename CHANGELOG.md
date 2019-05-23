@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.13.1 - 2010-05-23
+
+- Fix SSL check for IP addresses that serve a valid SSL, i.e. 1.1.1.1
+
 ## 1.13.0 - 2019-02-19
 
 - add specific exceptions
