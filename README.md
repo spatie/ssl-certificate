@@ -1,7 +1,7 @@
 # A class to validate SSL certificates
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/ssl-certificate.svg?style=flat-square)](https://packagist.org/packages/spatie/ssl-certificate)
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Build Status](https://img.shields.io/travis/spatie/ssl-certificate/master.svg?style=flat-square)](https://travis-ci.org/spatie/ssl-certificate)
 [![Quality Score](https://img.shields.io/scrutinizer/g/spatie/ssl-certificate.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/ssl-certificate)
 [![StyleCI](https://styleci.io/repos/64165510/shield)](https://styleci.io/repos/64165510)
