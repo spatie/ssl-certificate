@@ -14,6 +14,10 @@ class SslCertificate
 
     /** @var string */
     protected $fingerprint = '';
+    /**
+     * @var string
+     */
+    private $fingerprintSha256;
 
     public static function download(): Downloader
     {
@@ -27,11 +31,12 @@ class SslCertificate
         return $sslCertificate;
     }
 
-    public function __construct(array $rawCertificateFields, string $fingerprint = '')
+    public function __construct(array $rawCertificateFields, string $fingerprint = '', string $fingerprintSha256 = '')
     {
         $this->rawCertificateFields = $rawCertificateFields;
 
         $this->fingerprint = $fingerprint;
+        $this->fingerprintSha256 = $fingerprintSha256;
     }
 
     public function getRawCertificateFields(): array
@@ -69,6 +74,14 @@ class SslCertificate
     public function getFingerprint(): string
     {
         return $this->fingerprint;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFingerprintSha256(): string
+    {
+        return $this->fingerprintSha256;
     }
 
     public function getAdditionalDomains(): array
