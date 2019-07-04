@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.14.0 - 2019-07-04
+
+- add fingerprint sha256
+
 ## 1.13.1 - 2019-05-23
 
 - Fix SSL check for IP addresses that serve a valid SSL, i.e. 1.1.1.1

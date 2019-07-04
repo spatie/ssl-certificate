@@ -113,7 +113,11 @@ class Downloader
             $fingerprint = openssl_x509_fingerprint($certificate);
             $fingerprintSha256 = openssl_x509_fingerprint($certificate, 'sha256');
 
-            return new SslCertificate($certificateFields, $fingerprint, $fingerprintSha256);
+            return new SslCertificate(
+                $certificateFields,
+                $fingerprint,
+                $fingerprintSha256
+            );
         }, $fullCertificateChain);
 
         return array_unique($certificates);
