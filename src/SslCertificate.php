@@ -33,7 +33,8 @@ class SslCertificate
     public function __construct(
         array $rawCertificateFields,
         string $fingerprint = '',
-        string $fingerprintSha256 = '') {
+        string $fingerprintSha256 = '')
+    {
         $this->rawCertificateFields = $rawCertificateFields;
 
         $this->fingerprint = $fingerprint;
@@ -172,7 +173,7 @@ class SslCertificate
 
     public function appliesToUrl(string $url): bool
     {
-        if(filter_var($url, FILTER_VALIDATE_IP)) {
+        if (filter_var($url, FILTER_VALIDATE_IP)) {
             $host = $url;
         } else {
             $host = (new Url($url))->getHostName();
