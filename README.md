@@ -93,6 +93,12 @@ A domain name return with this method can start with `*` meaning it is valid for
 $certificate->getFingerprint(); // returns a fingerprint for the certificate
 ```
 
+### Getting the SHA256 fingerprint
+
+```php
+$certificate->getFingerprintSha256(); // returns a SHA256 fingerprint for the certificate
+```
+
 ### Getting the date when the certificate becomes valid
 
 ```php
