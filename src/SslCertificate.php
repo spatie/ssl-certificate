@@ -252,7 +252,7 @@ class SslCertificate
             return false;
         }
 
-        if( ! array_key_exists('ct_precert_poison', $this->rawCertificateFields['extensions'])) {
+        if (! array_key_exists('ct_precert_poison', $this->rawCertificateFields['extensions'])) {
             return false;
         }
 
