@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.14.1 - 2019-07-22
+
+- add check for missing 'INTL_IDNA_VARIANT_UTS46' constant
+
 ## 1.14.0 - 2019-07-04
 
 - add fingerprint sha256
