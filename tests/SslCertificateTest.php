@@ -277,13 +277,20 @@ class SslCertificateTest extends TestCase
     /** @test */
     public function it_correctly_identifies_pre_certificates()
     {
-        $rawCertificateFieldsNormalCertificate = json_decode(file_get_contents(__DIR__.'/stubs/spatieCertificateFields.json'), true);
-        $rawCertificateFieldsPreCertificate = json_decode(file_get_contents(__DIR__.'/stubs/preCertificate.json'), true);
+        $rawCertificateFieldsNormalCertificate = json_decode(
+            file_get_contents(__DIR__.'/stubs/spatieCertificateFields.json'),
+            true
+        );
 
-        $this->certificateNormal = new SslCertificate($rawCertificateFieldsNormalCertificate);
-        $this->certificatePreCertificate = new SslCertificate($rawCertificateFieldsPreCertificate);
+        $rawCertificateFieldsPreCertificate = json_decode(
+            file_get_contents(__DIR__.'/stubs/preCertificate.json'),
+            true
+        );
 
-        $this->assertFalse($this->certificateNormal->isPreCertificate());
-        $this->assertTrue($this->certificatePreCertificate->isPreCertificate());
+        $certificateNormal = new SslCertificate($rawCertificateFieldsNormalCertificate);
+        $certificatePreCertificate = new SslCertificate($rawCertificateFieldsPreCertificate);
+
+        $this->assertFalse($certificateNormal->isPreCertificate());
+        $this->assertTrue($certificatePreCertificate->isPreCertificate());
     }
 }
