@@ -18,7 +18,7 @@ class Url
             $url = "https://{$url}";
         }
 
-        if (strlen($url) < 61 && function_exists('idn_to_ascii')) {
+        if (function_exists('idn_to_ascii') && strlen($url) < 61) {
             $url = idn_to_ascii($url, false, INTL_IDNA_VARIANT_UTS46);
         }
 
