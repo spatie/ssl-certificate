@@ -180,7 +180,10 @@ class SslCertificateTest extends TestCase
     /** @test */
     public function it_can_convert_the_certificate_to_a_string()
     {
-        $this->assertEquals($this->certificate->getRawCertificateFieldsJson(), (string) $this->certificate);
+        $this->assertEquals(
+            $this->certificate->getRawCertificateFieldsJson(),
+            (string) $this->certificate
+        );
     }
 
     /** @test */
