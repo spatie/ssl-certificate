@@ -138,29 +138,17 @@ class SslCertificateTest extends TestCase
     public function it_can_determine_if_the_certificate_is_valid_for_a_certain_domain()
     {
         $this->assertTrue($this->certificate->isValid('spatie.be'));
-
         $this->assertTrue($this->certificate->isValid('www.spatie.be'));
-
         $this->assertFalse($this->certificate->isValid('another.spatie.be'));
-
         $this->assertFalse($this->certificate->isValid('www.another.spatie.be'));
-
         $this->assertFalse($this->certificate->isValid('another.www.another.spatie.be'));
-
         $this->assertTrue($this->certificate->isValid('otherdomain.com'));
-
         $this->assertTrue($this->certificate->isValid('www.otherdomain.com'));
-
         $this->assertTrue($this->certificate->isValid('another.otherdomain.com'));
-
         $this->assertFalse($this->certificate->isValid('www.another.otherdomain.com'));
-
         $this->assertFalse($this->certificate->isValid('another.www.another.otherdomain.com'));
-
         $this->assertFalse($this->certificate->isValid('facebook.com'));
-
         $this->assertFalse($this->certificate->isValid('spatie.be.facebook.com'));
-
         $this->assertFalse($this->certificate->isValid('www.spatie.be.facebook.com'));
     }
 
