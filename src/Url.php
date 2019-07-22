@@ -19,11 +19,7 @@ class Url
         }
 
         if (strlen($url) < 61 && function_exists('idn_to_ascii')) {
-            if (defined('INTL_IDNA_VARIANT_UTS46')) {
-                $url = idn_to_ascii($url, false, INTL_IDNA_VARIANT_UTS46);
-            } else {
-                $url = idn_to_ascii($url);
-            }
+            $url = idn_to_ascii($url, false, INTL_IDNA_VARIANT_UTS46);
         }
 
         if (! filter_var($url, FILTER_VALIDATE_URL)) {

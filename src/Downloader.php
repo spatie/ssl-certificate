@@ -25,11 +25,6 @@ class Downloader
     /** @var bool */
     protected $verifyPeerName = true;
 
-    /**
-     * @param int $port
-     *
-     * @return $this
-     */
     public function usingPort(int $port)
     {
         $this->port = $port;
@@ -37,11 +32,6 @@ class Downloader
         return $this;
     }
 
-    /**
-     * @param bool $sni
-     *
-     * @return $this
-     */
     public function usingSni(bool $sni)
     {
         $this->enableSni = $sni;
@@ -49,11 +39,6 @@ class Downloader
         return $this;
     }
 
-    /**
-     * @param bool $fullChain
-     *
-     * @return $this
-     */
     public function withFullChain(bool $fullChain)
     {
         $this->capturePeerChain = $fullChain;
@@ -61,11 +46,6 @@ class Downloader
         return $this;
     }
 
-    /**
-     * @param bool $verifyPeer
-     *
-     * @return $this
-     */
     public function withVerifyPeer(bool $verifyPeer)
     {
         $this->verifyPeer = $verifyPeer;
@@ -73,11 +53,6 @@ class Downloader
         return $this;
     }
 
-    /**
-     * @param bool $verifyPeerName
-     *
-     * @return $this
-     */
     public function withVerifyPeerName(bool $verifyPeerName)
     {
         $this->verifyPeerName = $verifyPeerName;
@@ -85,11 +60,6 @@ class Downloader
         return $this;
     }
 
-    /**
-     * @param int $timeOutInSeconds
-     *
-     * @return $this
-     */
     public function setTimeout(int $timeOutInSeconds)
     {
         $this->timeout = $timeOutInSeconds;
