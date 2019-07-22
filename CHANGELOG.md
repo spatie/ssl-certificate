@@ -2,6 +2,11 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.15.0 - 2019-07-22
+
+- internals cleanup
+- drop support for PHP 7.1 and below
+
 ## 1.14.1 - 2019-07-22
 
 - add check for missing 'INTL_IDNA_VARIANT_UTS46' constant
