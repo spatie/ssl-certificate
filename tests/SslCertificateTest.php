@@ -263,7 +263,10 @@ class SslCertificateTest extends TestCase
     /** @test */
     public function it_correctly_compares_uppercase_domain_names()
     {
-        $rawCertificateFields = json_decode(file_get_contents(__DIR__.'/stubs/certificateWithUppercaseDomains.json'), true);
+        $rawCertificateFields = json_decode(
+            file_get_contents(__DIR__.'/stubs/certificateWithUppercaseDomains.json'),
+            true
+        );
 
         $this->certificate = new SslCertificate($rawCertificateFields);
 
