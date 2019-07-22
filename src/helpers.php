@@ -16,7 +16,7 @@ function starts_with($haystack, $needles): bool
 /**
  * Determine if a given string ends with a given substring.
  *
- * @param string       $haystack
+ * @param string $haystack
  * @param string|array $needles
  *
  * @return bool
@@ -35,8 +35,8 @@ function ends_with(string $haystack, $needles): bool
 /**
  * Returns the portion of string specified by the start and length parameters.
  *
- * @param string   $string
- * @param int      $start
+ * @param string  $string
+ * @param int $start
  * @param int|null $length
  *
  * @return string
@@ -61,7 +61,7 @@ function length(string $value): int
 /**
  * Determine if a given string contains a given substring.
  *
- * @param string       $haystack
+ * @param string $haystack
  * @param string|array $needles
  *
  * @return bool

@@ -3,32 +3,36 @@
 namespace Spatie\SslCertificate\Test;
 
 use PHPUnit\Framework\TestCase;
+use function Spatie\SslCertificate\length;
+use function Spatie\SslCertificate\ends_with;
+use function Spatie\SslCertificate\starts_with;
+use function Spatie\SslCertificate\str_contains;
 
 class HelpersTest extends TestCase
 {
     /** @test */
     public function it_can_determine_if_a_string_starts_with_a_given_string()
     {
-        $this->assertTrue(\Spatie\SslCertificate\starts_with('jason', 'jas'));
-        $this->assertTrue(\Spatie\SslCertificate\starts_with('jason', 'jason'));
-        $this->assertTrue(\Spatie\SslCertificate\starts_with('jason', ['jas']));
-        $this->assertTrue(\Spatie\SslCertificate\starts_with('jason', ['day', 'jas']));
-        $this->assertFalse(\Spatie\SslCertificate\starts_with('jason', 'day'));
-        $this->assertFalse(\Spatie\SslCertificate\starts_with('jason', ['day']));
-        $this->assertFalse(\Spatie\SslCertificate\starts_with('jason', ''));
+        $this->assertTrue(starts_with('jason', 'jas'));
+        $this->assertTrue(starts_with('jason', 'jason'));
+        $this->assertTrue(starts_with('jason', ['jas']));
+        $this->assertTrue(starts_with('jason', ['day', 'jas']));
+        $this->assertFalse(starts_with('jason', 'day'));
+        $this->assertFalse(starts_with('jason', ['day']));
+        $this->assertFalse(starts_with('jason', ''));
     }
 
     /** @test */
     public function it_can_determine_if_a_string_end_with_a_given_string()
     {
-        $this->assertTrue(\Spatie\SslCertificate\ends_with('jason', 'on'));
-        $this->assertTrue(\Spatie\SslCertificate\ends_with('jason', 'jason'));
-        $this->assertTrue(\Spatie\SslCertificate\ends_with('jason', ['on']));
-        $this->assertTrue(\Spatie\SslCertificate\ends_with('jason', ['no', 'on']));
-        $this->assertFalse(\Spatie\SslCertificate\ends_with('jason', 'no'));
-        $this->assertFalse(\Spatie\SslCertificate\ends_with('jason', ['no']));
-        $this->assertFalse(\Spatie\SslCertificate\ends_with('jason', ''));
-        $this->assertFalse(\Spatie\SslCertificate\ends_with('7', ' 7'));
+        $this->assertTrue(ends_with('jason', 'on'));
+        $this->assertTrue(ends_with('jason', 'jason'));
+        $this->assertTrue(ends_with('jason', ['on']));
+        $this->assertTrue(ends_with('jason', ['no', 'on']));
+        $this->assertFalse(ends_with('jason', 'no'));
+        $this->assertFalse(ends_with('jason', ['no']));
+        $this->assertFalse(ends_with('jason', ''));
+        $this->assertFalse(ends_with('7', ' 7'));
     }
 
     /** @test */
@@ -50,18 +54,18 @@ class HelpersTest extends TestCase
     /** @test */
     public function it_can_determine_the_lenght_of_a_string()
     {
-        $this->assertEquals(11, \Spatie\SslCertificate\length('foo bar baz'));
+        $this->assertEquals(11, length('foo bar baz'));
     }
 
     /** @test */
     public function it_can_determine_if_a_string_str_contains_another_string()
     {
-        $this->assertTrue(\Spatie\SslCertificate\str_contains('taylor', 'ylo'));
-        $this->assertTrue(\Spatie\SslCertificate\str_contains('taylor', 'taylor'));
-        $this->assertTrue(\Spatie\SslCertificate\str_contains('taylor', ['ylo']));
-        $this->assertTrue(\Spatie\SslCertificate\str_contains('taylor', ['xxx', 'ylo']));
-        $this->assertFalse(\Spatie\SslCertificate\str_contains('taylor', 'xxx'));
-        $this->assertFalse(\Spatie\SslCertificate\str_contains('taylor', ['xxx']));
-        $this->assertFalse(\Spatie\SslCertificate\str_contains('taylor', ''));
+        $this->assertTrue(str_contains('taylor', 'ylo'));
+        $this->assertTrue(str_contains('taylor', 'taylor'));
+        $this->assertTrue(str_contains('taylor', ['ylo']));
+        $this->assertTrue(str_contains('taylor', ['xxx', 'ylo']));
+        $this->assertFalse(str_contains('taylor', 'xxx'));
+        $this->assertFalse(str_contains('taylor', ['xxx']));
+        $this->assertFalse(str_contains('taylor', ''));
     }
 }

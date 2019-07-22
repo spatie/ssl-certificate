@@ -25,9 +25,7 @@ class SslCertificate
 
     public static function createForHostName(string $url, int $timeout = 30): self
     {
-        $sslCertificate = Downloader::downloadCertificateFromUrl($url, $timeout);
-
-        return $sslCertificate;
+        return Downloader::downloadCertificateFromUrl($url, $timeout);
     }
 
     public function __construct(
@@ -248,9 +246,16 @@ class SslCertificate
         return false;
     }
 
-    public function isPreCertificate()
+    public function isPreCertificate(): bool
     {
-        return array_key_exists('extensions', $this->rawCertificateFields)
-                && array_key_exists('ct_precert_poison', $this->rawCertificateFields['extensions']);
+        if (! array_key_exists('extensions', $this->rawCertificateFields)) {
+            return false;
+        }
+
+        if (! array_key_exists('ct_precert_poison', $this->rawCertificateFields['extensions'])) {
+            return false;
+        }
+
+        return true;
     }
 }

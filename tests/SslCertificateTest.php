@@ -15,7 +15,7 @@ class SslCertificateTest extends TestCase
     /** @var SslCertificate */
     protected $certificate;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -138,29 +138,17 @@ class SslCertificateTest extends TestCase
     public function it_can_determine_if_the_certificate_is_valid_for_a_certain_domain()
     {
         $this->assertTrue($this->certificate->isValid('spatie.be'));
-
         $this->assertTrue($this->certificate->isValid('www.spatie.be'));
-
         $this->assertFalse($this->certificate->isValid('another.spatie.be'));
-
         $this->assertFalse($this->certificate->isValid('www.another.spatie.be'));
-
         $this->assertFalse($this->certificate->isValid('another.www.another.spatie.be'));
-
         $this->assertTrue($this->certificate->isValid('otherdomain.com'));
-
         $this->assertTrue($this->certificate->isValid('www.otherdomain.com'));
-
         $this->assertTrue($this->certificate->isValid('another.otherdomain.com'));
-
         $this->assertFalse($this->certificate->isValid('www.another.otherdomain.com'));
-
         $this->assertFalse($this->certificate->isValid('another.www.another.otherdomain.com'));
-
         $this->assertFalse($this->certificate->isValid('facebook.com'));
-
         $this->assertFalse($this->certificate->isValid('spatie.be.facebook.com'));
-
         $this->assertFalse($this->certificate->isValid('www.spatie.be.facebook.com'));
     }
 
@@ -192,7 +180,10 @@ class SslCertificateTest extends TestCase
     /** @test */
     public function it_can_convert_the_certificate_to_a_string()
     {
-        $this->assertEquals($this->certificate->getRawCertificateFieldsJson(), (string) $this->certificate);
+        $this->assertEquals(
+            $this->certificate->getRawCertificateFieldsJson(),
+            (string) $this->certificate
+        );
     }
 
     /** @test */
@@ -259,7 +250,10 @@ class SslCertificateTest extends TestCase
     /** @test */
     public function does_not_notify_on_wrong_domains()
     {
-        $rawCertificateFields = json_decode(file_get_contents(__DIR__.'/stubs/certificateWithRandomWildcardDomains.json'), true);
+        $rawCertificateFields = json_decode(
+            file_get_contents(__DIR__.'/stubs/certificateWithRandomWildcardDomains.json'),
+            true
+        );
 
         $this->certificate = new SslCertificate($rawCertificateFields);
 
@@ -269,7 +263,10 @@ class SslCertificateTest extends TestCase
     /** @test */
     public function it_correctly_compares_uppercase_domain_names()
     {
-        $rawCertificateFields = json_decode(file_get_contents(__DIR__.'/stubs/certificateWithUppercaseDomains.json'), true);
+        $rawCertificateFields = json_decode(
+            file_get_contents(__DIR__.'/stubs/certificateWithUppercaseDomains.json'),
+            true
+        );
 
         $this->certificate = new SslCertificate($rawCertificateFields);
 
@@ -280,13 +277,20 @@ class SslCertificateTest extends TestCase
     /** @test */
     public function it_correctly_identifies_pre_certificates()
     {
-        $rawCertificateFieldsNormalCertificate = json_decode(file_get_contents(__DIR__.'/stubs/spatieCertificateFields.json'), true);
-        $rawCertificateFieldsPreCertificate = json_decode(file_get_contents(__DIR__.'/stubs/preCertificate.json'), true);
+        $rawCertificateFieldsNormalCertificate = json_decode(
+            file_get_contents(__DIR__.'/stubs/spatieCertificateFields.json'),
+            true
+        );
 
-        $this->certificateNormal = new SslCertificate($rawCertificateFieldsNormalCertificate);
-        $this->certificatePreCertificate = new SslCertificate($rawCertificateFieldsPreCertificate);
+        $rawCertificateFieldsPreCertificate = json_decode(
+            file_get_contents(__DIR__.'/stubs/preCertificate.json'),
+            true
+        );
 
-        $this->assertFalse($this->certificateNormal->isPreCertificate());
-        $this->assertTrue($this->certificatePreCertificate->isPreCertificate());
+        $certificateNormal = new SslCertificate($rawCertificateFieldsNormalCertificate);
+        $certificatePreCertificate = new SslCertificate($rawCertificateFieldsPreCertificate);
+
+        $this->assertFalse($certificateNormal->isPreCertificate());
+        $this->assertTrue($certificatePreCertificate->isPreCertificate());
     }
 }
