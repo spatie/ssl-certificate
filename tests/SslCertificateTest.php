@@ -250,7 +250,10 @@ class SslCertificateTest extends TestCase
     /** @test */
     public function does_not_notify_on_wrong_domains()
     {
-        $rawCertificateFields = json_decode(file_get_contents(__DIR__.'/stubs/certificateWithRandomWildcardDomains.json'), true);
+        $rawCertificateFields = json_decode(
+            file_get_contents(__DIR__.'/stubs/certificateWithRandomWildcardDomains.json'),
+            true
+        );
 
         $this->certificate = new SslCertificate($rawCertificateFields);
 
