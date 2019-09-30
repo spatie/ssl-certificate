@@ -72,6 +72,6 @@ class DownloaderTest extends TestCase
     {
         $sslCertificate = Downloader::downloadCertificateFromUrl('spatie.be');
 
-        $this->assertEquals("138.197.187.74:443", $sslCertificate->getRemoteAddress());
+        $this->assertEquals('138.197.187.74:443', $sslCertificate->getRemoteAddress());
     }
 }

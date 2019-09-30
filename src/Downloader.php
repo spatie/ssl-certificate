@@ -136,7 +136,6 @@ class Downloader
                 STREAM_CLIENT_CONNECT,
                 $streamContext
             );
-
         } catch (Throwable $thrown) {
             $this->handleRequestFailure($hostName, $thrown);
         }
