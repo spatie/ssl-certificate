@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.16.0 - 2019-09-30
+
+- expose the remote address that served the certificates in the downloader (#110)
+
 ## 1.15.0 - 2019-07-22
 
 - internals cleanup
