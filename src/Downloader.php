@@ -70,6 +70,7 @@ class Downloader
     public function getCertificates(string $hostName): array
     {
         $response = $this->fetchCertificates($hostName);
+        $remoteAddress = $response['remoteAddress'];
 
         $peerCertificate = $response['options']['ssl']['peer_certificate'];
 
@@ -77,7 +78,7 @@ class Downloader
 
         $fullCertificateChain = array_merge([$peerCertificate], $peerCertificateChain);
 
-        $certificates = array_map(function ($certificate) {
+        $certificates = array_map(function ($certificate) use ($remoteAddress) {
             $certificateFields = openssl_x509_parse($certificate);
 
             $fingerprint = openssl_x509_fingerprint($certificate);
@@ -86,7 +87,8 @@ class Downloader
             return new SslCertificate(
                 $certificateFields,
                 $fingerprint,
-                $fingerprintSha256
+                $fingerprintSha256,
+                $remoteAddress
             );
         }, $fullCertificateChain);
 
@@ -143,6 +145,8 @@ class Downloader
         }
 
         $response = stream_context_get_params($client);
+
+        $response['remoteAddress'] = stream_socket_get_name($client, true);
 
         fclose($client);
 

@@ -18,6 +18,9 @@ class SslCertificate
     /** @var string */
     private $fingerprintSha256 = '';
 
+    /** @var string */
+    private $remoteAddress = '';
+
     public static function download(): Downloader
     {
         return new Downloader();
@@ -31,13 +34,16 @@ class SslCertificate
     public function __construct(
         array $rawCertificateFields,
         string $fingerprint = '',
-        string $fingerprintSha256 = '')
+        string $fingerprintSha256 = '',
+        string $remoteAddress = '')
     {
         $this->rawCertificateFields = $rawCertificateFields;
 
         $this->fingerprint = $fingerprint;
 
         $this->fingerprintSha256 = $fingerprintSha256;
+
+        $this->remoteAddress = $remoteAddress;
     }
 
     public function getRawCertificateFields(): array
@@ -222,6 +228,11 @@ class SslCertificate
     public function getHash(): string
     {
         return md5($this->getRawCertificateFieldsJson());
+    }
+
+    public function getRemoteAddress(): string
+    {
+        return $this->remoteAddress;
     }
 
     public function __toString(): string
