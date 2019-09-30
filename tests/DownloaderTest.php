@@ -66,4 +66,12 @@ class DownloaderTest extends TestCase
 
         Downloader::downloadCertificateFromUrl('hipsteadresjes.gent');
     }
+
+    /** @test */
+    public function it_can_retrieve_the_ip_address_of_the_server_that_served_the_certificates()
+    {
+        $sslCertificate = Downloader::downloadCertificateFromUrl('spatie.be');
+
+        $this->assertEquals("138.197.187.74:443", $sslCertificate->getRemoteAddress());
+    }
 }
