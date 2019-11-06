@@ -60,14 +60,6 @@ class DownloaderTest extends TestCase
     }
 
     /** @test */
-    public function it_can_detect_when_no_certificate_is_installed()
-    {
-        $this->expectException(NoCertificateInstalled::class);
-
-        Downloader::downloadCertificateFromUrl('hipsteadresjes.gent');
-    }
-
-    /** @test */
     public function it_can_retrieve_the_ip_address_of_the_server_that_served_the_certificates()
     {
         $sslCertificate = Downloader::downloadCertificateFromUrl('spatie.be');
