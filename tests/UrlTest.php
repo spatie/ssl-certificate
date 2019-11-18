@@ -2,9 +2,9 @@
 
 namespace Spatie\SslCertificate\Test;
 
-use Spatie\SslCertificate\Url;
 use PHPUnit\Framework\TestCase;
 use Spatie\SslCertificate\Exceptions\InvalidUrl;
+use Spatie\SslCertificate\Url;
 
 class UrlTest extends TestCase
 {
