@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.16.1 - 2019-11-18
+
+- set SSL option param 'peer_name' with hostname value (#113)
+
 ## 1.16.0 - 2019-09-30
 
 - expose the remote address that served the certificates in the downloader (#110)
