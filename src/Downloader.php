@@ -119,6 +119,7 @@ class Downloader
             'capture_peer_cert' => true,
             'capture_peer_cert_chain' => $this->capturePeerChain,
             'SNI_enabled' => $this->enableSni,
+            'peer_name' => $hostName,
             'verify_peer' => $this->verifyPeer,
             'verify_peer_name' => $this->verifyPeerName,
         ];
