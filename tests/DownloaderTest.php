@@ -4,10 +4,9 @@ namespace Spatie\SslCertificate\Test;
 
 use PHPUnit\Framework\TestCase;
 use Spatie\SslCertificate\Downloader;
-use Spatie\SslCertificate\SslCertificate;
-use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate\UnknownError;
 use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate\HostDoesNotExist;
-use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate\NoCertificateInstalled;
+use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate\UnknownError;
+use Spatie\SslCertificate\SslCertificate;
 
 class DownloaderTest extends TestCase
 {
