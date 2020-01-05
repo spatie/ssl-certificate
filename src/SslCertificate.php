@@ -31,6 +31,11 @@ class SslCertificate
         return Downloader::downloadCertificateFromUrl($url, $timeout);
     }
 
+    public static function createForCertificateString(string $certificateString): self
+    {
+        return Local::certificateAsString($certificateString);
+    }
+
     public function __construct(
         array $rawCertificateFields,
         string $fingerprint = '',
