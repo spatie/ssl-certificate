@@ -8,6 +8,6 @@ class LocalCertificateParseFailed extends CouldNotLoadLocalCertificate
 {
     public function __construct()
     {
-        parent::__construct("Failed to parse the local certificate file");
+        parent::__construct('Failed to parse the local certificate file');
     }
 }

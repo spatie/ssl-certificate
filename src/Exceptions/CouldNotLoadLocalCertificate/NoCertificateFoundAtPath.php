@@ -2,9 +2,7 @@
 
 namespace Spatie\SslCertificate\Exceptions\CouldNotLoadLocalCertificate;
 
-
 use Spatie\SslCertificate\Exceptions\CouldNotLoadLocalCertificate;
-use Throwable;
 
 class NoCertificateFoundAtPath extends CouldNotLoadLocalCertificate
 {
