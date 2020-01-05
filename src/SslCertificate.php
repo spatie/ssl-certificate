@@ -36,6 +36,11 @@ class SslCertificate
         return Local::certificateAsString($certificateString);
     }
 
+    public static function createForCertificatePath(string $path): self
+    {
+        return Local::certificateFromLocalPath($path);
+    }
+
     public function __construct(
         array $rawCertificateFields,
         string $fingerprint = '',

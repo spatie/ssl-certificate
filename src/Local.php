@@ -34,7 +34,7 @@ class Local
         return (new static ())->parseCertificate($certificateString);
     }
 
-    public static function certificateFromLocalPath(string $path): SslCertificate
+    private function parseCertificateFile(string $path)
     {
         if (! file_exists($path)) {
             throw CouldNotLoadLocalCertificate::certificatePathNotFound($path);
@@ -50,5 +50,10 @@ class Local
         }
 
         return (new static())->parseCertificate($certificateString);
+    }
+
+    public static function certificateFromLocalPath(string $path): SslCertificate
+    {
+        return (new static())->parseCertificateFile($path);
     }
 }
