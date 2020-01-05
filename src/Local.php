@@ -36,16 +36,16 @@ class Local
 
     public static function certificateFromLocalPath(string $path): SslCertificate
     {
-        if (!file_exists($path)) {
+        if (! file_exists($path)) {
             throw CouldNotLoadLocalCertificate::certificatePathNotFound($path);
         }
 
-        if (!is_readable($path)) {
+        if (! is_readable($path)) {
             throw CouldNotLoadLocalCertificate::certificateFilePermissionInvalid($path);
         }
 
         $certificateString = file_get_contents($path);
-        if (!$certificateString) {
+        if (! $certificateString) {
             throw CouldNotLoadLocalCertificate::certificateFileReadFailed($path);
         }
 
