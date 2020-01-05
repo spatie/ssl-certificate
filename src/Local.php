@@ -15,9 +15,9 @@ class Local
         }
 
         $certificateFields = openssl_x509_parse($certificateString);
-        if (!$certificateFields)
+        if (!$certificateFields) {
             throw CouldNotLoadLocalCertificate::localCertificateParseFailed();
-
+        }
 
         $fingerprint = openssl_x509_fingerprint($certificateString);
         $fingerprintSha256 = openssl_x509_fingerprint($certificateString, 'sha256');
@@ -36,16 +36,16 @@ class Local
 
     public static function certificateFromLocalPath(string $path): SslCertificate
     {
-        if (! file_exists($path)) {
+        if (!file_exists($path)) {
             throw CouldNotLoadLocalCertificate::certificatePathNotFound($path);
         }
 
-        if (! is_readable($path)) {
+        if (!is_readable($path)) {
             throw CouldNotLoadLocalCertificate::certificateFilePermissionInvalid($path);
         }
 
         $certificateString = file_get_contents($path);
-        if (! $certificateString) {
+        if (!$certificateString) {
             throw CouldNotLoadLocalCertificate::certificateFileReadFailed($path);
         }
 
