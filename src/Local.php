@@ -15,7 +15,7 @@ class Local
         }
 
         $certificateFields = openssl_x509_parse($certificateString);
-        if (!$certificateFields) {
+        if (! $certificateFields) {
             throw CouldNotLoadLocalCertificate::localCertificateParseFailed();
         }
 
