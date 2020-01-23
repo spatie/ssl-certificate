@@ -3,12 +3,19 @@
 namespace Spatie\SslCertificate;
 
 use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate;
+use Spatie\SslCertificate\Exceptions\InvalidIpAddress;
 use Throwable;
 
 class Downloader
 {
     /** @var int */
     protected $port = 443;
+
+    /** @var string */
+    protected $ipAddress = null;
+
+    /** @var bool */
+    protected $usingIpAddress = false;
 
     /** @var int */
     protected $timeout = 30;
@@ -63,6 +70,18 @@ class Downloader
     public function setTimeout(int $timeOutInSeconds)
     {
         $this->timeout = $timeOutInSeconds;
+
+        return $this;
+    }
+
+    public function setIpAddress(string $ipAddress)
+    {
+        if (! filter_var($ipAddress, FILTER_VALIDATE_IP)) {
+            throw InvalidIpAddress::couldNotValidate($ipAddress);
+        }
+
+        $this->ipAddress = $ipAddress;
+        $this->usingIpAddress = true;
 
         return $this;
     }
@@ -128,9 +147,15 @@ class Downloader
             'ssl' => $sslOptions,
         ]);
 
+        if ($this->usingIpAddress) {
+            $connectTo = $this->ipAddress;
+        } else {
+            $connectTo = $hostName;
+        }
+
         try {
             $client = stream_socket_client(
-                "ssl://{$hostName}:{$this->port}",
+                "ssl://{$connectTo}:{$this->port}",
                 $errorNumber,
                 $errorDescription,
                 $this->timeout,
@@ -138,11 +163,18 @@ class Downloader
                 $streamContext
             );
         } catch (Throwable $thrown) {
-            $this->handleRequestFailure($hostName, $thrown);
+            $this->handleRequestFailure($connectTo, $thrown);
         }
 
         if (! $client) {
-            throw CouldNotDownloadCertificate::unknownError($hostName, "Could not connect to `{$hostName}`.");
+            if ($this->usingIpAddress) {
+                throw CouldNotDownloadCertificate::unknownError(
+                    $hostName,
+                    "Could not connect to `{$connectTo}` or it does not have a certificate matching `${hostName}`."
+                );
+            } else {
+                throw CouldNotDownloadCertificate::unknownError($hostName, "Could not connect to `{$connectTo}`.");
+            }
         }
 
         $response = stream_context_get_params($client);
