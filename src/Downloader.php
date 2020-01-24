@@ -159,7 +159,7 @@ class Downloader
             $streamContext
         );
 
-        if (! empty( $errorDescription )) {
+        if (! empty($errorDescription)) {
             throw $this->generateFailureException($connectTo, $errorDescription);
         }
 
