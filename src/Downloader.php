@@ -160,7 +160,7 @@ class Downloader
         );
 
         if (! empty($errorDescription)) {
-            throw $this->generateFailureException($connectTo, $errorDescription);
+            throw $this->buildFailureException($connectTo, $errorDescription);
         }
 
         if (! $client) {
@@ -180,7 +180,7 @@ class Downloader
         return $response;
     }
 
-    protected function generateFailureException(string $hostName, string $errorDescription)
+    protected function buildFailureException(string $hostName, string $errorDescription)
     {
         if (str_contains($errorDescription, 'getaddrinfo failed')) {
             return CouldNotDownloadCertificate::hostDoesNotExist($hostName);
