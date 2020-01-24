@@ -74,7 +74,7 @@ class Downloader
         return $this;
     }
 
-    public function setIpAddress(string $ipAddress)
+    public function fromIpAddress(string $ipAddress)
     {
         if (! filter_var($ipAddress, FILTER_VALIDATE_IP)) {
             throw InvalidIpAddress::couldNotValidate($ipAddress);
@@ -147,11 +147,9 @@ class Downloader
             'ssl' => $sslOptions,
         ]);
 
-        if ($this->usingIpAddress) {
-            $connectTo = $this->ipAddress;
-        } else {
-            $connectTo = $hostName;
-        }
+        $connectTo = ($this->usingIpAddress)
+            ? $connectTo = $this->ipAddress
+            : $connectTo = $hostName;
 
         try {
             $client = stream_socket_client(
@@ -167,14 +165,11 @@ class Downloader
         }
 
         if (! $client) {
-            if ($this->usingIpAddress) {
-                throw CouldNotDownloadCertificate::unknownError(
-                    $hostName,
-                    "Could not connect to `{$connectTo}` or it does not have a certificate matching `${hostName}`."
-                );
-            } else {
-                throw CouldNotDownloadCertificate::unknownError($hostName, "Could not connect to `{$connectTo}`.");
-            }
+            $clientErrorMessage = ($this->usingIpAddress)
+                ? "Could not connect to `{$connectTo}` or it does not have a certificate matching `${hostName}`."
+                : "Could not connect to `{$connectTo}`.";
+
+            throw CouldNotDownloadCertificate::unknownError($hostName, $clientErrorMessage);
         }
 
         $response = stream_context_get_params($client);

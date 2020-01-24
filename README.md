@@ -54,7 +54,7 @@ SslCertificate::download()
 You can also check the certificate on a different IP address using the same style.
 ```php
 SslCertificate::download()
-   ->setIpAddress($ipAddress)
+   ->fromIpAddress($ipAddress)
    ->forHost($hostName);
 ```
 

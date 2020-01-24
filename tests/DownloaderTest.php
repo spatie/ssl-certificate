@@ -30,7 +30,7 @@ class DownloaderTest extends TestCase
     public function it_can_download_a_certificate_for_a_host_name_from_an_ip_address()
     {
         $sslCertificate = SslCertificate::download()
-            ->setIpAddress('138.197.187.74')
+            ->fromIpAddress('138.197.187.74')
             ->forHost('spatie.be');
 
         $this->assertInstanceOf(SslCertificate::class, $sslCertificate);
@@ -74,7 +74,7 @@ class DownloaderTest extends TestCase
         $this->expectException(UnknownError::class);
 
         $sslCertificate = SslCertificate::download()
-            ->setIpAddress('138.197.187.74')
+            ->fromIpAddress('138.197.187.74')
             ->forHost('fake.subdomain.spatie.be');
     }
 
