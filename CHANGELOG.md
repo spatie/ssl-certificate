@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.17.2 - 2020-01-26
+
+- throw exception instead of displaying warning when download fails
+
 ## 1.17.1 - 2020-01-26
 
 - add missing exception for invalid IP address (#121)
