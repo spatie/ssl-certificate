@@ -27,6 +27,16 @@ class DownloaderTest extends TestCase
     }
 
     /** @test */
+    public function it_can_download_a_certificate_for_a_host_name_from_an_ip_address()
+    {
+        $sslCertificate = SslCertificate::download()
+            ->fromIpAddress('138.197.187.74')
+            ->forHost('spatie.be');
+
+        $this->assertInstanceOf(SslCertificate::class, $sslCertificate);
+    }
+
+    /** @test */
     public function it_sets_a_fingerprint_on_the_downloaded_certificate()
     {
         $sslCertificate = Downloader::downloadCertificateFromUrl('spatie.be');
@@ -56,6 +66,16 @@ class DownloaderTest extends TestCase
         $this->expectException(UnknownError::class);
 
         Downloader::downloadCertificateFromUrl('3564020356.org');
+    }
+
+    /** @test */
+    public function it_throws_an_exception_when_downloading_a_certificate_for_a_missing_host_name_from_an_ip_address()
+    {
+        $this->expectException(UnknownError::class);
+
+        $sslCertificate = SslCertificate::download()
+            ->fromIpAddress('138.197.187.74')
+            ->forHost('fake.subdomain.spatie.be');
     }
 
     /** @test */

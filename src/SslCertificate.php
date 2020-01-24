@@ -35,8 +35,8 @@ class SslCertificate
         array $rawCertificateFields,
         string $fingerprint = '',
         string $fingerprintSha256 = '',
-        string $remoteAddress = '')
-    {
+        string $remoteAddress = ''
+    ) {
         $this->rawCertificateFields = $rawCertificateFields;
 
         $this->fingerprint = $fingerprint;
