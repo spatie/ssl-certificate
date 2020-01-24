@@ -3,7 +3,6 @@
 namespace Spatie\SslCertificate;
 
 use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate;
-use Throwable;
 
 class Downloader
 {
@@ -137,11 +136,11 @@ class Downloader
             $streamContext
         );
 
-        if (!empty($errorDescription)) {
+        if (! empty($errorDescription)) {
             throw $this->generateFailureException($hostName, $errorDescription);
         }
 
-        if (!$client) {
+        if (! $client) {
             throw CouldNotDownloadCertificate::unknownError($hostName, "Could not connect to `{$hostName}`.");
         }
 
