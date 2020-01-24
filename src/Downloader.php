@@ -128,20 +128,20 @@ class Downloader
             'ssl' => $sslOptions,
         ]);
 
-        try {
-            $client = @stream_socket_client(
-                "ssl://{$hostName}:{$this->port}",
-                $errorNumber,
-                $errorDescription,
-                $this->timeout,
-                STREAM_CLIENT_CONNECT,
-                $streamContext
-            );
-        } catch (Throwable $thrown) {
-            $this->handleRequestFailure($hostName, $thrown);
+        $client = @stream_socket_client(
+            "ssl://{$hostName}:{$this->port}",
+            $errorNumber,
+            $errorDescription,
+            $this->timeout,
+            STREAM_CLIENT_CONNECT,
+            $streamContext
+        );
+
+        if (!empty($errorDescription)) {
+            throw $this->generateFailureException($hostName, $errorDescription);
         }
 
-        if (! $client) {
+        if (!$client) {
             throw CouldNotDownloadCertificate::unknownError($hostName, "Could not connect to `{$hostName}`.");
         }
 
@@ -154,16 +154,16 @@ class Downloader
         return $response;
     }
 
-    protected function handleRequestFailure(string $hostName, Throwable $thrown)
+    protected function generateFailureException(string $hostName, string $errorDescription)
     {
-        if (str_contains($thrown->getMessage(), 'getaddrinfo failed')) {
-            throw CouldNotDownloadCertificate::hostDoesNotExist($hostName);
+        if (str_contains($errorDescription, 'getaddrinfo failed')) {
+            return CouldNotDownloadCertificate::hostDoesNotExist($hostName);
         }
 
-        if (str_contains($thrown->getMessage(), 'error:14090086')) {
-            throw CouldNotDownloadCertificate::noCertificateInstalled($hostName);
+        if (str_contains($errorDescription, 'error:14090086')) {
+            return CouldNotDownloadCertificate::noCertificateInstalled($hostName);
         }
 
-        throw CouldNotDownloadCertificate::unknownError($hostName, $thrown->getMessage());
+        return CouldNotDownloadCertificate::unknownError($hostName, $errorDescription);
     }
 }
