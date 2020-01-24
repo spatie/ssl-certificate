@@ -4,7 +4,6 @@ namespace Spatie\SslCertificate;
 
 use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate;
 use Spatie\SslCertificate\Exceptions\InvalidIpAddress;
-use Throwable;
 
 class Downloader
 {
