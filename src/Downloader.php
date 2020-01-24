@@ -148,8 +148,8 @@ class Downloader
         ]);
 
         $connectTo = ($this->usingIpAddress)
-            ? $connectTo = $this->ipAddress
-            : $connectTo = $hostName;
+            ? $this->ipAddress
+            : $hostName;
 
         try {
             $client = stream_socket_client(
