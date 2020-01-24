@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.17.0 - 2020-01-26
+
+- add function to get certificate for hostname from IP address (#119)
+
 ## 1.16.1 - 2019-11-18
 
 - set SSL option param 'peer_name' with hostname value (#113)
