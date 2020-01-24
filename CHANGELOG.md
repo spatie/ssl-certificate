@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.17.1 - 2020-01-26
+
+- add missing exception for invalid IP address (#121)
+
 ## 1.17.0 - 2020-01-26
 
 - add function to get certificate for hostname from IP address (#119)
