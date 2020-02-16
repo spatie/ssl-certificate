@@ -31,7 +31,7 @@ class SslCertificate
         return Downloader::downloadCertificateFromUrl($url, $timeout);
     }
 
-    public static function createFromString($certificate): SslCertificate
+    public static function createFromString(string $certificate): SslCertificate
     {
         $certificateFields = openssl_x509_parse($certificate);
 
