@@ -21,16 +21,16 @@ class SslCertificateTest extends TestCase
 
         Carbon::setTestNow(Carbon::create('2016', '06', '01', '00', '00', '00', 'utc'));
 
-        $rawCertificateFields = json_decode(file_get_contents(__DIR__.'/stubs/spatieCertificateFields.json'), true);
+        $rawCertificateFields = json_decode(file_get_contents(__DIR__ . '/stubs/spatieCertificateFields.json'), true);
 
         $this->certificate = new SslCertificate($rawCertificateFields);
     }
 
-    public function it_can_get_the_raw_certificate_fiels()
+    public function it_can_get_the_raw_certificate_fields()
     {
         $rawCertificateFields = $this->certificate->getRawCertificateFields();
 
-        $expectedFields = json_decode(file_get_contents(__DIR__.'/stubs/spatieCertificateFields.json'));
+        $expectedFields = json_decode(file_get_contents(__DIR__ . '/stubs/spatieCertificateFields.json'));
 
         $this->assertEquals($expectedFields, $rawCertificateFields);
     }
@@ -251,7 +251,7 @@ class SslCertificateTest extends TestCase
     public function does_not_notify_on_wrong_domains()
     {
         $rawCertificateFields = json_decode(
-            file_get_contents(__DIR__.'/stubs/certificateWithRandomWildcardDomains.json'),
+            file_get_contents(__DIR__ . '/stubs/certificateWithRandomWildcardDomains.json'),
             true
         );
 
@@ -264,7 +264,7 @@ class SslCertificateTest extends TestCase
     public function it_correctly_compares_uppercase_domain_names()
     {
         $rawCertificateFields = json_decode(
-            file_get_contents(__DIR__.'/stubs/certificateWithUppercaseDomains.json'),
+            file_get_contents(__DIR__ . '/stubs/certificateWithUppercaseDomains.json'),
             true
         );
 
@@ -278,12 +278,12 @@ class SslCertificateTest extends TestCase
     public function it_correctly_identifies_pre_certificates()
     {
         $rawCertificateFieldsNormalCertificate = json_decode(
-            file_get_contents(__DIR__.'/stubs/spatieCertificateFields.json'),
+            file_get_contents(__DIR__ . '/stubs/spatieCertificateFields.json'),
             true
         );
 
         $rawCertificateFieldsPreCertificate = json_decode(
-            file_get_contents(__DIR__.'/stubs/preCertificate.json'),
+            file_get_contents(__DIR__ . '/stubs/preCertificate.json'),
             true
         );
 
