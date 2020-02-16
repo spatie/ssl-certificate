@@ -72,7 +72,7 @@ class SslCertificate
 
     public function getDomain(): string
     {
-        if (!array_key_exists('CN', $this->rawCertificateFields['subject'])) {
+        if (! array_key_exists('CN', $this->rawCertificateFields['subject'])) {
             return '';
         }
 
@@ -136,11 +136,11 @@ class SslCertificate
 
     public function isValid(string $url = null)
     {
-        if (!Carbon::now()->between($this->validFromDate(), $this->expirationDate())) {
+        if (! Carbon::now()->between($this->validFromDate(), $this->expirationDate())) {
             return false;
         }
 
-        if (!empty($url)) {
+        if (! empty($url)) {
             return $this->appliesToUrl($url ?? $this->getDomain());
         }
 
@@ -224,7 +224,7 @@ class SslCertificate
             return true;
         }
 
-        if (!starts_with($wildcardHost, '*')) {
+        if (! starts_with($wildcardHost, '*')) {
             return false;
         }
 
@@ -268,7 +268,7 @@ class SslCertificate
                 return true;
             }
 
-            if (ends_with($domain, '.' . $certificateHost)) {
+            if (ends_with($domain, '.'.$certificateHost)) {
                 return true;
             }
         }
@@ -278,11 +278,11 @@ class SslCertificate
 
     public function isPreCertificate(): bool
     {
-        if (!array_key_exists('extensions', $this->rawCertificateFields)) {
+        if (! array_key_exists('extensions', $this->rawCertificateFields)) {
             return false;
         }
 
-        if (!array_key_exists('ct_precert_poison', $this->rawCertificateFields['extensions'])) {
+        if (! array_key_exists('ct_precert_poison', $this->rawCertificateFields['extensions'])) {
             return false;
         }
 

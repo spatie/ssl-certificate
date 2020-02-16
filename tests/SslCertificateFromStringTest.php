@@ -5,7 +5,6 @@ namespace Spatie\SslCertificate\Test;
 use Carbon\Carbon;
 use PHPUnit\Framework\TestCase;
 use Spatie\Snapshots\MatchesSnapshots;
-use Spatie\SslCertificate\Downloader;
 use Spatie\SslCertificate\SslCertificate;
 
 class SslCertificateFromStringTest extends TestCase
@@ -21,7 +20,7 @@ class SslCertificateFromStringTest extends TestCase
 
         Carbon::setTestNow(Carbon::create('2020', '01', '13', '03', '18', '13', 'utc'));
 
-        $certificate = file_get_contents(__DIR__ . '/stubs/spatieCertificate.pem');
+        $certificate = file_get_contents(__DIR__.'/stubs/spatieCertificate.pem');
 
         $this->certificate = SslCertificate::createFromString($certificate);
     }
@@ -172,7 +171,7 @@ class SslCertificateFromStringTest extends TestCase
     public function does_not_notify_on_wrong_domains()
     {
         $rawCertificateFields = json_decode(
-            file_get_contents(__DIR__ . '/stubs/certificateWithRandomWildcardDomains.json'),
+            file_get_contents(__DIR__.'/stubs/certificateWithRandomWildcardDomains.json'),
             true
         );
 
@@ -185,7 +184,7 @@ class SslCertificateFromStringTest extends TestCase
     public function it_correctly_compares_uppercase_domain_names()
     {
         $rawCertificateFields = json_decode(
-            file_get_contents(__DIR__ . '/stubs/certificateWithUppercaseDomains.json'),
+            file_get_contents(__DIR__.'/stubs/certificateWithUppercaseDomains.json'),
             true
         );
 
@@ -199,12 +198,12 @@ class SslCertificateFromStringTest extends TestCase
     public function it_correctly_identifies_pre_certificates()
     {
         $rawCertificateFieldsNormalCertificate = json_decode(
-            file_get_contents(__DIR__ . '/stubs/spatieCertificateFields.json'),
+            file_get_contents(__DIR__.'/stubs/spatieCertificateFields.json'),
             true
         );
 
         $rawCertificateFieldsPreCertificate = json_decode(
-            file_get_contents(__DIR__ . '/stubs/preCertificate.json'),
+            file_get_contents(__DIR__.'/stubs/preCertificate.json'),
             true
         );
 
