@@ -31,14 +31,14 @@ class SslCertificate
         return Downloader::downloadCertificateFromUrl($url, $timeout);
     }
 
-    public static function createFromString(string $certificate): SslCertificate
+    public static function createFromString(string $certificate): self
     {
         $certificateFields = openssl_x509_parse($certificate);
 
         $fingerprint = openssl_x509_fingerprint($certificate);
         $fingerprintSha256 = openssl_x509_fingerprint($certificate, 'sha256');
 
-        return new SslCertificate(
+        return new self(
             $certificateFields,
             $fingerprint,
             $fingerprintSha256
