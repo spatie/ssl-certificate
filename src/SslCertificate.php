@@ -92,6 +92,11 @@ class SslCertificate
         return $this->rawCertificateFields['signatureTypeSN'] ?? '';
     }
 
+    public function getOrganization(): string
+    {
+        return $this->rawCertificateFields['subject']['O'] ?? '';
+    }
+
     public function getFingerprint(): string
     {
         return $this->fingerprint;
