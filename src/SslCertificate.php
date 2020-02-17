@@ -31,12 +31,17 @@ class SslCertificate
         return Downloader::downloadCertificateFromUrl($url, $timeout);
     }
 
-    public static function createFromString(string $certificate): self
+    public static function createFromFile(string $pathToCertificate): self
     {
-        $certificateFields = openssl_x509_parse($certificate);
+        return $this->createFromString(file_get_contents($pathToCertificate));
+    }
 
-        $fingerprint = openssl_x509_fingerprint($certificate);
-        $fingerprintSha256 = openssl_x509_fingerprint($certificate, 'sha256');
+    public static function createFromString(string $certificatePem): self
+    {
+        $certificateFields = openssl_x509_parse($certificatePem);
+
+        $fingerprint = openssl_x509_fingerprint($certificatePem);
+        $fingerprintSha256 = openssl_x509_fingerprint($certificatePem, 'sha256');
 
         return new self(
             $certificateFields,
