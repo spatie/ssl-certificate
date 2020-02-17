@@ -12,7 +12,16 @@ The class provided by this package makes it incredibly easy to query the propert
 ```php
 use Spatie\SslCertificate\SslCertificate;
 
+We have three options for fetching a certficate.
+
+// fetch the certificate using an url
 $certificate = SslCertificate::createForHostName('spatie.be');
+
+// or from a certificate file
+$certificate = SslCertificate::createFromFile($pathToCertificateFile);
+
+// or from a string
+$certificate = SslCertificate::createFromString($certificateData);
 
 $certificate->getIssuer(); // returns "Let's Encrypt Authority X3"
 $certificate->isValid(); // returns true if the certificate is currently valid
@@ -128,8 +137,6 @@ $certificate->validFromDate(); // returns an instance of Carbon
 ```php
 $certificate->expirationDate(); // returns an instance of Carbon
 ```
-
-
 
 ### Determining if the certificate is still valid
 
