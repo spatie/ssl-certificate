@@ -7,12 +7,9 @@
 [![StyleCI](https://styleci.io/repos/64165510/shield)](https://styleci.io/repos/64165510)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/ssl-certificate.svg?style=flat-square)](https://packagist.org/packages/spatie/ssl-certificate)
 
-The class provided by this package makes it incredibly easy to query the properties on an ssl certificate. Here's an example:
-
+The class provided by this package makes it incredibly easy to query the properties on an ssl certificate. We have three options for fetching a certficate. Here's an example:
 ```php
 use Spatie\SslCertificate\SslCertificate;
-
-We have three options for fetching a certficate.
 
 // fetch the certificate using an url
 $certificate = SslCertificate::createForHostName('spatie.be');
