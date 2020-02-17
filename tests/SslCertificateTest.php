@@ -12,7 +12,7 @@ class SslCertificateTest extends TestCase
 {
     use MatchesSnapshots;
 
-    /** @var SslCertificate */
+    /** @var Spatie\SslCertificate\SslCertificate */
     protected $certificate;
 
     public function setUp(): void
