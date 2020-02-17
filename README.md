@@ -19,6 +19,7 @@ $certificate->isValid(); // returns true if the certificate is currently valid
 $certificate->expirationDate(); // returns an instance of Carbon
 $certificate->expirationDate()->diffInDays(); // returns an int
 $certificate->getSignatureAlgorithm(); // returns a string
+$certificate->getOrganization(); // returns the organization name when available
 ```
 
 Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
@@ -84,6 +85,14 @@ Returns the algorithm used for signing the certificate
 
 ```php
 $certificate->getSignatureAlgorithm(); // returns "RSA-SHA256"
+```
+
+### Getting the certificate's organization
+
+Returns the organization belonging to the certificate
+
+```php
+$certificate->getOrganization(); // returns "Spatie BVBA"
 ```
 
 ### Getting the additional domain names
