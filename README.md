@@ -7,18 +7,25 @@
 [![StyleCI](https://styleci.io/repos/64165510/shield)](https://styleci.io/repos/64165510)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/ssl-certificate.svg?style=flat-square)](https://packagist.org/packages/spatie/ssl-certificate)
 
-The class provided by this package makes it incredibly easy to query the properties on an ssl certificate. Here's an example:
-
+The class provided by this package makes it incredibly easy to query the properties on an ssl certificate. We have three options for fetching a certficate. Here's an example:
 ```php
 use Spatie\SslCertificate\SslCertificate;
 
+// fetch the certificate using an url
 $certificate = SslCertificate::createForHostName('spatie.be');
+
+// or from a certificate file
+$certificate = SslCertificate::createFromFile($pathToCertificateFile);
+
+// or from a string
+$certificate = SslCertificate::createFromString($certificateData);
 
 $certificate->getIssuer(); // returns "Let's Encrypt Authority X3"
 $certificate->isValid(); // returns true if the certificate is currently valid
 $certificate->expirationDate(); // returns an instance of Carbon
 $certificate->expirationDate()->diffInDays(); // returns an int
 $certificate->getSignatureAlgorithm(); // returns a string
+$certificate->getOrganization(); // returns the organization name when available
 ```
 
 Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
@@ -86,6 +93,14 @@ Returns the algorithm used for signing the certificate
 $certificate->getSignatureAlgorithm(); // returns "RSA-SHA256"
 ```
 
+### Getting the certificate's organization
+
+Returns the organization belonging to the certificate
+
+```php
+$certificate->getOrganization(); // returns "Spatie BVBA"
+```
+
 ### Getting the additional domain names
 
 A certificate can cover multiple (sub)domains. Here's how to get them.
@@ -119,8 +134,6 @@ $certificate->validFromDate(); // returns an instance of Carbon
 ```php
 $certificate->expirationDate(); // returns an instance of Carbon
 ```
-
-
 
 ### Determining if the certificate is still valid
 

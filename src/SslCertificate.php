@@ -31,6 +31,25 @@ class SslCertificate
         return Downloader::downloadCertificateFromUrl($url, $timeout);
     }
 
+    public static function createFromFile(string $pathToCertificate): self
+    {
+        return $this->createFromString(file_get_contents($pathToCertificate));
+    }
+
+    public static function createFromString(string $certificatePem): self
+    {
+        $certificateFields = openssl_x509_parse($certificatePem);
+
+        $fingerprint = openssl_x509_fingerprint($certificatePem);
+        $fingerprintSha256 = openssl_x509_fingerprint($certificatePem, 'sha256');
+
+        return new self(
+            $certificateFields,
+            $fingerprint,
+            $fingerprintSha256
+        );
+    }
+
     public function __construct(
         array $rawCertificateFields,
         string $fingerprint = '',
@@ -76,6 +95,11 @@ class SslCertificate
     public function getSignatureAlgorithm(): string
     {
         return $this->rawCertificateFields['signatureTypeSN'] ?? '';
+    }
+
+    public function getOrganization(): string
+    {
+        return $this->rawCertificateFields['subject']['O'] ?? '';
     }
 
     public function getFingerprint(): string

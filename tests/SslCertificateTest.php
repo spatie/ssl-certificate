@@ -12,7 +12,7 @@ class SslCertificateTest extends TestCase
 {
     use MatchesSnapshots;
 
-    /** @var SslCertificate */
+    /** @var Spatie\SslCertificate\SslCertificate */
     protected $certificate;
 
     public function setUp(): void
@@ -26,7 +26,7 @@ class SslCertificateTest extends TestCase
         $this->certificate = new SslCertificate($rawCertificateFields);
     }
 
-    public function it_can_get_the_raw_certificate_fiels()
+    public function it_can_get_the_raw_certificate_fields()
     {
         $rawCertificateFields = $this->certificate->getRawCertificateFields();
 
