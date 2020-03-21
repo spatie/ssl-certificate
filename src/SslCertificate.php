@@ -134,6 +134,11 @@ class SslCertificate
         return Carbon::createFromTimestampUTC($this->rawCertificateFields['validTo_time_t']);
     }
 
+    public function lifespanInDays(): int
+    {
+        return $this->validFromDate()->diffInDays($this->expirationDate());
+    }
+
     public function isExpired(): bool
     {
         return $this->expirationDate()->isPast();

@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.19.0 - 2020-03-21
+
+- add lifespan in days
+
 ## 1.18.0 - 2020-03-18
 
 - get details from a certificate from string (#123) 

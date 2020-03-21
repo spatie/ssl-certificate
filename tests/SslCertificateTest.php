@@ -80,6 +80,12 @@ class SslCertificateTest extends TestCase
     }
 
     /** @test */
+    public function it_can_determine_the_lifespan_in_days()
+    {
+        $this->assertEquals(90, $this->certificate->lifespanInDays());
+    }
+
+    /** @test */
     public function it_can_determine_if_the_certificate_is_valid()
     {
         Carbon::setTestNow(Carbon::create('2016', '05', '19', '16', '45', '00', 'utc'));

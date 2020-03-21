@@ -22,7 +22,9 @@ $certificate = SslCertificate::createFromString($certificateData);
 
 $certificate->getIssuer(); // returns "Let's Encrypt Authority X3"
 $certificate->isValid(); // returns true if the certificate is currently valid
-$certificate->expirationDate(); // returns an instance of Carbon
+$certificate->validFromDate(); // returns a Carbon instance Carbon
+$certificate->expirationDate(); // returns a Carbon instance Carbon
+$certificate->lifespanInDays(); // return the amount of days between  validFromDate and expirationDate
 $certificate->expirationDate()->diffInDays(); // returns an int
 $certificate->getSignatureAlgorithm(); // returns a string
 $certificate->getOrganization(); // returns the organization name when available
