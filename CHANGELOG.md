@@ -2,6 +2,14 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.19.0 - 2020-03-21
+
+- add lifespan in days
+
+## 1.18.0 - 2020-03-18
+
+- get details from a certificate from string (#123) 
+
 ## 1.17.2 - 2020-01-26
 
 - throw exception instead of displaying warning when download fails
