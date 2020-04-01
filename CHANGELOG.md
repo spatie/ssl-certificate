@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.19.1 - 2020-04-01
+
+- `createFromFile` static method bugfix #127
+
 ## 1.19.0 - 2020-03-21
 
 - add lifespan in days
