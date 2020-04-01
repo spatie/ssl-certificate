@@ -33,7 +33,7 @@ class SslCertificate
 
     public static function createFromFile(string $pathToCertificate): self
     {
-        return $this->createFromString(file_get_contents($pathToCertificate));
+        return self::createFromString(file_get_contents($pathToCertificate));
     }
 
     public static function createFromString(string $certificatePem): self
