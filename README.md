@@ -77,6 +77,15 @@ SslCertificate::download()
    ->forHost($hostName);
 ```
 
+You can also specify [socket context options](https://www.php.net/manual/en/context.socket.php).
+```php
+SslCertificate::download()
+   ->withSocketContextOptions([
+      'option' => 'value',
+   ])
+   ->forHost($hostName);
+```
+
 If the given `ipAddress` is invalid `Spatie\SslCertificate\Exceptions\InvalidIpAddress` will be thrown.
 
 If the given `hostName` is invalid `Spatie\SslCertificate\Exceptions\InvalidUrl` will be thrown.
