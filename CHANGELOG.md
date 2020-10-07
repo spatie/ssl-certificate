@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.20.0 - 2020-10-07
+
+- add `withSocketContextOptions`
+
 ## 1.19.1 - 2020-04-01
 
 - `createFromFile` static method bugfix #127
