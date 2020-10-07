@@ -25,6 +25,9 @@ class Downloader
     /** @var bool */
     protected $capturePeerChain = false;
 
+    /** @var array */
+    protected $socketContextOptions = [];
+
     /** @var bool */
     protected $verifyPeer = true;
 
@@ -41,6 +44,13 @@ class Downloader
     public function usingSni(bool $sni)
     {
         $this->enableSni = $sni;
+
+        return $this;
+    }
+
+    public function withSocketContextOptions(array $socketContextOptions)
+    {
+        $this->socketContextOptions = $socketContextOptions;
 
         return $this;
     }
@@ -143,6 +153,7 @@ class Downloader
         ];
 
         $streamContext = stream_context_create([
+            'socket' => $this->socketContextOptions,
             'ssl' => $sslOptions,
         ]);
 
