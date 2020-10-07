@@ -70,14 +70,14 @@ SslCertificate::download()
    ->forHost($hostName);
 ```
 
-You can also check the certificate on a different IP address using the same style.
+You can check the certificate on a different IP address using the same style.
 ```php
 SslCertificate::download()
    ->fromIpAddress($ipAddress)
    ->forHost($hostName);
 ```
 
-You can also specify [socket context options](https://www.php.net/manual/en/context.socket.php).
+You can specify [socket context options](https://www.php.net/manual/en/context.socket.php).
 ```php
 SslCertificate::download()
    ->withSocketContextOptions([
