@@ -132,7 +132,7 @@ class Downloader
         return $certificates[0] ?? false;
     }
 
-    public static function downloadCertificateFromUrl(string $url, int $timeout = 30, bool $verifyCertificate): SslCertificate
+    public static function downloadCertificateFromUrl(string $url, int $timeout = 30, bool $verifyCertificate = true): SslCertificate
     {
         return (new static())
             ->setTimeout($timeout)
