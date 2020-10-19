@@ -30,11 +30,21 @@ $certificate->getSignatureAlgorithm(); // returns a string
 $certificate->getOrganization(); // returns the organization name when available
 ```
 
+#### Downloading invalid certificate
+
+If you want to download certificates even if they are invalid (for example, if they are expired), you can pass a `$verifyCertificate` boolean to `SslCertificate::createFromHostname()` as the third argument, for example:
+
+```
+$certificate = SslCertificate::createForHostName('expired.badssl.com', 30, false);
+```
+
+## About us
+
 Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
 
 ## Support us
 
-[![Image](https://github-ads.s3.eu-central-1.amazonaws.com/ssl-certificate.jpg)](https://spatie.be/github-ad-click/ssl-certificate)
+[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/ssl-certificate.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/ssl-certificate)
 
 We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
 
