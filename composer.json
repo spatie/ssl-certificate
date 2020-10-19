@@ -5,6 +5,16 @@
         "spatie",
         "ssl-certificate"
     ],
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/sponsors/spatie"
+        },
+        {
+            "type": "other",
+            "url": "https://spatie.be/open-source/support-us"
+        }
+    ],
     "homepage": "https://github.com/spatie/ssl-certificate",
     "license": "MIT",
     "authors": [
@@ -17,7 +27,7 @@
     ],
     "require": {
         "php": "^7.2",
-        "ext-intl" : "*",
+        "ext-intl": "*",
         "ext-json": "*",
         "nesbot/carbon": "^2.3",
         "spatie/macroable": "^1.0"
@@ -44,5 +54,5 @@
     },
     "config": {
         "sort-packages": true
-  }
+    }
 }
