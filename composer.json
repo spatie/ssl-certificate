@@ -33,7 +33,7 @@
         "spatie/macroable": "^1.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.0",
+        "phpunit/phpunit": "^9.0",
         "spatie/phpunit-snapshot-assertions": "^4.2.3"
     },
     "autoload": {
