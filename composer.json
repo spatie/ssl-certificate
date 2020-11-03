@@ -29,7 +29,7 @@
         "php": "^7.4|^8.0",
         "ext-intl": "*",
         "ext-json": "*",
-        "nesbot/carbon": "^2.3",
+        "nesbot/carbon": "^2.23",
         "spatie/macroable": "^1.0"
     },
     "require-dev": {
