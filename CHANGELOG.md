@@ -2,6 +2,11 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.21.1 - 2020-11-04
+
+- add support for PHP 8.0
+- drop support for PHP 7.3 and below
+
 ## 1.21.0 - 2020-10-19
 
 - add option to disable certificate validation in createForHostName (#132)
