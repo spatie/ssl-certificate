@@ -33,6 +33,9 @@ class Downloader
 
     /** @var bool */
     protected $verifyPeerName = true;
+    
+    /** @var int */
+    protected $followLocation = 1;
 
     public function usingPort(int $port)
     {
@@ -82,6 +85,14 @@ class Downloader
 
         return $this;
     }
+    
+
+    public function setFollowLocation(int $followLocation)
+    {
+        $this->followLocation = $followLocation;
+
+        return $this;
+    }    
 
     public function fromIpAddress(string $ipAddress)
     {
@@ -152,6 +163,7 @@ class Downloader
             'peer_name' => $hostName,
             'verify_peer' => $this->verifyPeer,
             'verify_peer_name' => $this->verifyPeerName,
+            'follow_location' => $this->followLocation,
         ];
 
         $streamContext = stream_context_create([
