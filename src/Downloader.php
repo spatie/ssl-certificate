@@ -33,7 +33,7 @@ class Downloader
 
     /** @var bool */
     protected $verifyPeerName = true;
-    
+
     /** @var int */
     protected $followLocation = 1;
 
@@ -85,14 +85,13 @@ class Downloader
 
         return $this;
     }
-    
 
     public function setFollowLocation(int $followLocation)
     {
         $this->followLocation = $followLocation;
 
         return $this;
-    }    
+    }
 
     public function fromIpAddress(string $ipAddress)
     {
