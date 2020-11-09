@@ -4,7 +4,6 @@
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/spatie/ssl-certificate/run-tests?label=tests)
 [![Quality Score](https://img.shields.io/scrutinizer/g/spatie/ssl-certificate.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/ssl-certificate)
-[![StyleCI](https://styleci.io/repos/64165510/shield)](https://styleci.io/repos/64165510)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/ssl-certificate.svg?style=flat-square)](https://packagist.org/packages/spatie/ssl-certificate)
 
 The class provided by this package makes it incredibly easy to query the properties on an ssl certificate. We have three options for fetching a certficate. Here's an example:
