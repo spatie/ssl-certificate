@@ -34,7 +34,7 @@ $certificate->getOrganization(); // returns the organization name when available
 If you want to download certificates even if they are invalid (for example, if they are expired), you can pass a `$verifyCertificate` boolean to `SslCertificate::createFromHostname()` as the third argument, for example:
 
 ```
-$certificate = SslCertificate::createForHostName('expired.badssl.com', 30, false);
+$certificate = SslCertificate::createForHostName('expired.badssl.com', $timeoutInSeconds, false);
 ```
 
 ## About us
