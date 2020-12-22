@@ -14,7 +14,7 @@ class SslCertificateFromStringTest extends TestCase
     /** @var Spatie\SslCertificate\SslCertificate */
     protected $certificate;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
