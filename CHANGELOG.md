@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 1.22.1 - 2021-02-15
+
+- fix `getOrganization` method which always returned an empty result (#139)
+
 ## 1.22.0 - 2020-11-09
 
 - allow set followLocation to be set to zero, ignoring redirect (#134)
