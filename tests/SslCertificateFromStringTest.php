@@ -32,6 +32,12 @@ class SslCertificateFromStringTest extends TestCase
     }
 
     /** @test */
+    public function it_can_determine_the_organization()
+    {
+        $this->assertSame("Let's Encrypt", $this->certificate->getOrganization());
+    }
+
+    /** @test */
     public function it_can_determine_the_domain()
     {
         $this->assertSame('analytics.spatie.be', $this->certificate->getDomain());
