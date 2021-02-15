@@ -99,7 +99,7 @@ class SslCertificate
 
     public function getOrganization(): string
     {
-        return $this->rawCertificateFields['subject']['O'] ?? '';
+        return $this->rawCertificateFields['issuer']['O'] ?? '';
     }
 
     public function getFingerprint(): string
