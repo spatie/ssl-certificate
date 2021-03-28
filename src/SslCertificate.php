@@ -9,18 +9,6 @@ class SslCertificate
 {
     use Macroable;
 
-    /** @var array */
-    protected $rawCertificateFields = [];
-
-    /** @var string */
-    protected $fingerprint = '';
-
-    /** @var string */
-    private $fingerprintSha256 = '';
-
-    /** @var string */
-    private $remoteAddress = '';
-
     public static function download(): Downloader
     {
         return new Downloader();
@@ -51,18 +39,12 @@ class SslCertificate
     }
 
     public function __construct(
-        array $rawCertificateFields,
-        string $fingerprint = '',
-        string $fingerprintSha256 = '',
-        string $remoteAddress = ''
+        protected array $rawCertificateFields = [],
+        protected string $fingerprint = '',
+        private string $fingerprintSha256 = '',
+        private string $remoteAddress = '',
     ) {
-        $this->rawCertificateFields = $rawCertificateFields;
-
-        $this->fingerprint = $fingerprint;
-
-        $this->fingerprintSha256 = $fingerprintSha256;
-
-        $this->remoteAddress = $remoteAddress;
+        //
     }
 
     public function getRawCertificateFields(): array
@@ -107,9 +89,6 @@ class SslCertificate
         return $this->fingerprint;
     }
 
-    /**
-     * @return string
-     */
     public function getFingerprintSha256(): string
     {
         return $this->fingerprintSha256;
@@ -119,9 +98,7 @@ class SslCertificate
     {
         $additionalDomains = explode(', ', $this->rawCertificateFields['extensions']['subjectAltName'] ?? '');
 
-        return array_map(function (string $domain) {
-            return str_replace('DNS:', '', $domain);
-        }, $additionalDomains);
+        return array_map(fn (string $domain) => str_replace('DNS:', '', $domain), $additionalDomains);
     }
 
     public function validFromDate(): Carbon
@@ -144,7 +121,7 @@ class SslCertificate
         return $this->expirationDate()->isPast();
     }
 
-    public function isValid(string $url = null)
+    public function isValid(string $url = null): bool
     {
         if (! Carbon::now()->between($this->validFromDate(), $this->expirationDate())) {
             return false;
@@ -274,7 +251,7 @@ class SslCertificate
         $certificateHosts = $this->getDomains();
 
         foreach ($certificateHosts as $certificateHost) {
-            if ($certificateHost == $domain) {
+            if ($certificateHost === $domain) {
                 return true;
             }
 

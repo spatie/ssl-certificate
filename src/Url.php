@@ -6,11 +6,9 @@ use Spatie\SslCertificate\Exceptions\InvalidUrl;
 
 class Url
 {
-    /** @var string */
-    protected $url;
+    protected string $url;
 
-    /** @var array */
-    protected $parsedUrl;
+    protected array $parsedUrl;
 
     public function __construct(string $url)
     {
