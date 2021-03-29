@@ -201,7 +201,9 @@ class Downloader
 
             $response['remoteAddress'] = stream_socket_get_name($client, true);
         } finally {
-            fclose($client);
+            if ($client !== false) {
+                fclose($client);
+            }
         }
 
         return $response;
