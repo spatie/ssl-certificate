@@ -33,7 +33,7 @@ class Downloader
 
     /** @var bool */
     protected $verifyPeerName = true;
-    
+
     /** @var int */
     protected $followLocation = 1;
 
@@ -85,14 +85,14 @@ class Downloader
 
         return $this;
     }
-    
+
 
     public function setFollowLocation(int $followLocation)
     {
         $this->followLocation = $followLocation;
 
         return $this;
-    }    
+    }
 
     public function fromIpAddress(string $ipAddress)
     {
@@ -184,23 +184,25 @@ class Downloader
             $streamContext
         );
 
-        if (! empty($errorDescription)) {
-            throw $this->buildFailureException($connectTo, $errorDescription);
+        try {
+            if (!empty($errorDescription)) {
+                throw $this->buildFailureException($connectTo, $errorDescription);
+            }
+
+            if (!$client) {
+                $clientErrorMessage = ($this->usingIpAddress)
+                    ? "Could not connect to `{$connectTo}` or it does not have a certificate matching `${hostName}`."
+                    : "Could not connect to `{$connectTo}`.";
+
+                throw CouldNotDownloadCertificate::unknownError($hostName, $clientErrorMessage);
+            }
+
+            $response = stream_context_get_params($client);
+
+            $response['remoteAddress'] = stream_socket_get_name($client, true);
+        } finally {
+            fclose($client);
         }
-
-        if (! $client) {
-            $clientErrorMessage = ($this->usingIpAddress)
-                ? "Could not connect to `{$connectTo}` or it does not have a certificate matching `${hostName}`."
-                : "Could not connect to `{$connectTo}`.";
-
-            throw CouldNotDownloadCertificate::unknownError($hostName, $clientErrorMessage);
-        }
-
-        $response = stream_context_get_params($client);
-
-        $response['remoteAddress'] = stream_socket_get_name($client, true);
-
-        fclose($client);
 
         return $response;
     }
