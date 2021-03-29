@@ -2,6 +2,12 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 2.0.0 - unreleased
+
+- require PHP 8+
+- drop support for PHP 7.x
+- use PHP 8 syntax where possible
+
 ## 1.22.1 - 2021-02-15
 
 - fix `getOrganization` method which always returned an empty result (#139)
