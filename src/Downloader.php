@@ -76,7 +76,6 @@ class Downloader
         return $this;
     }
 
-
     public function setFollowLocation(int $followLocation): self
     {
         $this->followLocation = $followLocation;
