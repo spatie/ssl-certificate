@@ -26,7 +26,7 @@
         }
     ],
     "require": {
-        "php": "^7.4|^8.0",
+        "php": "^8.0",
         "ext-intl": "*",
         "ext-json": "*",
         "nesbot/carbon": "^2.23",

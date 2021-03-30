@@ -7,94 +7,83 @@ use Spatie\SslCertificate\Exceptions\InvalidIpAddress;
 
 class Downloader
 {
-    /** @var int */
-    protected $port = 443;
+    protected int $port = 443;
 
-    /** @var string */
-    protected $ipAddress = null;
+    protected ?string $ipAddress = null;
 
-    /** @var bool */
-    protected $usingIpAddress = false;
+    protected bool $usingIpAddress = false;
 
-    /** @var int */
-    protected $timeout = 30;
+    protected int $timeout = 30;
 
-    /** @var bool */
-    protected $enableSni = true;
+    protected bool $enableSni = true;
 
-    /** @var bool */
-    protected $capturePeerChain = false;
+    protected bool $capturePeerChain = false;
 
-    /** @var array */
-    protected $socketContextOptions = [];
+    protected array $socketContextOptions = [];
 
-    /** @var bool */
-    protected $verifyPeer = true;
+    protected bool $verifyPeer = true;
 
-    /** @var bool */
-    protected $verifyPeerName = true;
-    
-    /** @var int */
-    protected $followLocation = 1;
+    protected bool $verifyPeerName = true;
 
-    public function usingPort(int $port)
+    protected int $followLocation = 1;
+
+    public function usingPort(int $port): self
     {
         $this->port = $port;
 
         return $this;
     }
 
-    public function usingSni(bool $sni)
+    public function usingSni(bool $sni): self
     {
         $this->enableSni = $sni;
 
         return $this;
     }
 
-    public function withSocketContextOptions(array $socketContextOptions)
+    public function withSocketContextOptions(array $socketContextOptions): self
     {
         $this->socketContextOptions = $socketContextOptions;
 
         return $this;
     }
 
-    public function withFullChain(bool $fullChain)
+    public function withFullChain(bool $fullChain): self
     {
         $this->capturePeerChain = $fullChain;
 
         return $this;
     }
 
-    public function withVerifyPeer(bool $verifyPeer)
+    public function withVerifyPeer(bool $verifyPeer): self
     {
         $this->verifyPeer = $verifyPeer;
 
         return $this;
     }
 
-    public function withVerifyPeerName(bool $verifyPeerName)
+    public function withVerifyPeerName(bool $verifyPeerName): self
     {
         $this->verifyPeerName = $verifyPeerName;
 
         return $this;
     }
 
-    public function setTimeout(int $timeOutInSeconds)
+    public function setTimeout(int $timeOutInSeconds): self
     {
         $this->timeout = $timeOutInSeconds;
 
         return $this;
     }
-    
 
-    public function setFollowLocation(int $followLocation)
+    public function setFollowLocation(int $followLocation): self
     {
         $this->followLocation = $followLocation;
 
         return $this;
-    }    
+    }
 
-    public function fromIpAddress(string $ipAddress)
+    public function fromIpAddress(string $ipAddress): self
     {
         if (! filter_var($ipAddress, FILTER_VALIDATE_IP)) {
             throw InvalidIpAddress::couldNotValidate($ipAddress);
@@ -134,7 +123,7 @@ class Downloader
         return array_unique($certificates);
     }
 
-    public function forHost(string $hostName): SslCertificate
+    public function forHost(string $hostName): SslCertificate | bool
     {
         $hostName = (new Url($hostName))->getHostName();
 
@@ -143,7 +132,7 @@ class Downloader
         return $certificates[0] ?? false;
     }
 
-    public static function downloadCertificateFromUrl(string $url, int $timeout = 30, bool $verifyCertificate = true): SslCertificate
+    public static function downloadCertificateFromUrl(string $url, int $timeout = 30, bool $verifyCertificate = true): SslCertificate | bool
     {
         return (new static())
             ->setTimeout($timeout)
@@ -205,7 +194,7 @@ class Downloader
         return $response;
     }
 
-    protected function buildFailureException(string $hostName, string $errorDescription)
+    protected function buildFailureException(string $hostName, string $errorDescription): CouldNotDownloadCertificate
     {
         if (str_contains($errorDescription, 'getaddrinfo failed')) {
             return CouldNotDownloadCertificate::hostDoesNotExist($hostName);
