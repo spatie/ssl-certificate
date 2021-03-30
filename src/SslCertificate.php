@@ -39,7 +39,7 @@ class SslCertificate
     }
 
     public function __construct(
-        protected array $rawCertificateFields = [],
+        protected array $rawCertificateFields,
         protected string $fingerprint = '',
         private string $fingerprintSha256 = '',
         private string $remoteAddress = '',
