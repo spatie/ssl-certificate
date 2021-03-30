@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 2.0.1 - 2021-03-30
+
+- fix edge case when using serialized certificates
+
 ## 2.0.0 - 2021-03-30
 
 - require PHP 8+

@@ -86,12 +86,12 @@ class SslCertificate
 
     public function getFingerprint(): string
     {
-        return $this->fingerprint;
+        return $this->fingerprint ?? '';
     }
 
     public function getFingerprintSha256(): string
     {
-        return $this->fingerprintSha256;
+        return $this->fingerprintSha256 ?? '';
     }
 
     public function getAdditionalDomains(): array
