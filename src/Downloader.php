@@ -9,7 +9,7 @@ class Downloader
 {
     protected int $port = 443;
 
-    protected string | null $ipAddress = null;
+    protected ?string $ipAddress = null;
 
     protected bool $usingIpAddress = false;
 

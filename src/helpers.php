@@ -24,7 +24,7 @@ function ends_with(string $haystack, string | array $needles): bool
     return false;
 }
 
-function substr(string $string, int $start, int | null $length = null): string
+function substr(string $string, int $start, ?int $length = null): string
 {
     return mb_substr($string, $start, $length, 'UTF-8');
 }
