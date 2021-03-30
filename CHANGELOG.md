@@ -2,7 +2,7 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
-## 2.0.0 - unreleased
+## 2.0.0 - 2021-03-30
 
 - require PHP 8+
 - drop support for PHP 7.x
