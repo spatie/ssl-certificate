@@ -125,7 +125,11 @@ class Downloader
 
     public function forHost(string $hostName): SslCertificate | bool
     {
-        $hostName = (new Url($hostName))->getHostName();
+        $url = new Url($hostName);
+
+        $this->port = $url->getPort();
+
+        $hostName = $url->getHostName();
 
         $certificates = $this->getCertificates($hostName);
 
