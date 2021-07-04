@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 2.0.2 - 2021-07-04
+
+- support spatie/macroable v2(#142)
+
 ## 2.0.1 - 2021-03-30
 
 - fix edge case when using serialized certificates
