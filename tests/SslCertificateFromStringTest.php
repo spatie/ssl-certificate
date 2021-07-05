@@ -14,6 +14,9 @@ class SslCertificateFromStringTest extends TestCase
     /** @var Spatie\SslCertificate\SslCertificate */
     protected $certificate;
 
+    protected $domainWithDifferentPort;
+    protected $differentPort;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -23,6 +26,9 @@ class SslCertificateFromStringTest extends TestCase
         $certificate = file_get_contents(__DIR__.'/stubs/spatieCertificate.pem');
 
         $this->certificate = SslCertificate::createFromString($certificate);
+
+        $this->domainWithDifferentPort = 'ben.hotweb.de';
+        $this->differentPort = 8443;
     }
 
     /** @test */
@@ -114,6 +120,16 @@ class SslCertificateFromStringTest extends TestCase
             ->forHost('spatie.be');
 
         $this->assertSame('spatie.be', $downloadedCertificate->getDomain());
+    }
+
+    /** @test */
+    public function it_provides_a_fluent_interface_to_set_all_options_with_hostport()
+    {
+        $downloadedCertificate = SslCertificate::download()
+            ->setTimeout(30)
+            ->forHost($this->domainWithDifferentPort . ':' . $this->differentPort);
+
+        $this->assertSame($this->domainWithDifferentPort, $downloadedCertificate->getDomain());
     }
 
     /** @test */
