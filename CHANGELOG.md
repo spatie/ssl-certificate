@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 2.0.3 - 2021-07-08
+
+- add support for custom ports (#143)
+
 ## 2.0.2 - 2021-07-04
 
 - support spatie/macroable v2(#142)
