@@ -69,6 +69,12 @@ You can create an instance of `Spatie\SslCertificate\SslCertificate` with this n
 $certificate = SslCertificate::createForHostName('spatie.be');
 ```
 
+You can create an instance of `Spatie\SslCertificate\SslCertificate` passing the port with this named constructor:
+
+```php
+$certificate = SslCertificate::createForHostName('spatie.be:443');
+```
+
 You can use this fluent style to specify a specific port to connect to.
 
 ```php

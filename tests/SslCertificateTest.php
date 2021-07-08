@@ -15,6 +15,9 @@ class SslCertificateTest extends TestCase
     /** @var Spatie\SslCertificate\SslCertificate */
     protected $certificate;
 
+    protected $domainWithDifferentPort;
+    protected $differentPort;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -24,6 +27,9 @@ class SslCertificateTest extends TestCase
         $rawCertificateFields = json_decode(file_get_contents(__DIR__.'/stubs/spatieCertificateFields.json'), true);
 
         $this->certificate = new SslCertificate($rawCertificateFields);
+
+        $this->domainWithDifferentPort = 'ben.hotweb.de';
+        $this->differentPort = 8443;
     }
 
     public function it_can_get_the_raw_certificate_fields()
@@ -178,6 +184,16 @@ class SslCertificateTest extends TestCase
     }
 
     /** @test */
+    public function it_provides_a_fluent_interface_to_set_all_options_with_hostport()
+    {
+        $downloadedCertificate = SslCertificate::download()
+            ->setTimeout(30)
+            ->forHost($this->domainWithDifferentPort . ':' . $this->differentPort);
+
+        $this->assertSame($this->domainWithDifferentPort, $downloadedCertificate->getDomain());
+    }
+
+    /** @test */
     public function it_can_convert_the_certificate_to_json()
     {
         $this->assertMatchesJsonSnapshot($this->certificate->getRawCertificateFieldsJson());
@@ -247,6 +263,12 @@ class SslCertificateTest extends TestCase
         $this->assertGreaterThan(1000, strlen($serializable));
 
         $sslCertificate = Downloader::downloadCertificateFromUrl('www.facebook.com');
+
+        $serializable = serialize($sslCertificate);
+
+        $this->assertGreaterThan(1000, strlen($serializable));
+
+        $sslCertificate = Downloader::downloadCertificateFromUrl($this->domainWithDifferentPort . ':' . $this->differentPort);
 
         $serializable = serialize($sslCertificate);
 

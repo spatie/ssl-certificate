@@ -10,6 +10,19 @@ use Spatie\SslCertificate\SslCertificate;
 
 class DownloaderTest extends TestCase
 {
+    protected $domainWithDifferentPort;
+    protected $ipDomainWithDifferentPort;
+    protected $differentPort;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->domainWithDifferentPort = 'ben.hotweb.de';
+        $this->ipDomainWithDifferentPort = '178.254.8.25';
+        $this->differentPort = 8443;
+    }
+
     /** @test */
     public function it_can_download_a_certificate_from_a_host_name()
     {
@@ -19,9 +32,25 @@ class DownloaderTest extends TestCase
     }
 
     /** @test */
+    public function it_can_download_a_certificate_from_a_host_name_with_hostport()
+    {
+        $sslCertificate = Downloader::downloadCertificateFromUrl($this->domainWithDifferentPort . ':' . $this->differentPort);
+
+        $this->assertInstanceOf(SslCertificate::class, $sslCertificate);
+    }
+
+    /** @test */
     public function it_can_download_a_certificate_from_a_host_name_with_strange_characters()
     {
         $sslCertificate = Downloader::downloadCertificateFromUrl('https://www.hüpfburg.de');
+
+        $this->assertInstanceOf(SslCertificate::class, $sslCertificate);
+    }
+
+    /** @test */
+    public function it_can_download_a_certificate_from_a_host_name_with_strange_characters_with_hostport()
+    {
+        $sslCertificate = Downloader::downloadCertificateFromUrl('https://' . $this->domainWithDifferentPort . ':' . $this->differentPort);
 
         $this->assertInstanceOf(SslCertificate::class, $sslCertificate);
     }
@@ -37,9 +66,27 @@ class DownloaderTest extends TestCase
     }
 
     /** @test */
+    public function it_can_download_a_certificate_for_a_host_name_from_an_ip_address_with_hostport()
+    {
+        $sslCertificate = SslCertificate::download()
+            ->fromIpAddress($this->ipDomainWithDifferentPort)
+            ->forHost($this->domainWithDifferentPort . ':' . $this->differentPort);
+
+        $this->assertInstanceOf(SslCertificate::class, $sslCertificate);
+    }
+
+    /** @test */
     public function it_sets_a_fingerprint_on_the_downloaded_certificate()
     {
         $sslCertificate = Downloader::downloadCertificateFromUrl('spatie.be');
+
+        $this->assertNotEmpty($sslCertificate->getFingerprint());
+    }
+
+    /** @test */
+    public function it_sets_a_fingerprint_on_the_downloaded_certificate_with_hostport()
+    {
+        $sslCertificate = Downloader::downloadCertificateFromUrl($this->domainWithDifferentPort . ':' . $this->differentPort);
 
         $this->assertNotEmpty($sslCertificate->getFingerprint());
     }
@@ -96,5 +143,13 @@ class DownloaderTest extends TestCase
         $sslCertificate = Downloader::downloadCertificateFromUrl('spatie.be');
 
         $this->assertEquals('138.197.187.74:443', $sslCertificate->getRemoteAddress());
+    }
+
+    /** @test */
+    public function it_can_retrieve_the_ip_address_of_the_server_that_served_the_certificates_with_hostport()
+    {
+        $sslCertificate = Downloader::downloadCertificateFromUrl($this->domainWithDifferentPort . ':' . $this->differentPort);
+
+        $this->assertEquals($this->ipDomainWithDifferentPort . ':' . $this->differentPort, $sslCertificate->getRemoteAddress());
     }
 }
