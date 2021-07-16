@@ -94,7 +94,7 @@ class DownloaderTest extends TestCase
     /** @test */
     public function it_can_download_all_certificates_from_a_host_name()
     {
-        $sslCertificates = (new Downloader)->getCertificates('spatie.be');
+        $sslCertificates = (new Downloader())->getCertificates('spatie.be');
 
         $this->assertCount(1, $sslCertificates);
     }
@@ -102,7 +102,7 @@ class DownloaderTest extends TestCase
     /** @test */
     public function it_can_download_all_certificates_from_a_host_name_with_socket_context_options()
     {
-        $sslCertificates = (new Downloader)
+        $sslCertificates = (new Downloader())
             ->withSocketContextOptions([
                 'bindto' => '0:0',
             ])
