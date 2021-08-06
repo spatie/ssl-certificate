@@ -156,7 +156,6 @@ class Downloader
             'peer_name' => $hostName,
             'verify_peer' => $this->verifyPeer,
             'verify_peer_name' => $this->verifyPeerName,
-            'follow_location' => $this->followLocation,
         ];
 
         $streamContext = stream_context_create([
