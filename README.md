@@ -59,7 +59,7 @@ composer require spatie/ssl-certificate
 
 ## Important notice
 
-Currently this package [does not check](https://github.com/spatie/ssl-certificate/blob/master/src/SslCertificate.php#L63-L74) if the certificate is signed by a trusted authority. We'll add this check soon in a next point release.
+Currently, this package [does not check](https://github.com/spatie/ssl-certificate/blob/master/src/SslCertificate.php#L63-L74) if the certificate is signed by a trusted authority. We'll add this check soon in a next point release.
 
 ## Usage
 
@@ -196,6 +196,20 @@ $certificate->isValidUntil(Carbon::now()->addDays(7)); // returns a boolean
 
 ```php
 $certificate->isExpired(); // returns a boolean if expired
+```
+
+### Convert the certificate to an array
+
+You can convert a certificate to an array using the `toArray` method.
+
+```php
+$certificateProperties = $certificate->toArray();
+```
+
+The properties can be used to create a new instance of the certificate.
+
+```php
+\Spatie\SslCertificate\SslCertificate::createFromArray($certificateProperties);
 ```
 
 ## Testing

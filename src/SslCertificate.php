@@ -38,6 +38,16 @@ class SslCertificate
         );
     }
 
+    public static function createFromArray(array $properties): self
+    {
+           return new self(
+               $properties['rawCertificateFields'],
+               $properties['fingerprint'],
+               $properties['fingerprintSha256'],
+               $properties['remoteAddress'],
+           );
+    }
+
     public function __construct(
         protected array $rawCertificateFields,
         protected string $fingerprint = '',
@@ -244,6 +254,16 @@ class SslCertificate
     public function __toString(): string
     {
         return $this->getRawCertificateFieldsJson();
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'rawCertificateFields' => $this->rawCertificateFields,
+            'fingerprint' => $this->fingerprint,
+            'fingerprintSha256' => $this->fingerprintSha256,
+            'remoteAddress' => $this->remoteAddress,
+        ];
     }
 
     public function containsDomain(string $domain): bool

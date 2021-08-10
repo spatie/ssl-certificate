@@ -12,7 +12,7 @@ class SslCertificateTest extends TestCase
 {
     use MatchesSnapshots;
 
-    /** @var Spatie\SslCertificate\SslCertificate */
+    /** @var \Spatie\SslCertificate\SslCertificate */
     protected $certificate;
 
     protected $domainWithDifferentPort;
@@ -320,5 +320,17 @@ class SslCertificateTest extends TestCase
 
         $this->assertFalse($certificateNormal->isPreCertificate());
         $this->assertTrue($certificatePreCertificate->isPreCertificate());
+    }
+
+    /** @test */
+    public function it_can_saved_to_and_created_from_an_array()
+    {
+        $certificate = SslCertificate::createForHostName('spatie.be');
+
+        $certificateProperties = $certificate->toArray();
+
+        $certificate = SslCertificate::createFromArray($certificateProperties);
+
+        $this->assertTrue($certificate->appliesToUrl('spatie.be'));
     }
 }

@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 2.1.0 - 2021-08-10
+
+- add `toArray` and `createFromArray`
+
 ## 2.0.3 - 2021-07-08
 
 - add support for custom ports (#143)
