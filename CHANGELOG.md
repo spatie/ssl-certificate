@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 2.1.1 - 2021-10-03
+
+- improve URL validation
+
 ## 2.1.0 - 2021-08-10
 
 - add `toArray` and `createFromArray`

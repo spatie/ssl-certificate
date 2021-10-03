@@ -34,7 +34,8 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^9.0",
-        "spatie/phpunit-snapshot-assertions": "^4.2.3"
+        "spatie/phpunit-snapshot-assertions": "^4.2.3",
+        "spatie/ray": "^1.30"
     },
     "autoload": {
         "psr-4": {

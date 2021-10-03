@@ -20,7 +20,7 @@ class Url
             $url = idn_to_ascii($url, false, INTL_IDNA_VARIANT_UTS46);
         }
 
-        if (! filter_var($url, FILTER_VALIDATE_URL)) {
+        if (! $this->isValidUrl($url)) {
             throw InvalidUrl::couldNotValidate($url);
         }
 
@@ -31,6 +31,11 @@ class Url
         if (! isset($this->parsedUrl['host'])) {
             throw InvalidUrl::couldNotDetermineHost($this->url);
         }
+    }
+
+    public function isValidUrl(string $url): bool
+    {
+        return parse_url($url,PHP_URL_HOST) !== false;
     }
 
     public function getHostName(): string
