@@ -35,7 +35,7 @@ class Url
 
     public function isValidUrl(string $url): bool
     {
-        return parse_url($url,PHP_URL_HOST) !== false;
+        return parse_url($url, PHP_URL_HOST) !== false;
     }
 
     public function getHostName(): string

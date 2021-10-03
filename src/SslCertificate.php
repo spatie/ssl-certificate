@@ -40,12 +40,12 @@ class SslCertificate
 
     public static function createFromArray(array $properties): self
     {
-           return new self(
-               $properties['rawCertificateFields'],
-               $properties['fingerprint'],
-               $properties['fingerprintSha256'],
-               $properties['remoteAddress'],
-           );
+        return new self(
+            $properties['rawCertificateFields'],
+            $properties['fingerprint'],
+            $properties['fingerprintSha256'],
+            $properties['remoteAddress'],
+        );
     }
 
     public function __construct(
