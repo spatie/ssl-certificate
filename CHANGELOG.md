@@ -2,6 +2,12 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 2.1.2 - 2021-11-17
+
+- Make compatible with PHP 8.2
+
+**Full Changelog**: https://github.com/spatie/ssl-certificate/compare/2.1.1...2.1.2
+
 ## 2.1.1 - 2021-10-03
 
 - improve URL validation
@@ -59,7 +65,7 @@ All notable changes to `ssl-certificate` will be documented in this file
 
 ## 1.18.0 - 2020-03-18
 
-- get details from a certificate from string (#123) 
+- get details from a certificate from string (#123)
 
 ## 1.17.2 - 2020-01-26
 
