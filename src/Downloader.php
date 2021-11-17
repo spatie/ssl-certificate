@@ -200,7 +200,7 @@ class Downloader
 
     protected function buildFailureException(string $hostName, string $errorDescription): CouldNotDownloadCertificate
     {
-        if (str_contains($errorDescription, 'getaddrinfo failed')) {
+        if (str_contains($errorDescription, 'getaddrinfo') && str_contains($errorDescription, 'failed')) {
             return CouldNotDownloadCertificate::hostDoesNotExist($hostName);
         }
 
