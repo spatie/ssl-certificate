@@ -15,7 +15,8 @@ class UnknownError extends CouldNotDownloadCertificate
         $this->errorMessage = $errorMessage;
     }
 
-    public function getOriginalMessage(): string {
+    public function getOriginalMessage(): string
+    {
         return $this->errorMessage;
     }
 }
