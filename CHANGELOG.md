@@ -2,6 +2,18 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 2.1.3 - 2022-06-06
+
+### What's Changed
+
+- Keep original unknown error message by @rudiedirkx in https://github.com/spatie/ssl-certificate/pull/170
+
+### New Contributors
+
+- @rudiedirkx made their first contribution in https://github.com/spatie/ssl-certificate/pull/170
+
+**Full Changelog**: https://github.com/spatie/ssl-certificate/compare/2.1.2...2.1.3
+
 ## 2.1.2 - 2021-11-17
 
 - Make compatible with PHP 8.2
