@@ -93,6 +93,13 @@ SslCertificate::download()
    ->forHost($hostName);
 ```
 
+This also works with IPv6 addresses
+```php
+SslCertificate::download()
+    ->fromIpAddress('2a00:1450:4001:80e::200e')
+    ->forHost('google.com');
+```
+
 You can specify [socket context options](https://www.php.net/manual/en/context.socket.php).
 ```php
 SslCertificate::download()

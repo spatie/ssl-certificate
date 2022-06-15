@@ -11,6 +11,8 @@ class Downloader
 
     protected ?string $ipAddress = null;
 
+    protected bool $isIPv6 = false;
+
     protected bool $usingIpAddress = false;
 
     protected int $timeout = 30;
@@ -85,8 +87,13 @@ class Downloader
 
     public function fromIpAddress(string $ipAddress): self
     {
-        if (! filter_var($ipAddress, FILTER_VALIDATE_IP)) {
+        $isValidIPv4 = filter_var($ipAddress, FILTER_VALIDATE_IP) !== false;
+        $isValidIPv6 = filter_var($ipAddress, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) !== false;
+        if (!$isValidIPv4 && !$isValidIPv6) {
             throw InvalidIpAddress::couldNotValidate($ipAddress);
+        }
+        if($isValidIPv6) {
+            $this->isIPv6 = true;
         }
 
         $this->ipAddress = $ipAddress;
@@ -164,9 +171,11 @@ class Downloader
             'ssl' => $sslOptions,
         ]);
 
-        $connectTo = ($this->usingIpAddress)
-            ? $this->ipAddress
-            : $hostName;
+        if($this->usingIpAddress) {
+            $connectTo = ($this->isIPv6) ? "[" . $this->ipAddress . ']' : $this->ipAddress;
+        } else {
+            $connectTo = $hostName;
+        }
 
         $client = @stream_socket_client(
             "ssl://{$connectTo}:{$this->port}",
