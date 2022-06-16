@@ -2,6 +2,20 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 2.2.0 - 2022-06-16
+
+### What's Changed
+
+- Update .gitattributes by @angeljqv in https://github.com/spatie/ssl-certificate/pull/171
+- add IPv6 Support by @LordSimal in https://github.com/spatie/ssl-certificate/pull/174
+
+### New Contributors
+
+- @angeljqv made their first contribution in https://github.com/spatie/ssl-certificate/pull/171
+- @LordSimal made their first contribution in https://github.com/spatie/ssl-certificate/pull/174
+
+**Full Changelog**: https://github.com/spatie/ssl-certificate/compare/2.1.3...2.2.0
+
 ## 2.1.3 - 2022-06-06
 
 ### What's Changed
