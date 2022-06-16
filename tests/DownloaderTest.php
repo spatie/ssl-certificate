@@ -59,7 +59,7 @@ class DownloaderTest extends TestCase
     public function it_can_download_a_certificate_for_a_host_name_from_an_ip_address()
     {
         $sslCertificate = SslCertificate::download()
-            ->fromIpAddress('138.197.187.74')
+            ->fromIpAddress('164.92.244.169')
             ->forHost('spatie.be');
 
         $this->assertInstanceOf(SslCertificate::class, $sslCertificate);
@@ -71,6 +71,19 @@ class DownloaderTest extends TestCase
         $sslCertificate = SslCertificate::download()
             ->fromIpAddress($this->ipDomainWithDifferentPort)
             ->forHost($this->domainWithDifferentPort . ':' . $this->differentPort);
+
+        $this->assertInstanceOf(SslCertificate::class, $sslCertificate);
+    }
+
+    /** @test */
+    public function it_can_download_a_certificate_for_a_host_name_from_an_ipv6_address()
+    {
+        if(getenv('GITHUB_ACTIONS')) {
+            $this->markTestSkipped('Github Actions have no IPv6 Support');
+        }
+        $sslCertificate = SslCertificate::download()
+            ->fromIpAddress('2a00:1450:4001:80e::200e')
+            ->forHost('google.com');
 
         $this->assertInstanceOf(SslCertificate::class, $sslCertificate);
     }
@@ -142,7 +155,7 @@ class DownloaderTest extends TestCase
     {
         $sslCertificate = Downloader::downloadCertificateFromUrl('spatie.be');
 
-        $this->assertEquals('138.197.187.74:443', $sslCertificate->getRemoteAddress());
+        $this->assertEquals('164.92.244.169:443', $sslCertificate->getRemoteAddress());
     }
 
     /** @test */
