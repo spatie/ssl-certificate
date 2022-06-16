@@ -89,10 +89,10 @@ class Downloader
     {
         $isValidIPv4 = filter_var($ipAddress, FILTER_VALIDATE_IP) !== false;
         $isValidIPv6 = filter_var($ipAddress, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) !== false;
-        if (!$isValidIPv4 && !$isValidIPv6) {
+        if (! $isValidIPv4 && ! $isValidIPv6) {
             throw InvalidIpAddress::couldNotValidate($ipAddress);
         }
-        if($isValidIPv6) {
+        if ($isValidIPv6) {
             $this->isIPv6 = true;
         }
 
@@ -171,7 +171,7 @@ class Downloader
             'ssl' => $sslOptions,
         ]);
 
-        if($this->usingIpAddress) {
+        if ($this->usingIpAddress) {
             $connectTo = ($this->isIPv6) ? "[" . $this->ipAddress . ']' : $this->ipAddress;
         } else {
             $connectTo = $hostName;
