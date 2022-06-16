@@ -78,6 +78,9 @@ class DownloaderTest extends TestCase
     /** @test */
     public function it_can_download_a_certificate_for_a_host_name_from_an_ipv6_address()
     {
+        if($_ENV['GITHUB_ACTIONS']) {
+            $this->markTestSkipped('Github Actions have no IPv6 Support');
+        }
         $sslCertificate = SslCertificate::download()
             ->fromIpAddress('2a00:1450:4001:80e::200e')
             ->forHost('google.com');
