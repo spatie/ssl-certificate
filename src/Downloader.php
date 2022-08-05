@@ -202,6 +202,10 @@ class Downloader
 
         $response['remoteAddress'] = stream_socket_get_name($client, true);
 
+        if (empty($response['options']['ssl']['peer_certificate']) && empty($response['options']['ssl']['peer_certificate_chain'])) {
+            throw CouldNotDownloadCertificate::unknownError($hostName, "Could not connect to `{$connectTo}`.");
+        }
+
         fclose($client);
 
         return $response;
