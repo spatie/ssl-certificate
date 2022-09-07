@@ -3,6 +3,7 @@
 namespace Spatie\SslCertificate\Test;
 
 use PHPUnit\Framework\TestCase;
+
 use function Spatie\SslCertificate\ends_with;
 use function Spatie\SslCertificate\length;
 use function Spatie\SslCertificate\starts_with;
