@@ -67,6 +67,11 @@ class SslCertificate
         return $this->rawCertificateFields['issuer']['CN'] ?? '';
     }
 
+    public function getSerialNumber(): string
+    {
+        return $this->rawCertificateFields['serialNumber'] ?? '';
+    }
+
     public function getDomain(): string
     {
         if (! array_key_exists('CN', $this->rawCertificateFields['subject'])) {

@@ -48,6 +48,12 @@ class SslCertificateTest extends TestCase
     }
 
     /** @test */
+    public function it_can_determine_the_serialnumber()
+    {
+        $this->assertSame("267977138471675133728493439824231787816484", $this->certificate->getSerialNumber());
+    }
+
+    /** @test */
     public function it_can_determine_the_domain()
     {
         $this->assertSame('spatie.be', $this->certificate->getDomain());
