@@ -2,6 +2,18 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 2.3.0 - 2022-09-07
+
+### What's Changed
+
+- Add getSerialNumber() by @hexathos in https://github.com/spatie/ssl-certificate/pull/176
+
+### New Contributors
+
+- @hexathos made their first contribution in https://github.com/spatie/ssl-certificate/pull/176
+
+**Full Changelog**: https://github.com/spatie/ssl-certificate/compare/2.2.0...2.3.0
+
 ## 2.2.0 - 2022-06-16
 
 ### What's Changed
