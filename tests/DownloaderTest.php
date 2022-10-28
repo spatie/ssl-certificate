@@ -18,8 +18,8 @@ class DownloaderTest extends TestCase
     {
         parent::setUp();
 
-        $this->domainWithDifferentPort = 'ben.hotweb.de';
-        $this->ipDomainWithDifferentPort = '178.254.8.25';
+        $this->domainWithDifferentPort = 'psd2.b2b.belfius.be';
+        $this->ipDomainWithDifferentPort = '141.96.1.12';
         $this->differentPort = 8443;
     }
 
@@ -82,7 +82,7 @@ class DownloaderTest extends TestCase
             $this->markTestSkipped('Github Actions have no IPv6 Support');
         }
         $sslCertificate = SslCertificate::download()
-            ->fromIpAddress('2a00:1450:4001:80e::200e')
+            ->fromIpAddress('2607:f8b0:4004:c07::64')
             ->forHost('google.com');
 
         $this->assertInstanceOf(SslCertificate::class, $sslCertificate);

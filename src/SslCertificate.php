@@ -21,7 +21,11 @@ class SslCertificate
 
     public static function createFromFile(string $pathToCertificate): self
     {
-        return self::createFromString(file_get_contents($pathToCertificate));
+        $fileContents = file_get_contents($pathToCertificate);
+        if (!str_contains($fileContents,'BEGIN CERTIFICATE')) {
+            $fileContents = self::der2pem($fileContents);
+        }
+        return self::createFromString($fileContents);
     }
 
     public static function createFromString(string $certificatePem): self
@@ -46,6 +50,12 @@ class SslCertificate
             $properties['fingerprintSha256'],
             $properties['remoteAddress'],
         );
+    }
+
+    public static function der2pem($der_data): string
+    {
+        $pem = chunk_split(base64_encode($der_data), 64, "\n");
+        return "-----BEGIN CERTIFICATE-----\n".$pem."-----END CERTIFICATE-----\n";
     }
 
     public function __construct(

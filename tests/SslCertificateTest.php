@@ -28,7 +28,7 @@ class SslCertificateTest extends TestCase
 
         $this->certificate = new SslCertificate($rawCertificateFields);
 
-        $this->domainWithDifferentPort = 'ben.hotweb.de';
+        $this->domainWithDifferentPort = 'psd2.b2b.belfius.be';
         $this->differentPort = 8443;
     }
 
