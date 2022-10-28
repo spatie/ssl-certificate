@@ -2,6 +2,18 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 2.4.0 - 2022-10-28
+
+### What's Changed
+
+- add the ability to load from file a DER based certificate by @marco-introini in https://github.com/spatie/ssl-certificate/pull/177
+
+### New Contributors
+
+- @marco-introini made their first contribution in https://github.com/spatie/ssl-certificate/pull/177
+
+**Full Changelog**: https://github.com/spatie/ssl-certificate/compare/2.3.0...2.4.0
+
 ## 2.3.0 - 2022-09-07
 
 ### What's Changed
