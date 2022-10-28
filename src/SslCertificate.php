@@ -22,9 +22,10 @@ class SslCertificate
     public static function createFromFile(string $pathToCertificate): self
     {
         $fileContents = file_get_contents($pathToCertificate);
-        if (!str_contains($fileContents,'BEGIN CERTIFICATE')) {
+        if (! str_contains($fileContents, 'BEGIN CERTIFICATE')) {
             $fileContents = self::der2pem($fileContents);
         }
+
         return self::createFromString($fileContents);
     }
 
@@ -55,6 +56,7 @@ class SslCertificate
     public static function der2pem($der_data): string
     {
         $pem = chunk_split(base64_encode($der_data), 64, "\n");
+
         return "-----BEGIN CERTIFICATE-----\n".$pem."-----END CERTIFICATE-----\n";
     }
 

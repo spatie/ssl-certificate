@@ -14,14 +14,11 @@ class SslCertificateFromFileTest extends TestCase
     /** @var Spatie\SslCertificate\SslCertificate */
     protected $certificate;
 
-
     protected function setUp(): void
     {
         parent::setUp();
 
         Carbon::setTestNow(Carbon::create('2020', '01', '13', '03', '18', '13', 'utc'));
-
-
     }
 
     /** @test */
@@ -39,5 +36,4 @@ class SslCertificateFromFileTest extends TestCase
         $this->assertSame("Let's Encrypt", $this->certificate->getOrganization());
         $this->assertSame("analytics.spatie.be", $this->certificate->getDomain());
     }
-
 }
