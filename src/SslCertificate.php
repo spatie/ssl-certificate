@@ -21,7 +21,11 @@ class SslCertificate
 
     public static function createFromFile(string $pathToCertificate): self
     {
-        return self::createFromString(file_get_contents($pathToCertificate));
+        $fileContents = file_get_contents($pathToCertificate);
+        if (!str_contains($fileContents,'BEGIN CERTIFICATE')) {
+            $fileContents = der2pem($fileContents);
+        }
+        return self::createFromString($fileContents);
     }
 
     public static function createFromString(string $certificatePem): self

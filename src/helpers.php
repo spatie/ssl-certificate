@@ -44,3 +44,9 @@ function str_contains(string $haystack, string | array $needles): bool
 
     return false;
 }
+
+function der2pem($der_data): string
+{
+    $pem = chunk_split(base64_encode($der_data), 64, "\n");
+    return "-----BEGIN CERTIFICATE-----\n".$pem."-----END CERTIFICATE-----\n";
+}
