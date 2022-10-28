@@ -27,7 +27,7 @@ class SslCertificateFromStringTest extends TestCase
 
         $this->certificate = SslCertificate::createFromString($certificate);
 
-        $this->domainWithDifferentPort = 'ben.hotweb.de';
+        $this->domainWithDifferentPort = 'psd2.b2b.belfius.be';
         $this->differentPort = 8443;
     }
 
