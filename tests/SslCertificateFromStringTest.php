@@ -150,7 +150,14 @@ class SslCertificateFromStringTest extends TestCase
     /** @test */
     public function it_can_get_the_hash_of_a_certificate()
     {
-        $this->assertEquals('025580390a842a6564e9f24b81a5e000', $this->certificate->getHash());
+        $hash = '025580390a842a6564e9f24b81a5e000';
+
+        // windows + PHP < 8.2 returns a different hash
+        if (strtolower(PHP_OS) === 'windows' && version_compare(PHP_MAJOR_VERSION . "." . PHP_MINOR_VERSION, '8.2', '<')) {
+            $hash = '0547c1a78dcdbe96f907aaaf42db5b8f';
+        }
+
+        $this->assertEquals($hash, $this->certificate->getHash());
     }
 
     /** @test */
