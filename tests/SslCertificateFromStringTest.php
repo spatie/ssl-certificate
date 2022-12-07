@@ -152,7 +152,8 @@ class SslCertificateFromStringTest extends TestCase
     {
         $hash = '025580390a842a6564e9f24b81a5e000';
 
-        if (strtolower(PHP_OS_FAMILY) === 'windows') {
+        // windows + PHP < 8.2 returns a different hash
+        if (strtolower(PHP_OS_FAMILY) === 'windows' && version_compare(PHP_VERSION, '8.2.0', '<')) {
             $hash = '0547c1a78dcdbe96f907aaaf42db5b8f';
         }
 
