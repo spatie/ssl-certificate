@@ -135,7 +135,7 @@ class SslCertificateFromStringTest extends TestCase
     /** @test */
     public function it_can_convert_the_certificate_to_json()
     {
-        $this->assertMatchesJsonSnapshot($this->safeJson($this->certificate->getRawCertificateFieldsJson()));
+        $this->assertMatchesSnapshot($this->safeJson($this->certificate->getRawCertificateFieldsJson()));
     }
 
     /** @test */
@@ -238,6 +238,6 @@ class SslCertificateFromStringTest extends TestCase
 
     protected function safeJson(string $json): string
     {
-        return str_replace("\\\\n", "", $json);
+        return str_replace([PHP_EOL, "\n", "\\n", "\\\n"], "", $json);
     }
 }
