@@ -238,6 +238,13 @@ class SslCertificateFromStringTest extends TestCase
 
     protected function safeJson(string $json): string
     {
-        return str_replace([PHP_EOL, "\n", "\\n", "\\\n"], "", $json);
+        $result = str_replace([PHP_EOL, "\n", "\\n", "\\\n"], "", $json);
+
+        if (strtolower(PHP_OS_FAMILY) === 'windows') {
+            //windows-specific fix
+            $result = str_replace('"authorityKeyIdentifier":"keyid:', '"authorityKeyIdentifier":"', $result);
+        }
+
+        return $result;
     }
 }
