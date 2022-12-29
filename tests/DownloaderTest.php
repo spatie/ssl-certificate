@@ -1,168 +1,114 @@
 <?php
 
-namespace Spatie\SslCertificate\Test;
-
-use PHPUnit\Framework\TestCase;
 use Spatie\SslCertificate\Downloader;
 use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate\HostDoesNotExist;
 use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate\UnknownError;
 use Spatie\SslCertificate\SslCertificate;
 
-class DownloaderTest extends TestCase
-{
-    protected $domainWithDifferentPort;
-    protected $ipDomainWithDifferentPort;
-    protected $differentPort;
+beforeEach(function () {
+    $this->domainWithDifferentPort = 'psd2.b2b.belfius.be';
+    $this->ipDomainWithDifferentPort = '141.96.1.12';
+    $this->differentPort = 8443;
+});
 
-    protected function setUp(): void
-    {
-        parent::setUp();
+it('can download a certificate from a host name', function () {
+    $sslCertificate = Downloader::downloadCertificateFromUrl('spatie.be');
 
-        $this->domainWithDifferentPort = 'psd2.b2b.belfius.be';
-        $this->ipDomainWithDifferentPort = '141.96.1.12';
-        $this->differentPort = 8443;
-    }
+    expect($sslCertificate)->toBeInstanceOf(SslCertificate::class);
+});
 
-    /** @test */
-    public function it_can_download_a_certificate_from_a_host_name()
-    {
-        $sslCertificate = Downloader::downloadCertificateFromUrl('spatie.be');
+it('can download a certificate from a host name with hostport ', function () {
+    $sslCertificate = Downloader::downloadCertificateFromUrl($this->domainWithDifferentPort . ':' . $this->differentPort);
 
-        $this->assertInstanceOf(SslCertificate::class, $sslCertificate);
-    }
+    expect($sslCertificate)->toBeInstanceOf(SslCertificate::class);
+});
 
-    /** @test */
-    public function it_can_download_a_certificate_from_a_host_name_with_hostport()
-    {
-        $sslCertificate = Downloader::downloadCertificateFromUrl($this->domainWithDifferentPort . ':' . $this->differentPort);
+it('can download a certificate from a host name with strange characters', function () {
+    $sslCertificate = Downloader::downloadCertificateFromUrl('https://www.hüpfburg.de');
 
-        $this->assertInstanceOf(SslCertificate::class, $sslCertificate);
-    }
+    expect($sslCertificate)->toBeInstanceOf(SslCertificate::class);
+});
 
-    /** @test */
-    public function it_can_download_a_certificate_from_a_host_name_with_strange_characters()
-    {
-        $sslCertificate = Downloader::downloadCertificateFromUrl('https://www.hüpfburg.de');
+test('can download a certificate from a host name with strange characters with hostport', function () {
+    $sslCertificate = Downloader::downloadCertificateFromUrl('https://' . $this->domainWithDifferentPort . ':' . $this->differentPort);
 
-        $this->assertInstanceOf(SslCertificate::class, $sslCertificate);
-    }
+    expect($sslCertificate)->toBeInstanceOf(SslCertificate::class);
+});
 
-    /** @test */
-    public function it_can_download_a_certificate_from_a_host_name_with_strange_characters_with_hostport()
-    {
-        $sslCertificate = Downloader::downloadCertificateFromUrl('https://' . $this->domainWithDifferentPort . ':' . $this->differentPort);
+it('can download a certificate for a host name from an ip address', function () {
+    $sslCertificate = SslCertificate::download()
+        ->fromIpAddress('164.92.244.169')
+        ->forHost('spatie.be');
 
-        $this->assertInstanceOf(SslCertificate::class, $sslCertificate);
-    }
+    expect($sslCertificate)->toBeInstanceOf(SslCertificate::class);
+});
 
-    /** @test */
-    public function it_can_download_a_certificate_for_a_host_name_from_an_ip_address()
-    {
-        $sslCertificate = SslCertificate::download()
-            ->fromIpAddress('164.92.244.169')
-            ->forHost('spatie.be');
+it('can download a certificate for a host name from an ip address with hostport', function () {
+    $sslCertificate = SslCertificate::download()
+        ->fromIpAddress($this->ipDomainWithDifferentPort)
+        ->forHost($this->domainWithDifferentPort . ':' . $this->differentPort);
 
-        $this->assertInstanceOf(SslCertificate::class, $sslCertificate);
-    }
+    expect($sslCertificate)->toBeInstanceOf(SslCertificate::class);
+});
 
-    /** @test */
-    public function it_can_download_a_certificate_for_a_host_name_from_an_ip_address_with_hostport()
-    {
-        $sslCertificate = SslCertificate::download()
-            ->fromIpAddress($this->ipDomainWithDifferentPort)
-            ->forHost($this->domainWithDifferentPort . ':' . $this->differentPort);
+it('can download a certificate for a host name from an ipv6 address', function () {
+    $sslCertificate = SslCertificate::download()
+        ->fromIpAddress('2607:f8b0:4004:c07::64')
+        ->forHost('google.com');
 
-        $this->assertInstanceOf(SslCertificate::class, $sslCertificate);
-    }
+    expect($sslCertificate)->toBeInstanceOf(SslCertificate::class);
+})->skip(getenv('GITHUB_ACTIONS'), 'Github Actions have no IPv6 Support');
 
-    /** @test */
-    public function it_can_download_a_certificate_for_a_host_name_from_an_ipv6_address()
-    {
-        if (getenv('GITHUB_ACTIONS')) {
-            $this->markTestSkipped('Github Actions have no IPv6 Support');
-        }
-        $sslCertificate = SslCertificate::download()
-            ->fromIpAddress('2607:f8b0:4004:c07::64')
-            ->forHost('google.com');
+it('sets a fingerprint on the downloaded certificate', function () {
+    $sslCertificate = Downloader::downloadCertificateFromUrl('spatie.be');
 
-        $this->assertInstanceOf(SslCertificate::class, $sslCertificate);
-    }
+    expect($sslCertificate->getFingerprint())->notg19->toBeEmpty();
+});
 
-    /** @test */
-    public function it_sets_a_fingerprint_on_the_downloaded_certificate()
-    {
-        $sslCertificate = Downloader::downloadCertificateFromUrl('spatie.be');
+it('sets a fingerprint on the downloaded certificate with hostport', function () {
+    $sslCertificate = Downloader::downloadCertificateFromUrl($this->domainWithDifferentPort . ':' . $this->differentPort);
 
-        $this->assertNotEmpty($sslCertificate->getFingerprint());
-    }
+    expect($sslCertificate->getFingerprint())->not->toBeEmpty();
+});
 
-    /** @test */
-    public function it_sets_a_fingerprint_on_the_downloaded_certificate_with_hostport()
-    {
-        $sslCertificate = Downloader::downloadCertificateFromUrl($this->domainWithDifferentPort . ':' . $this->differentPort);
+it('can download all certificates from a host name', function () {
+    $sslCertificates = (new Downloader())->getCertificates('spatie.be');
 
-        $this->assertNotEmpty($sslCertificate->getFingerprint());
-    }
+    expect($sslCertificates)->toHaveCount(1);
+});
 
-    /** @test */
-    public function it_can_download_all_certificates_from_a_host_name()
-    {
-        $sslCertificates = (new Downloader())->getCertificates('spatie.be');
+it('can download all certificates from a host name with socket context options', function () {
+    $sslCertificates = (new Downloader())
+        ->withSocketContextOptions([
+            'bindto' => '0:0',
+        ])
+        ->getCertificates('spatie.be');
 
-        $this->assertCount(1, $sslCertificates);
-    }
+    expect($sslCertificates)->toHaveCount(1);
+});
 
-    /** @test */
-    public function it_can_download_all_certificates_from_a_host_name_with_socket_context_options()
-    {
-        $sslCertificates = (new Downloader())
-            ->withSocketContextOptions([
-                'bindto' => '0:0',
-            ])
-            ->getCertificates('spatie.be');
+it('throws an exception for non existing host')
+    ->tap(fn () => Downloader::downloadCertificateFromUrl('spatie-non-existing.be'))
+    ->throws(HostDoesNotExist::class);
 
-        $this->assertCount(1, $sslCertificates);
-    }
+it('throws an exception when downloading a certificate from a host that contains none')
+    ->tap(fn () => Downloader::downloadCertificateFromUrl('3564020356.org'))
+    ->throws(UnknownError::class);
 
-    /** @test */
-    public function it_throws_an_exception_for_non_existing_host()
-    {
-        $this->expectException(HostDoesNotExist::class);
+it('throws an exception when downloading a certificate for a missing host name from an ip address', function () {
+    $sslCertificate = SslCertificate::download()
+        ->fromIpAddress('138.197.187.74')
+        ->forHost('fake.subdomain.spatie.be');
+})->throws(UnknownError::class);
 
-        Downloader::downloadCertificateFromUrl('spatie-non-existing.be');
-    }
+it('can retrieve the ip address of the server that served the certificates', function () {
+    $sslCertificate = Downloader::downloadCertificateFromUrl('spatie.be');
 
-    /** @test */
-    public function it_throws_an_exception_when_downloading_a_certificate_from_a_host_that_contains_none()
-    {
-        $this->expectException(UnknownError::class);
+    expect($sslCertificate->getRemoteAddress())->toEqual('164.92.244.169:443');
+});
 
-        Downloader::downloadCertificateFromUrl('3564020356.org');
-    }
+it('can retrieve the ip address of the server that served the certificates with hostport', function () {
+    $sslCertificate = Downloader::downloadCertificateFromUrl($this->domainWithDifferentPort . ':' . $this->differentPort);
 
-    /** @test */
-    public function it_throws_an_exception_when_downloading_a_certificate_for_a_missing_host_name_from_an_ip_address()
-    {
-        $this->expectException(UnknownError::class);
-
-        $sslCertificate = SslCertificate::download()
-            ->fromIpAddress('138.197.187.74')
-            ->forHost('fake.subdomain.spatie.be');
-    }
-
-    /** @test */
-    public function it_can_retrieve_the_ip_address_of_the_server_that_served_the_certificates()
-    {
-        $sslCertificate = Downloader::downloadCertificateFromUrl('spatie.be');
-
-        $this->assertEquals('164.92.244.169:443', $sslCertificate->getRemoteAddress());
-    }
-
-    /** @test */
-    public function it_can_retrieve_the_ip_address_of_the_server_that_served_the_certificates_with_hostport()
-    {
-        $sslCertificate = Downloader::downloadCertificateFromUrl($this->domainWithDifferentPort . ':' . $this->differentPort);
-
-        $this->assertEquals($this->ipDomainWithDifferentPort . ':' . $this->differentPort, $sslCertificate->getRemoteAddress());
-    }
-}
+    expect($sslCertificate->getRemoteAddress())->toEqual($this->ipDomainWithDifferentPort . ':' . $this->differentPort);
+});
