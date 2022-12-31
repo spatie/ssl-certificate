@@ -2,71 +2,69 @@
 
 namespace Spatie\SslCertificate\Test;
 
-use PHPUnit\Framework\TestCase;
-
 use function Spatie\SslCertificate\ends_with;
 use function Spatie\SslCertificate\length;
 use function Spatie\SslCertificate\starts_with;
 use function Spatie\SslCertificate\str_contains;
 
-class HelpersTest extends TestCase
-{
-    /** @test */
-    public function it_can_determine_if_a_string_starts_with_a_given_string()
-    {
-        $this->assertTrue(starts_with('jason', 'jas'));
-        $this->assertTrue(starts_with('jason', 'jason'));
-        $this->assertTrue(starts_with('jason', ['jas']));
-        $this->assertTrue(starts_with('jason', ['day', 'jas']));
-        $this->assertFalse(starts_with('jason', 'day'));
-        $this->assertFalse(starts_with('jason', ['day']));
-        $this->assertFalse(starts_with('jason', ''));
-    }
+it('can determine if a string starts with a given string', function () {
+    expect([
+        starts_with('jason', 'jas'),
+        starts_with('jason', 'jason'),
+        starts_with('jason', ['jas']),
+        starts_with('jason', ['day', 'jas'])
+    ])->each->toBeTrue();
 
-    /** @test */
-    public function it_can_determine_if_a_string_end_with_a_given_string()
-    {
-        $this->assertTrue(ends_with('jason', 'on'));
-        $this->assertTrue(ends_with('jason', 'jason'));
-        $this->assertTrue(ends_with('jason', ['on']));
-        $this->assertTrue(ends_with('jason', ['no', 'on']));
-        $this->assertFalse(ends_with('jason', 'no'));
-        $this->assertFalse(ends_with('jason', ['no']));
-        $this->assertFalse(ends_with('jason', ''));
-        $this->assertFalse(ends_with('7', ' 7'));
-    }
+    expect([
+        starts_with('jason', 'day'),
+        starts_with('jason', ['day']),
+        starts_with('jason', '')
+    ])->each->toBeFalse();
+});
 
-    /** @test */
-    public function it_can_create_substring_of_a_given_stirng()
-    {
-        $this->assertEquals('Ё', \Spatie\SslCertificate\substr('БГДЖИЛЁ', -1));
-        $this->assertEquals('ЛЁ', \Spatie\SslCertificate\substr('БГДЖИЛЁ', -2));
-        $this->assertEquals('И', \Spatie\SslCertificate\substr('БГДЖИЛЁ', -3, 1));
-        $this->assertEquals('ДЖИЛ', \Spatie\SslCertificate\substr('БГДЖИЛЁ', 2, -1));
-        $this->assertEmpty(\Spatie\SslCertificate\substr('БГДЖИЛЁ', 4, -4));
-        $this->assertEquals('ИЛ', \Spatie\SslCertificate\substr('БГДЖИЛЁ', -3, -1));
-        $this->assertEquals('ГДЖИЛЁ', \Spatie\SslCertificate\substr('БГДЖИЛЁ', 1));
-        $this->assertEquals('ГДЖ', \Spatie\SslCertificate\substr('БГДЖИЛЁ', 1, 3));
-        $this->assertEquals('БГДЖ', \Spatie\SslCertificate\substr('БГДЖИЛЁ', 0, 4));
-        $this->assertEquals('Ё', \Spatie\SslCertificate\substr('БГДЖИЛЁ', -1, 1));
-        $this->assertEmpty(\Spatie\SslCertificate\substr('Б', 2));
-    }
+it('can determine if a string end with a given string', function () {
+    expect([
+        ends_with('jason', 'on'),
+        ends_with('jason', 'jason'),
+        ends_with('jason', ['on']),
+        ends_with('jason', ['no', 'on'])
+    ])->each->toBeTrue()
+        ->and([
+            ends_with('jason', 'no'),
+            ends_with('jason', ['no']),
+            ends_with('jason', ''),
+            ends_with('7', ' 7')
+        ])->each->toBeFalse();
+});
 
-    /** @test */
-    public function it_can_determine_the_lenght_of_a_string()
-    {
-        $this->assertEquals(11, length('foo bar baz'));
-    }
+it('can create substring of a given stirng', function () {
+    expect(\Spatie\SslCertificate\substr('БГДЖИЛЁ', -1))->toEqual('Ё')
+        ->and(\Spatie\SslCertificate\substr('БГДЖИЛЁ', -2))->toEqual('ЛЁ')
+        ->and(\Spatie\SslCertificate\substr('БГДЖИЛЁ', -3, 1))->toEqual('И')
+        ->and(\Spatie\SslCertificate\substr('БГДЖИЛЁ', 2, -1))->toEqual('ДЖИЛ')
+        ->and(\Spatie\SslCertificate\substr('БГДЖИЛЁ', 4, -4))->toBeEmpty()
+        ->and(\Spatie\SslCertificate\substr('БГДЖИЛЁ', -3, -1))->toEqual('ИЛ')
+        ->and(\Spatie\SslCertificate\substr('БГДЖИЛЁ', 1))->toEqual('ГДЖИЛЁ')
+        ->and(\Spatie\SslCertificate\substr('БГДЖИЛЁ', 1, 3))->toEqual('ГДЖ')
+        ->and(\Spatie\SslCertificate\substr('БГДЖИЛЁ', 0, 4))->toEqual('БГДЖ')
+        ->and(\Spatie\SslCertificate\substr('БГДЖИЛЁ', -1, 1))->toEqual('Ё')
+        ->and(\Spatie\SslCertificate\substr('Б', 2))->toBeEmpty();
+});
 
-    /** @test */
-    public function it_can_determine_if_a_string_str_contains_another_string()
-    {
-        $this->assertTrue(str_contains('taylor', 'ylo'));
-        $this->assertTrue(str_contains('taylor', 'taylor'));
-        $this->assertTrue(str_contains('taylor', ['ylo']));
-        $this->assertTrue(str_contains('taylor', ['xxx', 'ylo']));
-        $this->assertFalse(str_contains('taylor', 'xxx'));
-        $this->assertFalse(str_contains('taylor', ['xxx']));
-        $this->assertFalse(str_contains('taylor', ''));
-    }
-}
+it('can determine the lenght of a string', function () {
+    expect(length('foo bar baz'))->toEqual(11);
+});
+
+it('can determine if a string str contains another string', function () {
+    expect([
+        str_contains('taylor', 'ylo'),
+        str_contains('taylor', 'taylor'),
+        str_contains('taylor', ['ylo']),
+        str_contains('taylor', ['xxx', 'ylo']),
+    ])->each->toBeTrue()
+        ->and([
+            str_contains('taylor', 'xxx'),
+            str_contains('taylor', ['xxx']),
+            str_contains('taylor', '')
+        ])->each->toBeFalse();
+});
