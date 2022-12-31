@@ -1,238 +1,171 @@
 <?php
 
-namespace Spatie\SslCertificate\Test;
-
 use Carbon\Carbon;
-use PHPUnit\Framework\TestCase;
-use Spatie\Snapshots\MatchesSnapshots;
 use Spatie\SslCertificate\SslCertificate;
 
-class SslCertificateFromStringTest extends TestCase
-{
-    use MatchesSnapshots;
+use function Spatie\Snapshots\assertMatchesJsonSnapshot;
 
-    /** @var Spatie\SslCertificate\SslCertificate */
-    protected $certificate;
+beforeEach(function () {
+    Carbon::setTestNow(Carbon::create('2020', '01', '13', '03', '18', '13', 'utc'));
 
-    protected $domainWithDifferentPort;
-    protected $differentPort;
+    $certificate = file_get_contents(__DIR__ . '/stubs/spatieCertificate.pem');
 
-    protected function setUp(): void
-    {
-        parent::setUp();
+    $this->certificate = SslCertificate::createFromString($certificate);
 
-        Carbon::setTestNow(Carbon::create('2020', '01', '13', '03', '18', '13', 'utc'));
+    $this->domainWithDifferentPort = 'psd2.b2b.belfius.be';
+    $this->differentPort = 8443;
+});
 
-        $certificate = file_get_contents(__DIR__.'/stubs/spatieCertificate.pem');
+it('can determine the issuer')
+    ->expect(fn () => $this->certificate->getIssuer())
+    ->toEqual("Let's Encrypt Authority X3");
 
-        $this->certificate = SslCertificate::createFromString($certificate);
+it('can determine the organization')
+    ->expect(fn () => $this->certificate->getOrganization())
+    ->toEqual("Let's Encrypt");
 
-        $this->domainWithDifferentPort = 'psd2.b2b.belfius.be';
-        $this->differentPort = 8443;
-    }
+it('can determine the domain')
+    ->expect(fn () => $this->certificate->getDomain())
+    ->toEqual('analytics.spatie.be');
 
-    /** @test */
-    public function it_can_determine_the_issuer()
-    {
-        $this->assertSame("Let's Encrypt Authority X3", $this->certificate->getIssuer());
-    }
+it('can determine the signature algorithm')
+    ->expect(fn () => $this->certificate->getSignatureAlgorithm())
+    ->toEqual('RSA-SHA256');
 
-    /** @test */
-    public function it_can_determine_the_organization()
-    {
-        $this->assertSame("Let's Encrypt", $this->certificate->getOrganization());
-    }
+it('can determine the additional domains')
+    ->expect(fn () => $this->certificate->getAdditionalDomains())->toHaveCount(1)
+    ->and(fn () => $this->certificate->getAdditionalDomains()[0])->toEqual('analytics.spatie.be');
 
-    /** @test */
-    public function it_can_determine_the_domain()
-    {
-        $this->assertSame('analytics.spatie.be', $this->certificate->getDomain());
-    }
+it('can determine the valid from date')
+    ->expect(fn () => $this->certificate->validFromDate())->toBeInstanceOf(Carbon::class)
+    ->and(fn () => $this->certificate->validFromDate()->format('Y-m-d H:i:s'))->toEqual('2020-01-13 03:18:13');
 
-    /** @test */
-    public function it_can_determine_the_signature_algorithm()
-    {
-        $this->assertSame('RSA-SHA256', $this->certificate->getSignatureAlgorithm());
-    }
+it('can determine the expiration date')
+    ->expect(fn () => $this->certificate->expirationDate())->toBeInstanceOf(Carbon::class)
+    ->and(fn () => $this->certificate->expirationDate()->format('Y-m-d H:i:s'))->toEqual('2020-04-12 03:18:13');
 
-    /** @test */
-    public function it_can_determine_the_additional_domains()
-    {
-        $this->assertCount(1, $this->certificate->getAdditionalDomains());
+it('can determine if the certificate is valid', function () {
+    Carbon::setTestNow(Carbon::create('2016', '05', '19', '16', '45', '00', 'utc'));
+    expect($this->certificate->isValid())->toBeFalse();
 
-        $this->assertSame('analytics.spatie.be', $this->certificate->getAdditionalDomains()[0]);
-    }
+    Carbon::setTestNow(Carbon::create('2020', '02', '13', '16', '51', '00', 'utc'));
+    expect($this->certificate->isValid())->toBeTrue();
 
-    /** @test */
-    public function it_can_determine_the_valid_from_date()
-    {
-        $this->assertInstanceOf(Carbon::class, $this->certificate->validFromDate());
+    Carbon::setTestNow(Carbon::create('2020', '03', '17', '16', '49', '00', 'utc'));
+    expect($this->certificate->isValid())->toBeTrue();
 
-        $this->assertSame('2020-01-13 03:18:13', $this->certificate->validFromDate()->format('Y-m-d H:i:s'));
-    }
+    Carbon::setTestNow(Carbon::create('2016', '08', '17', '16', '51', '00', 'utc'));
+    expect($this->certificate->isValid())->toBeFalse();
+});
 
-    /** @test */
-    public function it_can_determine_the_expiration_date()
-    {
-        $this->assertInstanceOf(Carbon::class, $this->certificate->expirationDate());
+it('can determine if the certificate is expired', function () {
+    Carbon::setTestNow(Carbon::create('2020', '02', '13', '16', '45', '00', 'utc'));
+    expect($this->certificate->isExpired())->toBeFalse();
 
-        $this->assertSame('2020-04-12 03:18:13', $this->certificate->expirationDate()->format('Y-m-d H:i:s'));
-    }
+    Carbon::setTestNow(Carbon::create('2020', '02', '13', '16', '51', '00', 'utc'));
+    expect($this->certificate->isExpired())->toBeFalse();
 
-    /** @test */
-    public function it_can_determine_if_the_certificate_is_valid()
-    {
-        Carbon::setTestNow(Carbon::create('2016', '05', '19', '16', '45', '00', 'utc'));
-        $this->assertFalse($this->certificate->isValid());
+    Carbon::setTestNow(Carbon::create('2020', '02', '17', '16', '49', '00', 'utc'));
+    expect($this->certificate->isExpired())->toBeFalse();
 
-        Carbon::setTestNow(Carbon::create('2020', '02', '13', '16', '51', '00', 'utc'));
-        $this->assertTrue($this->certificate->isValid());
+    Carbon::setTestNow(Carbon::create('2020', '08', '17', '16', '51', '00', 'utc'));
+    expect($this->certificate->isExpired())->toBeTrue();
+});
 
-        Carbon::setTestNow(Carbon::create('2020', '03', '17', '16', '49', '00', 'utc'));
-        $this->assertTrue($this->certificate->isValid());
+it('provides a fluent interface to set all options', function () {
+    $downloadedCertificate = SslCertificate::download()
+        ->usingPort(443)
+        ->setTimeout(30)
+        ->forHost('spatie.be');
 
-        Carbon::setTestNow(Carbon::create('2016', '08', '17', '16', '51', '00', 'utc'));
-        $this->assertFalse($this->certificate->isValid());
-    }
+    expect($downloadedCertificate->getDomain())->toEqual('spatie.be');
+});
 
-    /** @test */
-    public function it_can_determine_if_the_certificate_is_expired()
-    {
-        Carbon::setTestNow(Carbon::create('2020', '02', '13', '16', '45', '00', 'utc'));
-        $this->assertFalse($this->certificate->isExpired());
+it('provides a fluent interface to set all options with hostport', function () {
+    $downloadedCertificate = SslCertificate::download()
+        ->setTimeout(30)
+        ->forHost($this->domainWithDifferentPort . ':' . $this->differentPort);
 
-        Carbon::setTestNow(Carbon::create('2020', '02', '13', '16', '51', '00', 'utc'));
-        $this->assertFalse($this->certificate->isExpired());
+    expect($downloadedCertificate->getDomain())->toEqual($this->domainWithDifferentPort);
+});
 
-        Carbon::setTestNow(Carbon::create('2020', '02', '17', '16', '49', '00', 'utc'));
-        $this->assertFalse($this->certificate->isExpired());
+it('can convert the certificate to json', function () {
+    assertMatchesJsonSnapshot($this->certificate->getRawCertificateFieldsJson());
+});
 
-        Carbon::setTestNow(Carbon::create('2020', '08', '17', '16', '51', '00', 'utc'));
-        $this->assertTrue($this->certificate->isExpired());
-    }
+it('can convert the certificate to a string', function () {
+    expect($this->certificate->getRawCertificateFieldsJson())
+        ->toEqual((string) $this->certificate);
+});
 
-    /** @test */
-    public function it_provides_a_fluent_interface_to_set_all_options()
-    {
-        $downloadedCertificate = SslCertificate::download()
-            ->usingPort(443)
-            ->setTimeout(30)
-            ->forHost('spatie.be');
+it('can get the hash of a certificate')
+    ->expect(fn () => $this->certificate->getHash())
+    ->toEqual('0547c1a78dcdbe96f907aaaf42db5b8f');
 
-        $this->assertSame('spatie.be', $downloadedCertificate->getDomain());
-    }
+it('can get all domains')
+    ->expect(fn () => $this->certificate->getDomains())
+    ->toEqual([
+        0 => 'analytics.spatie.be',
+    ]);
 
-    /** @test */
-    public function it_provides_a_fluent_interface_to_set_all_options_with_hostport()
-    {
-        $downloadedCertificate = SslCertificate::download()
-            ->setTimeout(30)
-            ->forHost($this->domainWithDifferentPort . ':' . $this->differentPort);
+it('can get the days until the expiration date')
+    ->expect(fn () => $this->certificate->daysUntilExpirationDate())
+    ->toEqual(90);
 
-        $this->assertSame($this->domainWithDifferentPort, $downloadedCertificate->getDomain());
-    }
+it('can determine if it is self signed')
+    ->expect(fn () => $this->certificate->isSelfSigned())
+    ->toBeFalse();
 
-    /** @test */
-    public function it_can_convert_the_certificate_to_json()
-    {
-        $this->assertMatchesJsonSnapshot($this->certificate->getRawCertificateFieldsJson());
-    }
+it('can determine if it uses sha1 hasing')
+    ->expect(fn () => $this->certificate->usesSha1Hash())
+    ->toBeFalse();
 
-    /** @test */
-    public function it_can_convert_the_certificate_to_a_string()
-    {
-        $this->assertEquals(
-            $this->certificate->getRawCertificateFieldsJson(),
-            (string) $this->certificate
-        );
-    }
+it('can determine if the certificate has a certain domain', function () {
+    expect($this->certificate->containsDomain('analytics.spatie.be'))->toBeTrue()
+        ->and([
+            $this->certificate->containsDomain('www.example.com'),
+            $this->certificate->containsDomain('notreallyspatie.be'),
+            $this->certificate->containsDomain('spatie.be.example.com')
+        ])->each->toBeFalse();
+});
 
-    /** @test */
-    public function it_can_get_the_hash_of_a_certificate()
-    {
-        $this->assertEquals('0547c1a78dcdbe96f907aaaf42db5b8f', $this->certificate->getHash());
-    }
+it('does not notify on wrong domains', function () {
+    $rawCertificateFields = json_decode(
+        file_get_contents(__DIR__ . '/stubs/certificateWithRandomWildcardDomains.json'),
+        true
+    );
 
-    /** @test */
-    public function it_can_get_all_domains()
-    {
-        $this->assertEquals([
-            0 => 'analytics.spatie.be',
-        ], $this->certificate->getDomains());
-    }
+    $this->certificate = new SslCertificate($rawCertificateFields);
 
-    /** @test */
-    public function it_can_get_the_days_until_the_expiration_date()
-    {
-        $this->assertEquals(90, $this->certificate->daysUntilExpirationDate());
-    }
+    expect($this->certificate->appliesToUrl('https://coinmarketcap.com'))->toBeFalse();
+});
 
-    /** @test */
-    public function it_can_determine_if_it_is_self_signed()
-    {
-        $this->assertFalse($this->certificate->isSelfSigned());
-    }
+it('correctly compares uppercase domain names', function () {
+    $rawCertificateFields = json_decode(
+        file_get_contents(__DIR__ . '/stubs/certificateWithUppercaseDomains.json'),
+        true
+    );
 
-    /** @test */
-    public function it_can_determine_if_it_uses_sha1_hasing()
-    {
-        $this->assertFalse($this->certificate->usesSha1Hash());
-    }
+    $this->certificate = new SslCertificate($rawCertificateFields);
 
-    /** @test */
-    public function it_can_determine_if_the_certificate_has_a_certain_domain()
-    {
-        $this->assertTrue($this->certificate->containsDomain('analytics.spatie.be'));
+    expect($this->certificate->appliesToUrl('spatie.be'))->toBeTrue()
+        ->and($this->certificate->appliesToUrl('www.spatie.be'))->toBeTrue();
+});
 
-        $this->assertFalse($this->certificate->containsDomain('www.example.com'));
-        $this->assertFalse($this->certificate->containsDomain('notreallyspatie.be'));
-        $this->assertFalse($this->certificate->containsDomain('spatie.be.example.com'));
-    }
+it('correctly identifies pre certificates', function () {
+    $rawCertificateFieldsNormalCertificate = json_decode(
+        file_get_contents(__DIR__ . '/stubs/spatieCertificateFields.json'),
+        true
+    );
 
-    /** @test */
-    public function does_not_notify_on_wrong_domains()
-    {
-        $rawCertificateFields = json_decode(
-            file_get_contents(__DIR__.'/stubs/certificateWithRandomWildcardDomains.json'),
-            true
-        );
+    $rawCertificateFieldsPreCertificate = json_decode(
+        file_get_contents(__DIR__ . '/stubs/preCertificate.json'),
+        true
+    );
 
-        $this->certificate = new SslCertificate($rawCertificateFields);
+    $certificateNormal = new SslCertificate($rawCertificateFieldsNormalCertificate);
+    $certificatePreCertificate = new SslCertificate($rawCertificateFieldsPreCertificate);
 
-        $this->assertFalse($this->certificate->appliesToUrl('https://coinmarketcap.com'));
-    }
-
-    /** @test */
-    public function it_correctly_compares_uppercase_domain_names()
-    {
-        $rawCertificateFields = json_decode(
-            file_get_contents(__DIR__.'/stubs/certificateWithUppercaseDomains.json'),
-            true
-        );
-
-        $this->certificate = new SslCertificate($rawCertificateFields);
-
-        $this->assertTrue($this->certificate->appliesToUrl('spatie.be'));
-        $this->assertTrue($this->certificate->appliesToUrl('www.spatie.be'));
-    }
-
-    /** @test */
-    public function it_correctly_identifies_pre_certificates()
-    {
-        $rawCertificateFieldsNormalCertificate = json_decode(
-            file_get_contents(__DIR__.'/stubs/spatieCertificateFields.json'),
-            true
-        );
-
-        $rawCertificateFieldsPreCertificate = json_decode(
-            file_get_contents(__DIR__.'/stubs/preCertificate.json'),
-            true
-        );
-
-        $certificateNormal = new SslCertificate($rawCertificateFieldsNormalCertificate);
-        $certificatePreCertificate = new SslCertificate($rawCertificateFieldsPreCertificate);
-
-        $this->assertFalse($certificateNormal->isPreCertificate());
-        $this->assertTrue($certificatePreCertificate->isPreCertificate());
-    }
-}
+    expect($certificateNormal->isPreCertificate())->toBeFalse()
+        ->and($certificatePreCertificate->isPreCertificate())->toBeTrue();
+});

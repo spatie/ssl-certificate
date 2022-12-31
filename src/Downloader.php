@@ -89,7 +89,7 @@ class Downloader
     {
         $isValidIPv4 = filter_var($ipAddress, FILTER_VALIDATE_IP) !== false;
         $isValidIPv6 = filter_var($ipAddress, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) !== false;
-        if (! $isValidIPv4 && ! $isValidIPv6) {
+        if (!$isValidIPv4 && !$isValidIPv6) {
             throw InvalidIpAddress::couldNotValidate($ipAddress);
         }
         if ($isValidIPv6) {
@@ -186,13 +186,13 @@ class Downloader
             $streamContext
         );
 
-        if (! empty($errorDescription)) {
+        if (!empty($errorDescription)) {
             throw $this->buildFailureException($connectTo, $errorDescription);
         }
 
-        if (! $client) {
+        if (!$client) {
             $clientErrorMessage = ($this->usingIpAddress)
-                ? "Could not connect to `{$connectTo}` or it does not have a certificate matching `${hostName}`."
+                ? "Could not connect to `{$connectTo}` or it does not have a certificate matching `{$hostName}`."
                 : "Could not connect to `{$connectTo}`.";
 
             throw CouldNotDownloadCertificate::unknownError($hostName, $clientErrorMessage);
