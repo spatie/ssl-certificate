@@ -34,6 +34,7 @@
     },
     "require-dev": {
         "pestphp/pest": "^1.22",
+        "spatie/pest-plugin-snapshots": "^1.1",
         "spatie/phpunit-snapshot-assertions": "^4.2.3",
         "spatie/ray": "^1.30"
     },
