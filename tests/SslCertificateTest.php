@@ -8,71 +8,55 @@ use Spatie\Snapshots\MatchesSnapshots;
 use Spatie\SslCertificate\Downloader;
 use Spatie\SslCertificate\SslCertificate;
 
-class SslCertificateTest extends TestCase
-{
-    use MatchesSnapshots;
+beforeEach(function () {
+    Carbon::setTestNow(Carbon::create('2016', '06', '01', '00', '00', '00', 'utc'));
 
-    /** @var \Spatie\SslCertificate\SslCertificate */
-    protected $certificate;
+    $rawCertificateFields = json_decode(file_get_contents(__DIR__ . '/stubs/spatieCertificateFields.json'), true);
 
-    protected $domainWithDifferentPort;
-    protected $differentPort;
+    $this->certificate = new SslCertificate($rawCertificateFields);
 
-    protected function setUp(): void
-    {
-        parent::setUp();
+    $this->domainWithDifferentPort = 'psd2.b2b.belfius.be';
+    $this->differentPort = 8443;
+});
 
-        Carbon::setTestNow(Carbon::create('2016', '06', '01', '00', '00', '00', 'utc'));
+it('can get the raw certificate fields', function () {
+    $rawCertificateFields = $this->certificate->getRawCertificateFields();
 
-        $rawCertificateFields = json_decode(file_get_contents(__DIR__.'/stubs/spatieCertificateFields.json'), true);
+    $expectedFields = json_decode(file_get_contents(__DIR__ . '/stubs/spatieCertificateFields.json'));
 
-        $this->certificate = new SslCertificate($rawCertificateFields);
+    expect($rawCertificateFields)->toEqual($expectedFields);
+});
 
-        $this->domainWithDifferentPort = 'psd2.b2b.belfius.be';
-        $this->differentPort = 8443;
-    }
+it('can determine the issuer')
+    ->expect(fn () => $this->certificate->getIssuer())
+    ->toEqual("Let's Encrypt Authority X3");
 
-    public function it_can_get_the_raw_certificate_fields()
-    {
-        $rawCertificateFields = $this->certificate->getRawCertificateFields();
+it('can determine the serialnumber')
+    ->expect(fn () => $this->certificate->getSerialNumber())
+    ->toEqual('267977138471675133728493439824231787816484');
 
-        $expectedFields = json_decode(file_get_contents(__DIR__.'/stubs/spatieCertificateFields.json'));
+it('can determine the domain')
+    ->expect(fn () => $this->certificate->getDomain())
+    ->toEqual('spatie.be');
 
-        $this->assertEquals($expectedFields, $rawCertificateFields);
-    }
+it('can determine the signature algorithm')
+    ->expect(fn () => $this->certificate->getSignatureAlgorithm())
+    ->toEqual('RSA-SHA256');
 
-    /** @test */
-    public function it_can_determine_the_issuer()
-    {
-        $this->assertSame("Let's Encrypt Authority X3", $this->certificate->getIssuer());
-    }
-
-    /** @test */
-    public function it_can_determine_the_serialnumber()
-    {
-        $this->assertSame("267977138471675133728493439824231787816484", $this->certificate->getSerialNumber());
-    }
-
-    /** @test */
-    public function it_can_determine_the_domain()
-    {
-        $this->assertSame('spatie.be', $this->certificate->getDomain());
-    }
-
-    /** @test */
-    public function it_can_determine_the_signature_algorithm()
-    {
-        $this->assertSame('RSA-SHA256', $this->certificate->getSignatureAlgorithm());
-    }
-
-    /** @test */
-    public function it_can_determine_the_additional_domains()
-    {
-        $this->assertCount(3, $this->certificate->getAdditionalDomains());
+    it('can determine the additional domains', function () {
+       $this->assertCount(3, $this->certificate->getAdditionalDomains());
 
         $this->assertSame('spatie.be', $this->certificate->getAdditionalDomains()[0]);
         $this->assertSame('www.spatie.be', $this->certificate->getAdditionalDomains()[1]);
         $this->assertSame('*.otherdomain.com', $this->certificate->getAdditionalDomains()[2]);
+    });
+
+class SslCertificateTest extends TestCase
+{
+    /** @test */
+    public function ()
+    {
+        
     }
 
     /** @test */
@@ -285,7 +269,7 @@ class SslCertificateTest extends TestCase
     public function does_not_notify_on_wrong_domains()
     {
         $rawCertificateFields = json_decode(
-            file_get_contents(__DIR__.'/stubs/certificateWithRandomWildcardDomains.json'),
+            file_get_contents(__DIR__ . '/stubs/certificateWithRandomWildcardDomains.json'),
             true
         );
 
@@ -298,7 +282,7 @@ class SslCertificateTest extends TestCase
     public function it_correctly_compares_uppercase_domain_names()
     {
         $rawCertificateFields = json_decode(
-            file_get_contents(__DIR__.'/stubs/certificateWithUppercaseDomains.json'),
+            file_get_contents(__DIR__ . '/stubs/certificateWithUppercaseDomains.json'),
             true
         );
 
@@ -312,12 +296,12 @@ class SslCertificateTest extends TestCase
     public function it_correctly_identifies_pre_certificates()
     {
         $rawCertificateFieldsNormalCertificate = json_decode(
-            file_get_contents(__DIR__.'/stubs/spatieCertificateFields.json'),
+            file_get_contents(__DIR__ . '/stubs/spatieCertificateFields.json'),
             true
         );
 
         $rawCertificateFieldsPreCertificate = json_decode(
-            file_get_contents(__DIR__.'/stubs/preCertificate.json'),
+            file_get_contents(__DIR__ . '/stubs/preCertificate.json'),
             true
         );
 
