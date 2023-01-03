@@ -53,7 +53,7 @@ it('can determine the additional domains', function () {
 it('can determine the valid from date')
     ->expect(fn () => $this->certificate->validFromDate())->toBeInstanceOf(Carbon::class)
     ->and(fn () => $this->certificate->validFromDate()->format('Y-m-d H:i:s'))->toEqual('2016-05-19 16:50:00');
-    ;
+;
 
 it('can determine the lifespan in days')
     ->expect(fn () => $this->certificate->lifespanInDays())->toEqual(90);
