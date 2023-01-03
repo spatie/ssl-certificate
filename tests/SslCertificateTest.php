@@ -1,10 +1,12 @@
 <?php
 
 use Carbon\Carbon;
-use Spatie\SslCertificate\Downloader;
-use Spatie\SslCertificate\SslCertificate;
 
 use function Spatie\Snapshots\assertMatchesJsonSnapshot;
+
+use Spatie\SslCertificate\Downloader;
+
+use Spatie\SslCertificate\SslCertificate;
 
 beforeEach(function () {
     Carbon::setTestNow(Carbon::create('2016', '06', '01', '00', '00', '00', 'utc'));
@@ -50,7 +52,8 @@ it('can determine the additional domains', function () {
 
 it('can determine the valid from date')
     ->expect(fn () => $this->certificate->validFromDate())->toBeInstanceOf(Carbon::class)
-    ->and(fn () => $this->certificate->validFromDate()->format('Y-m-d H:i:s'))->toEqual('2016-05-19 16:50:00');;
+    ->and(fn () => $this->certificate->validFromDate()->format('Y-m-d H:i:s'))->toEqual('2016-05-19 16:50:00');
+    ;
 
 it('can determine the lifespan in days')
     ->expect(fn () => $this->certificate->lifespanInDays())->toEqual(90);
@@ -178,13 +181,13 @@ it('can determine if it uses sha1 hasing')
 it('can determine if the certificate has a certain domain', function () {
     expect([
         $this->certificate->containsDomain('spatie.be'),
-        $this->certificate->containsDomain('www.spatie.be')
+        $this->certificate->containsDomain('www.spatie.be'),
     ])->each->toBeTrue();
 
     expect([
         $this->certificate->containsDomain('www.example.com'),
         $this->certificate->containsDomain('notreallyspatie.be'),
-        $this->certificate->containsDomain('spatie.be.example.com')
+        $this->certificate->containsDomain('spatie.be.example.com'),
     ])->each->toBeFalse();
 });
 

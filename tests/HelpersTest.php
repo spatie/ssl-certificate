@@ -10,13 +10,13 @@ it('can determine if a string starts with a given string', function () {
         starts_with('jason', 'jas'),
         starts_with('jason', 'jason'),
         starts_with('jason', ['jas']),
-        starts_with('jason', ['day', 'jas'])
+        starts_with('jason', ['day', 'jas']),
     ])->each->toBeTrue();
 
     expect([
         starts_with('jason', 'day'),
         starts_with('jason', ['day']),
-        starts_with('jason', '')
+        starts_with('jason', ''),
     ])->each->toBeFalse();
 });
 
@@ -25,13 +25,13 @@ it('can determine if a string end with a given string', function () {
         ends_with('jason', 'on'),
         ends_with('jason', 'jason'),
         ends_with('jason', ['on']),
-        ends_with('jason', ['no', 'on'])
+        ends_with('jason', ['no', 'on']),
     ])->each->toBeTrue()
         ->and([
             ends_with('jason', 'no'),
             ends_with('jason', ['no']),
             ends_with('jason', ''),
-            ends_with('7', ' 7')
+            ends_with('7', ' 7'),
         ])->each->toBeFalse();
 });
 
@@ -63,6 +63,6 @@ it('can determine if a string str contains another string', function () {
         ->and([
             str_contains('taylor', 'xxx'),
             str_contains('taylor', ['xxx']),
-            str_contains('taylor', '')
+            str_contains('taylor', ''),
         ])->each->toBeFalse();
 });

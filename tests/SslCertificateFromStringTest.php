@@ -1,9 +1,10 @@
 <?php
 
 use Carbon\Carbon;
-use Spatie\SslCertificate\SslCertificate;
 
 use function Spatie\Snapshots\assertMatchesJsonSnapshot;
+
+use Spatie\SslCertificate\SslCertificate;
 
 beforeEach(function () {
     Carbon::setTestNow(Carbon::create('2020', '01', '13', '03', '18', '13', 'utc'));
@@ -125,7 +126,7 @@ it('can determine if the certificate has a certain domain', function () {
         ->and([
             $this->certificate->containsDomain('www.example.com'),
             $this->certificate->containsDomain('notreallyspatie.be'),
-            $this->certificate->containsDomain('spatie.be.example.com')
+            $this->certificate->containsDomain('spatie.be.example.com'),
         ])->each->toBeFalse();
 });
 
