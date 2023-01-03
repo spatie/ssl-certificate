@@ -33,7 +33,8 @@
         "spatie/macroable": "^1.0|^2.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.0",
+        "pestphp/pest": "^1.22",
+        "spatie/pest-plugin-snapshots": "^1.1",
         "spatie/phpunit-snapshot-assertions": "^4.2.3",
         "spatie/ray": "^1.30"
     },
@@ -51,9 +52,12 @@
         }
     },
     "scripts": {
-        "test": "vendor/bin/phpunit"
+        "test": "vendor/bin/pest"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     }
 }

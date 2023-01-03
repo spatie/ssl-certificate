@@ -1,39 +1,18 @@
 <?php
 
-namespace Spatie\SslCertificate\Test;
-
 use Carbon\Carbon;
-use PHPUnit\Framework\TestCase;
-use Spatie\Snapshots\MatchesSnapshots;
 use Spatie\SslCertificate\SslCertificate;
 
-class SslCertificateFromFileTest extends TestCase
-{
-    use MatchesSnapshots;
+beforeEach(function () {
+    Carbon::setTestNow(Carbon::create('2020', '01', '13', '03', '18', '13', 'utc'));
+});
 
-    /** @var Spatie\SslCertificate\SslCertificate */
-    protected $certificate;
+it('can load pem certificate')
+    ->tap(fn () => $this->certificate = SslCertificate::createFromFile(__DIR__ . '/stubs/spatieCertificate.pem'))
+    ->expect(fn () => $this->certificate->getOrganization())->toEqual("Let's Encrypt")
+    ->and(fn () => $this->certificate->getDomain())->toEqual("analytics.spatie.be");
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        Carbon::setTestNow(Carbon::create('2020', '01', '13', '03', '18', '13', 'utc'));
-    }
-
-    /** @test */
-    public function it_can_load_pem_certificate()
-    {
-        $this->certificate = SslCertificate::createFromFile(__DIR__.'/stubs/spatieCertificate.pem');
-        $this->assertSame("Let's Encrypt", $this->certificate->getOrganization());
-        $this->assertSame("analytics.spatie.be", $this->certificate->getDomain());
-    }
-
-    /** @test */
-    public function it_can_load_der_certificate()
-    {
-        $this->certificate = SslCertificate::createFromFile(__DIR__.'/stubs/derCertificate.der');
-        $this->assertSame("Let's Encrypt", $this->certificate->getOrganization());
-        $this->assertSame("analytics.spatie.be", $this->certificate->getDomain());
-    }
-}
+it('can load der certificate')
+    ->tap(fn () => $this->certificate = SslCertificate::createFromFile(__DIR__ . '/stubs/derCertificate.der'))
+    ->expect(fn () => $this->certificate->getOrganization())->toEqual("Let's Encrypt")
+    ->and(fn () => $this->certificate->getDomain())->toEqual("analytics.spatie.be");
