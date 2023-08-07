@@ -29,13 +29,13 @@
         "php": "^8.0",
         "ext-intl": "*",
         "ext-json": "*",
-        "nesbot/carbon": "^2.23",
-        "spatie/macroable": "^1.0|^2.0"
+        "nesbot/carbon": "^2.68.1",
+        "spatie/macroable": "^2.0"
     },
     "require-dev": {
-        "pestphp/pest": "^2.0",
-        "spatie/pest-plugin-snapshots": "^2.0",
-        "spatie/ray": "^1.30"
+        "pestphp/pest": "^2.12.2",
+        "spatie/pest-plugin-snapshots": "^2.0.1",
+        "spatie/ray": "^1.37.2"
     },
     "autoload": {
         "psr-4": {
