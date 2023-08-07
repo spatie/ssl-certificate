@@ -99,7 +99,7 @@ it('can convert the certificate to a string', function () {
         ->toEqual((string) $this->certificate);
 });
 
-it('can get the hash of a certificate', function() {
+it('can get the hash of a certificate', function () {
     expect($this->certificate->getHash())->toEqual('0547c1a78dcdbe96f907aaaf42db5b8f');
 })->skip(getenv('GITHUB_ACTIONS'), 'Github Actions results in different output');
 
