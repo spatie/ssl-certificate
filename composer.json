@@ -33,9 +33,8 @@
         "spatie/macroable": "^1.0|^2.0"
     },
     "require-dev": {
-        "pestphp/pest": "^1.22",
-        "spatie/pest-plugin-snapshots": "^1.1",
-        "spatie/phpunit-snapshot-assertions": "^4.2.3",
+        "pestphp/pest": "^2.0",
+        "spatie/pest-plugin-snapshots": "^2.0",
         "spatie/ray": "^1.30"
     },
     "autoload": {
