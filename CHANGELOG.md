@@ -2,6 +2,20 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 2.4.1 - 2023-08-07
+
+### What's Changed
+
+- Missing type by @roquie in https://github.com/spatie/ssl-certificate/pull/178
+- Convert all tests to pest by @alexmanase in https://github.com/spatie/ssl-certificate/pull/180
+
+### New Contributors
+
+- @roquie made their first contribution in https://github.com/spatie/ssl-certificate/pull/178
+- @alexmanase made their first contribution in https://github.com/spatie/ssl-certificate/pull/180
+
+**Full Changelog**: https://github.com/spatie/ssl-certificate/compare/2.4.0...2.4.1
+
 ## 2.4.0 - 2022-10-28
 
 ### What's Changed

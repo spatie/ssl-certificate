@@ -53,11 +53,11 @@ it('can download a certificate for a host name from an ip address with hostport'
 
 it('can download a certificate for a host name from an ipv6 address', function () {
     $sslCertificate = SslCertificate::download()
-        ->fromIpAddress('2607:f8b0:4004:c07::64')
+        ->fromIpAddress('2607:f8b0:4003:c00::6a')
         ->forHost('google.com');
 
     expect($sslCertificate)->toBeInstanceOf(SslCertificate::class);
-})->skip(getenv('GITHUB_ACTIONS'), 'Github Actions have no IPv6 Support');
+})->todo('Find an IPv6 address that works');
 
 it('sets a fingerprint on the downloaded certificate', function () {
     $sslCertificate = Downloader::downloadCertificateFromUrl('spatie.be');
