@@ -2,6 +2,18 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 2.5.0 - 2023-08-10
+
+### What's Changed
+
+- Display connecting port in error message by @JoeHorn in https://github.com/spatie/ssl-certificate/pull/181
+
+### New Contributors
+
+- @JoeHorn made their first contribution in https://github.com/spatie/ssl-certificate/pull/181
+
+**Full Changelog**: https://github.com/spatie/ssl-certificate/compare/2.4.1...2.5.0
+
 ## 2.4.1 - 2023-08-07
 
 ### What's Changed
