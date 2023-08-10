@@ -192,8 +192,8 @@ class Downloader
 
         if (! $client) {
             $clientErrorMessage = ($this->usingIpAddress)
-                ? "Could not connect to `{$connectTo}` or it does not have a certificate matching `{$hostName}`."
-                : "Could not connect to `{$connectTo}`.";
+                ? "Could not connect to `{$connectTo}:{$this->port}` or it does not have a certificate matching `{$hostName}`."
+                : "Could not connect to `{$connectTo}:{$this->port}`.";
 
             throw CouldNotDownloadCertificate::unknownError($hostName, $clientErrorMessage);
         }
