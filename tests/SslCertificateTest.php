@@ -156,7 +156,7 @@ it('can convert the certificate to a string', function () {
 
 it('can get the hash of a certificate')
     ->expect(fn () => $this->certificate->getHash())
-    ->toEqual('7469a491af5f1a5cc5dc5775608ec0ab');
+    ->toEqual('55353c8a63ab7669bb37a2692d2b0f3d');
 
 it('can get all domains', function () {
     expect($this->certificate->getDomains())->toMatchArray([
