@@ -33,6 +33,14 @@ it('can determine the signature algorithm')
     ->expect(fn () => $this->certificate->getSignatureAlgorithm())
     ->toEqual('RSA-SHA256');
 
+it('can determine the public key algorithm')
+    ->expect(fn () => $this->certificate->getPublicKeyAlgorithm())
+    ->toEqual("RSA");
+
+it('can determine the public key size')
+    ->expect(fn () => $this->certificate->getPublicKeySize())
+    ->toEqual(4096);
+
 it('can determine the additional domains')
     ->expect(fn () => $this->certificate->getAdditionalDomains())->toHaveCount(1)
     ->and(fn () => $this->certificate->getAdditionalDomains()[0])->toEqual('analytics.spatie.be');

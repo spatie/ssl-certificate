@@ -33,13 +33,16 @@ class SslCertificate
     {
         $certificateFields = openssl_x509_parse($certificatePem);
 
+        $publicKeyDetail = openssl_pkey_get_details(openssl_pkey_get_public($certificatePem));
+
         $fingerprint = openssl_x509_fingerprint($certificatePem);
         $fingerprintSha256 = openssl_x509_fingerprint($certificatePem, 'sha256');
 
         return new self(
             $certificateFields,
+            $publicKeyDetail,
             $fingerprint,
-            $fingerprintSha256
+            $fingerprintSha256,
         );
     }
 
@@ -47,6 +50,7 @@ class SslCertificate
     {
         return new self(
             $properties['rawCertificateFields'],
+            $properties['publicKeyDetail'],
             $properties['fingerprint'],
             $properties['fingerprintSha256'],
             $properties['remoteAddress'],
@@ -62,6 +66,7 @@ class SslCertificate
 
     public function __construct(
         protected array $rawCertificateFields,
+        private array $publicKeyDetail = [],
         protected string $fingerprint = '',
         private string $fingerprintSha256 = '',
         private string $remoteAddress = '',
@@ -126,6 +131,23 @@ class SslCertificate
         $additionalDomains = explode(', ', $this->rawCertificateFields['extensions']['subjectAltName'] ?? '');
 
         return array_map(fn (string $domain) => str_replace('DNS:', '', $domain), $additionalDomains);
+    }
+
+    public function getPublicKeyAlgorithm(): string
+    {
+        $type = $this->publicKeyDetail['type'] ?? -1;
+        switch ($type) {
+            case OPENSSL_KEYTYPE_RSA:   return 'RSA'; break;
+            case OPENSSL_KEYTYPE_DSA:   return 'DSA'; break;
+            case OPENSSL_KEYTYPE_DH:    return 'DH'; break;
+            case OPENSSL_KEYTYPE_EC:    return 'EC'; break;
+            default:                    return 'Unknown'; break;
+        }
+    }
+
+    public function getPublicKeySize(): int
+    {
+        return intval($this->publicKeyDetail['bits'] ?? 0);
     }
 
     public function validFromDate(): Carbon
@@ -280,6 +302,7 @@ class SslCertificate
             'fingerprint' => $this->fingerprint,
             'fingerprintSha256' => $this->fingerprintSha256,
             'remoteAddress' => $this->remoteAddress,
+            'publicKeyDetail' => $this->publicKeyDetail,
         ];
     }
 
