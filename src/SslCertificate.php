@@ -299,10 +299,10 @@ class SslCertificate
     {
         return [
             'rawCertificateFields' => $this->rawCertificateFields,
+            'publicKeyDetail' => $this->publicKeyDetail,
             'fingerprint' => $this->fingerprint,
             'fingerprintSha256' => $this->fingerprintSha256,
             'remoteAddress' => $this->remoteAddress,
-            'publicKeyDetail' => $this->publicKeyDetail,
         ];
     }
 
