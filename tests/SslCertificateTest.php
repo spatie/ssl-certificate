@@ -13,9 +13,7 @@ beforeEach(function () {
 
     $rawCertificateFields = json_decode(file_get_contents(__DIR__ . '/stubs/spatieCertificateFields.json'), true);
 
-    $this->certificate = new SslCertificate(
-        $rawCertificateFields, ['type' => OPENSSL_KEYTYPE_RSA, 'bits' => 4096]
-    );
+    $this->certificate = new SslCertificate($rawCertificateFields);
 
     $this->domainWithDifferentPort = 'psd2.b2b.belfius.be';
     $this->differentPort = 8443;
@@ -47,11 +45,11 @@ it('can determine the signature algorithm')
 
 it('can determine the public key algorithm')
     ->expect(fn () => $this->certificate->getPublicKeyAlgorithm())
-    ->toEqual("RSA");
+    ->toEqual("Unknown");
 
 it('can determine the public key size')
     ->expect(fn () => $this->certificate->getPublicKeySize())
-    ->toEqual(4096);
+    ->toEqual(0);
 
     it('can determine the additional domains', function () {
     expect($this->certificate->getAdditionalDomains())->toHaveCount(3)

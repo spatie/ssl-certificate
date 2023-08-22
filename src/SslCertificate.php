@@ -40,9 +40,10 @@ class SslCertificate
 
         return new self(
             $certificateFields,
-            $publicKeyDetail,
             $fingerprint,
             $fingerprintSha256,
+            '',
+            $publicKeyDetail,
         );
     }
 
@@ -50,10 +51,10 @@ class SslCertificate
     {
         return new self(
             $properties['rawCertificateFields'],
-            $properties['publicKeyDetail'],
             $properties['fingerprint'],
             $properties['fingerprintSha256'],
             $properties['remoteAddress'],
+            $properties['publicKeyDetail'],
         );
     }
 
@@ -66,10 +67,10 @@ class SslCertificate
 
     public function __construct(
         protected array $rawCertificateFields,
-        private array $publicKeyDetail = [],
         protected string $fingerprint = '',
         private string $fingerprintSha256 = '',
         private string $remoteAddress = '',
+        private array $publicKeyDetail = [],
     ) {
         //
     }
@@ -299,10 +300,10 @@ class SslCertificate
     {
         return [
             'rawCertificateFields' => $this->rawCertificateFields,
-            'publicKeyDetail' => $this->publicKeyDetail,
             'fingerprint' => $this->fingerprint,
             'fingerprintSha256' => $this->fingerprintSha256,
             'remoteAddress' => $this->remoteAddress,
+            'publicKeyDetail' => $this->publicKeyDetail,
         ];
     }
 

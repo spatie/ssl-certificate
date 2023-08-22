@@ -123,10 +123,10 @@ class Downloader
 
             return new SslCertificate(
                 $certificateFields,
-                $publicKeyDetail,
                 $fingerprint,
                 $fingerprintSha256,
                 $remoteAddress,
+                $publicKeyDetail,
             );
         }, $fullCertificateChain);
 
