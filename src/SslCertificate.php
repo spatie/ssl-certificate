@@ -136,13 +136,13 @@ class SslCertificate
 
     public function getPublicKeyAlgorithm(): string
     {
-        $type = $this->publicKeyDetail['type'] ?? -1;
-        switch ($type) {
-            case OPENSSL_KEYTYPE_RSA:   return 'RSA'; break;
-            case OPENSSL_KEYTYPE_DSA:   return 'DSA'; break;
-            case OPENSSL_KEYTYPE_DH:    return 'DH'; break;
-            case OPENSSL_KEYTYPE_EC:    return 'EC'; break;
-            default:                    return 'Unknown'; break;
+        return match($val['type'] ?? -1) {
+            -1                  => 'Unknown',
+            OPENSSL_KEYTYPE_RSA => 'RSA',
+            OPENSSL_KEYTYPE_DSA => 'DSA',
+            OPENSSL_KEYTYPE_DH  => 'DH',
+            OPENSSL_KEYTYPE_EC  => 'EC',
+        };
         }
     }
 
