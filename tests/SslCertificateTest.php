@@ -51,7 +51,7 @@ it('can determine the public key size')
     ->expect(fn () => $this->certificate->getPublicKeySize())
     ->toEqual(0);
 
-    it('can determine the additional domains', function () {
+it('can determine the additional domains', function () {
     expect($this->certificate->getAdditionalDomains())->toHaveCount(3)
         ->and($this->certificate->getAdditionalDomains()[0])->toEqual('spatie.be')
         ->and($this->certificate->getAdditionalDomains()[1])->toEqual('www.spatie.be')

@@ -139,9 +139,9 @@ class SslCertificate
         return match($this->publicKeyDetail['type'] ?? -1) {
             OPENSSL_KEYTYPE_RSA => 'RSA',
             OPENSSL_KEYTYPE_DSA => 'DSA',
-            OPENSSL_KEYTYPE_DH  => 'DH',
-            OPENSSL_KEYTYPE_EC  => 'EC',
-            default             => 'Unknown',
+            OPENSSL_KEYTYPE_DH => 'DH',
+            OPENSSL_KEYTYPE_EC => 'EC',
+            default => 'Unknown',
         };
     }
 
