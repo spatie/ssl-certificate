@@ -2,6 +2,14 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 2.6.0 - 2023-09-04
+
+### What's Changed
+
+- Introduce SslCertificate::getPublicKeyAlgorithm() and SslCertificate::getPublicKeySize() by @JoeHorn in https://github.com/spatie/ssl-certificate/pull/182
+
+**Full Changelog**: https://github.com/spatie/ssl-certificate/compare/2.5.0...2.6.0
+
 ## 2.5.0 - 2023-08-10
 
 ### What's Changed
