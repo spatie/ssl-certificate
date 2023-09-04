@@ -33,6 +33,14 @@ it('can determine the signature algorithm')
     ->expect(fn () => $this->certificate->getSignatureAlgorithm())
     ->toEqual('RSA-SHA256');
 
+it('can determine the public key algorithm')
+    ->expect(fn () => $this->certificate->getPublicKeyAlgorithm())
+    ->toEqual("RSA");
+
+it('can determine the public key size')
+    ->expect(fn () => $this->certificate->getPublicKeySize())
+    ->toEqual(4096);
+
 it('can determine the additional domains')
     ->expect(fn () => $this->certificate->getAdditionalDomains())->toHaveCount(1)
     ->and(fn () => $this->certificate->getAdditionalDomains()[0])->toEqual('analytics.spatie.be');
@@ -100,7 +108,7 @@ it('can convert the certificate to a string', function () {
 });
 
 it('can get the hash of a certificate', function () {
-    expect($this->certificate->getHash())->toEqual('0547c1a78dcdbe96f907aaaf42db5b8f');
+    expect($this->certificate->getHash())->toEqual('025580390a842a6564e9f24b81a5e000');
 })->skip(getenv('GITHUB_ACTIONS'), 'Github Actions results in different output');
 
 it('can get all domains')

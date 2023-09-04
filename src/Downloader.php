@@ -116,6 +116,8 @@ class Downloader
         $certificates = array_map(function ($certificate) use ($remoteAddress) {
             $certificateFields = openssl_x509_parse($certificate);
 
+            $publicKeyDetail = openssl_pkey_get_details(openssl_pkey_get_public($certificate));
+
             $fingerprint = openssl_x509_fingerprint($certificate);
             $fingerprintSha256 = openssl_x509_fingerprint($certificate, 'sha256');
 
@@ -123,7 +125,8 @@ class Downloader
                 $certificateFields,
                 $fingerprint,
                 $fingerprintSha256,
-                $remoteAddress
+                $remoteAddress,
+                $publicKeyDetail,
             );
         }, $fullCertificateChain);
 

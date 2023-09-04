@@ -71,10 +71,10 @@
         "extendedKeyUsage": "TLS Web Server Authentication, TLS Web Client Authentication",
         "basicConstraints": "CA:FALSE",
         "subjectKeyIdentifier": "84:93:3A:3C:73:0D:EA:A6:59:3E:79:21:80:96:FF:95:A1:B7:0F:5D",
-        "authorityKeyIdentifier": "keyid:A8:4A:6A:63:04:7D:DD:BA:E6:D1:39:B7:A6:45:65:EF:F3:A8:EC:A1\n",
-        "authorityInfoAccess": "OCSP - URI:http:\/\/ocsp.int-x3.letsencrypt.org\nCA Issuers - URI:http:\/\/cert.int-x3.letsencrypt.org\/\n",
+        "authorityKeyIdentifier": "A8:4A:6A:63:04:7D:DD:BA:E6:D1:39:B7:A6:45:65:EF:F3:A8:EC:A1",
+        "authorityInfoAccess": "OCSP - URI:http:\/\/ocsp.int-x3.letsencrypt.org\nCA Issuers - URI:http:\/\/cert.int-x3.letsencrypt.org\/",
         "subjectAltName": "DNS:analytics.spatie.be",
-        "certificatePolicies": "Policy: 2.23.140.1.2.1\nPolicy: 1.3.6.1.4.1.44947.1.1.1\n  CPS: http:\/\/cps.letsencrypt.org\n",
+        "certificatePolicies": "Policy: 2.23.140.1.2.1\nPolicy: 1.3.6.1.4.1.44947.1.1.1\n  CPS: http:\/\/cps.letsencrypt.org",
         "ct_precert_scts": "Signed Certificate Timestamp:\n    Version   : v1 (0x0)\n    Log ID    : 5E:A7:73:F9:DF:56:C0:E7:B5:36:48:7D:D0:49:E0:32:\n                7A:91:9A:0C:84:A1:12:12:84:18:75:96:81:71:45:58\n    Timestamp : Jan 13 04:18:13.691 2020 GMT\n    Extensions: none\n    Signature : ecdsa-with-SHA256\n                30:46:02:21:00:B8:E0:C8:73:90:2E:59:15:28:D2:7E:\n                5F:63:A7:14:BD:0E:A6:40:42:52:C5:20:B1:30:A1:21:\n                25:1F:C3:CB:D0:02:21:00:DA:4D:D5:EC:E5:28:F2:24:\n                79:1C:F3:02:B0:A0:C1:DD:9B:65:0F:95:19:52:9B:27:\n                68:DA:72:84:83:E9:B4:18\nSigned Certificate Timestamp:\n    Version   : v1 (0x0)\n    Log ID    : B2:1E:05:CC:8B:A2:CD:8A:20:4E:87:66:F9:2B:B9:8A:\n                25:20:67:6B:DA:FA:70:E7:B2:49:53:2D:EF:8B:90:5E\n    Timestamp : Jan 13 04:18:13.670 2020 GMT\n    Extensions: none\n    Signature : ecdsa-with-SHA256\n                30:44:02:20:41:9C:70:D9:1F:60:9E:C9:65:53:E0:2F:\n                B8:A7:FD:29:D7:33:FF:F8:73:BC:1F:D3:C2:1C:85:80:\n                F2:70:10:3B:02:20:28:10:E5:4D:E3:90:C8:04:58:58:\n                51:88:B5:08:34:CF:CA:9D:52:1B:86:56:4C:04:3A:B3:\n                4E:D7:BE:3D:13:2E"
     }
 }

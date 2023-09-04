@@ -43,7 +43,15 @@ it('can determine the signature algorithm')
     ->expect(fn () => $this->certificate->getSignatureAlgorithm())
     ->toEqual('RSA-SHA256');
 
-it('can determine the additional domains', function () {
+it('can determine the public key algorithm')
+    ->expect(fn () => $this->certificate->getPublicKeyAlgorithm())
+    ->toEqual("Unknown");
+
+it('can determine the public key size')
+    ->expect(fn () => $this->certificate->getPublicKeySize())
+    ->toEqual(0);
+
+    it('can determine the additional domains', function () {
     expect($this->certificate->getAdditionalDomains())->toHaveCount(3)
         ->and($this->certificate->getAdditionalDomains()[0])->toEqual('spatie.be')
         ->and($this->certificate->getAdditionalDomains()[1])->toEqual('www.spatie.be')
@@ -156,7 +164,7 @@ it('can convert the certificate to a string', function () {
 
 it('can get the hash of a certificate')
     ->expect(fn () => $this->certificate->getHash())
-    ->toEqual('7469a491af5f1a5cc5dc5775608ec0ab');
+    ->toEqual('55353c8a63ab7669bb37a2692d2b0f3d');
 
 it('can get all domains', function () {
     expect($this->certificate->getDomains())->toMatchArray([
