@@ -54,7 +54,7 @@ class SslCertificate
             $properties['fingerprint'],
             $properties['fingerprintSha256'],
             $properties['remoteAddress'],
-            $properties['publicKeyDetail'],
+            $properties['publicKeyDetail'] ?? [],
         );
     }
 
