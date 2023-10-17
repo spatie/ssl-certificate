@@ -2,6 +2,7 @@
 
 namespace Spatie\SslCertificate;
 
+use ErrorException;
 use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate;
 use Spatie\SslCertificate\Exceptions\InvalidIpAddress;
 
@@ -180,14 +181,20 @@ class Downloader
             $connectTo = $hostName;
         }
 
-        $client = @stream_socket_client(
-            "ssl://{$connectTo}:{$this->port}",
-            $errorNumber,
-            $errorDescription,
-            $this->timeout,
-            STREAM_CLIENT_CONNECT,
-            $streamContext
-        );
+        try {
+            $client = stream_socket_client(
+                "ssl://{$connectTo}:{$this->port}",
+                $errorNumber,
+                $errorDescription,
+                $this->timeout,
+                STREAM_CLIENT_CONNECT,
+                $streamContext
+            );
+        }
+        catch (ErrorException $exception) {
+            $client = null;
+            $errorDescription = trim(str_replace('stream_socket_client():', '', $exception->getMessage()));
+        }
 
         if (! empty($errorDescription)) {
             throw $this->buildFailureException($connectTo, $errorDescription);
