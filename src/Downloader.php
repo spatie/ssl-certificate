@@ -190,8 +190,7 @@ class Downloader
                 STREAM_CLIENT_CONNECT,
                 $streamContext
             );
-        }
-        catch (ErrorException $exception) {
+        } catch (ErrorException $exception) {
             $client = null;
             $errorDescription = trim(str_replace('stream_socket_client():', '', $exception->getMessage()));
         }
