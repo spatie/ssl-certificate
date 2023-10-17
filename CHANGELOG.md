@@ -2,6 +2,14 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 2.6.2 - 2023-10-17
+
+### What's Changed
+
+- Use stream_socket_client() exception for better message by @rudiedirkx in https://github.com/spatie/ssl-certificate/pull/183
+
+**Full Changelog**: https://github.com/spatie/ssl-certificate/compare/2.6.1...2.6.2
+
 ## 2.6.1 - 2023-09-29
 
 - improve bc
