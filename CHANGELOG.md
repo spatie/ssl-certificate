@@ -2,6 +2,18 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 2.6.3 - 2024-02-17
+
+### What's Changed
+
+* Suppress `stream_socket_client` warnings by @mbardelmeijer in https://github.com/spatie/ssl-certificate/pull/184
+
+### New Contributors
+
+* @mbardelmeijer made their first contribution in https://github.com/spatie/ssl-certificate/pull/184
+
+**Full Changelog**: https://github.com/spatie/ssl-certificate/compare/2.6.2...2.6.3
+
 ## 2.6.2 - 2023-10-17
 
 ### What's Changed
