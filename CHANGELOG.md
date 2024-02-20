@@ -2,6 +2,10 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 2.6.4 - 2024-02-20
+
+- fix errors
+
 ## 2.6.3 - 2024-02-17
 
 ### What's Changed
