@@ -2,6 +2,20 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 2.6.5 - 2024-03-25
+
+### What's Changed
+
+* Add PHP 8.3 on test by @lloricode in https://github.com/spatie/ssl-certificate/pull/186
+* Fix deprecated calls in test by @lloricode in https://github.com/spatie/ssl-certificate/pull/187
+* Allow Carbon v3 by @lloricode in https://github.com/spatie/ssl-certificate/pull/185
+
+### New Contributors
+
+* @lloricode made their first contribution in https://github.com/spatie/ssl-certificate/pull/186
+
+**Full Changelog**: https://github.com/spatie/ssl-certificate/compare/2.6.4...2.6.5
+
 ## 2.6.4 - 2024-02-20
 
 - fix errors
