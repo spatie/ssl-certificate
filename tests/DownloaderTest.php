@@ -88,11 +88,11 @@ it('can download all certificates from a host name with socket context options',
 });
 
 it('throws an exception for non existing host')
-    ->tap(fn () => Downloader::downloadCertificateFromUrl('spatie-non-existing.be'))
+    ->defer(fn () => Downloader::downloadCertificateFromUrl('spatie-non-existing.be'))
     ->throws(HostDoesNotExist::class);
 
 it('throws an exception when downloading a certificate from a host that contains none')
-    ->tap(fn () => Downloader::downloadCertificateFromUrl('3564020356.org'))
+    ->defer(fn () => Downloader::downloadCertificateFromUrl('3564020356.org'))
     ->throws(UnknownError::class);
 
 it('throws an exception when downloading a certificate for a missing host name from an ip address', function () {

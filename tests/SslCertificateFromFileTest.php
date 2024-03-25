@@ -8,11 +8,11 @@ beforeEach(function () {
 });
 
 it('can load pem certificate')
-    ->tap(fn () => $this->certificate = SslCertificate::createFromFile(__DIR__ . '/stubs/spatieCertificate.pem'))
+    ->defer(fn () => $this->certificate = SslCertificate::createFromFile(__DIR__ . '/stubs/spatieCertificate.pem'))
     ->expect(fn () => $this->certificate->getOrganization())->toEqual("Let's Encrypt")
     ->and(fn () => $this->certificate->getDomain())->toEqual("analytics.spatie.be");
 
 it('can load der certificate')
-    ->tap(fn () => $this->certificate = SslCertificate::createFromFile(__DIR__ . '/stubs/derCertificate.der'))
+    ->defer(fn () => $this->certificate = SslCertificate::createFromFile(__DIR__ . '/stubs/derCertificate.der'))
     ->expect(fn () => $this->certificate->getOrganization())->toEqual("Let's Encrypt")
     ->and(fn () => $this->certificate->getDomain())->toEqual("analytics.spatie.be");

@@ -16,7 +16,7 @@ it('can determine a host name when not specifying a protocol', function () {
 });
 
 it('throws an exception when creating an url from an empty string')
-    ->tap(fn () => new Url(''))
+    ->defer(fn () => new Url(''))
     ->throws(InvalidUrl::class);
 
 it('can assume a default port when not explicitly defined', function () {
