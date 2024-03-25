@@ -12,8 +12,9 @@ jobs:
                 os: [ubuntu-latest]
                 php: [8.3, 8.2, 8.1]
                 dependency-version: [prefer-lowest, prefer-stable]
+                carbon: [^2.68.1, ^3.0]
 
-        name: P${{ matrix.php }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
+        name: P${{ matrix.php }} - Carbon${{ matrix.carbon }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
 
         steps:
             -   name: Checkout code
@@ -27,7 +28,9 @@ jobs:
                     coverage: none
 
             -   name: Install dependencies
-                run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
+                run: |
+                  composer require "nesbot/carbon:${{ matrix.carbon }}" --no-interaction --no-update
+                  composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
 
             -   name: Execute tests
-                run: vendor/bin/pest
+                run: vendor/bin/pest --ci
