@@ -19,14 +19,19 @@ $certificate = SslCertificate::createFromFile($pathToCertificateFile);
 // or from a string
 $certificate = SslCertificate::createFromString($certificateData);
 
-$certificate->getIssuer(); // returns "Let's Encrypt Authority X3"
 $certificate->isValid(); // returns true if the certificate is currently valid
-$certificate->validFromDate(); // returns a Carbon instance Carbon
+
 $certificate->expirationDate(); // returns a Carbon instance Carbon
-$certificate->lifespanInDays(); // return the amount of days between  validFromDate and expirationDate
-$certificate->expirationDate()->diffInDays(); // returns an int
-$certificate->getSignatureAlgorithm(); // returns a string
+$certificate->validFromDate(); // returns a Carbon instance Carbon
+
+$certificate->daysUntilExpirationDate(); // returns the amount of days between today and expirationDate
+$certificate->lifespanInDays(); // return the amount of days between validFromDate and expirationDate
+
+$certificate->getIssuer(); // returns "Let's Encrypt Authority X3"
 $certificate->getOrganization(); // returns the organization name when available
+$certificate->getPublicKeyAlgorithm(); // returns the public key algorithm
+$certificate->getPublicKeySize(); // returns the public key algorithm
+$certificate->getSignatureAlgorithm(); // returns the signature algorithm
 ```
 
 #### Downloading invalid certificate
