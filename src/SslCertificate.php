@@ -162,7 +162,7 @@ class SslCertificate
 
     public function lifespanInDays(): int
     {
-        return $this->validFromDate()->diffInDays($this->expirationDate());
+        return $this->validFromDate()->diffInDays($this->expirationDate(), false);
     }
 
     public function isExpired(): bool
@@ -216,7 +216,7 @@ class SslCertificate
     {
         $endDate = $this->expirationDate();
 
-        return (int) Carbon::now()->diffInDays($endDate);
+        return (int) Carbon::now()->diffInDays($endDate, false);
     }
 
     public function getDomains(): array
