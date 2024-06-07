@@ -2,6 +2,19 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 2.6.6 - 2024-06-07
+
+### What's Changed
+
+* Update README.md by @JoeHorn in https://github.com/spatie/ssl-certificate/pull/188
+* Make days diff negative when using Carbon v2 by @kylekatarnls in https://github.com/spatie/ssl-certificate/pull/189
+
+### New Contributors
+
+* @kylekatarnls made their first contribution in https://github.com/spatie/ssl-certificate/pull/189
+
+**Full Changelog**: https://github.com/spatie/ssl-certificate/compare/2.6.5...2.6.6
+
 ## 2.6.5 - 2024-03-25
 
 ### What's Changed
