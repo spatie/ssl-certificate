@@ -2,6 +2,18 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 2.6.7 - 2024-06-28
+
+### What's Changed
+
+* Base64 encode serialized publicKeyDetail by @jszobody in https://github.com/spatie/ssl-certificate/pull/190
+
+### New Contributors
+
+* @jszobody made their first contribution in https://github.com/spatie/ssl-certificate/pull/190
+
+**Full Changelog**: https://github.com/spatie/ssl-certificate/compare/2.6.6...2.6.7
+
 ## 2.6.6 - 2024-06-07
 
 ### What's Changed
