@@ -334,13 +334,16 @@ class SslCertificate
         return true;
     }
 
-    public function __serialize(): array {
+    public function __serialize(): array
+    {
         $data = $this->toArray();
         $data['publicKeyDetail'] = base64_encode(serialize($data['publicKeyDetail']));
+
         return $data;
     }
-    
-    public function __unserialize($data): void {
+
+    public function __unserialize($data): void
+    {
         $data['publicKeyDetail'] = unserialize(base64_decode($data['publicKeyDetail']));
         $this->__construct(...$data);
     }
