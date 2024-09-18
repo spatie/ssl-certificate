@@ -162,7 +162,7 @@ class SslCertificate
 
     public function lifespanInDays(): int
     {
-        return $this->validFromDate()->diffInDays($this->expirationDate(), false);
+        return (int)$this->validFromDate()->diffInDays($this->expirationDate(), false);
     }
 
     public function isExpired(): bool
