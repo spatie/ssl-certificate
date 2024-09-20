@@ -2,6 +2,18 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 2.6.8 - 2024-09-20
+
+### What's Changed
+
+* Implicit conversion from float to int Warning by @cord in https://github.com/spatie/ssl-certificate/pull/192
+
+### New Contributors
+
+* @cord made their first contribution in https://github.com/spatie/ssl-certificate/pull/192
+
+**Full Changelog**: https://github.com/spatie/ssl-certificate/compare/2.6.7...2.6.8
+
 ## 2.6.7 - 2024-06-28
 
 ### What's Changed
