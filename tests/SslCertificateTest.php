@@ -5,7 +5,6 @@ use Carbon\Carbon;
 use function Spatie\Snapshots\assertMatchesJsonSnapshot;
 
 use Spatie\SslCertificate\Downloader;
-
 use Spatie\SslCertificate\SslCertificate;
 
 beforeEach(function () {
