@@ -170,7 +170,7 @@ class SslCertificate
         return $this->expirationDate()->isPast();
     }
 
-    public function isValid(string $url = null): bool
+    public function isValid(?string $url = null): bool
     {
         if (! Carbon::now()->between($this->validFromDate(), $this->expirationDate())) {
             return false;
@@ -203,7 +203,7 @@ class SslCertificate
         return false;
     }
 
-    public function isValidUntil(Carbon $carbon, string $url = null): bool
+    public function isValidUntil(Carbon $carbon, ?string $url = null): bool
     {
         if ($this->expirationDate()->lte($carbon)) {
             return false;
