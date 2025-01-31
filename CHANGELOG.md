@@ -2,6 +2,18 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 2.6.9 - 2025-01-31
+
+### What's Changed
+
+* Fix PHP 8.4 implicitly marking parameter deprecation by @jdecool in https://github.com/spatie/ssl-certificate/pull/193
+
+### New Contributors
+
+* @jdecool made their first contribution in https://github.com/spatie/ssl-certificate/pull/193
+
+**Full Changelog**: https://github.com/spatie/ssl-certificate/compare/2.6.8...2.6.9
+
 ## 2.6.8 - 2024-09-20
 
 ### What's Changed
