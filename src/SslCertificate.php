@@ -270,6 +270,10 @@ class SslCertificate
 
         $hostWithDottedPrefix = ".{$host}";
 
+        if ($wildcardHostWithoutWildcard === $hostWithDottedPrefix) {
+            return false;
+        }
+
         return ends_with($hostWithDottedPrefix, $wildcardHostWithoutWildcard);
     }
 
