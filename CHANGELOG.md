@@ -2,6 +2,18 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 2.6.10 - 2025-04-25
+
+### What's Changed
+
+* A wildcard certificate does not cover the root domain by @styxit in https://github.com/spatie/ssl-certificate/pull/194
+
+### New Contributors
+
+* @styxit made their first contribution in https://github.com/spatie/ssl-certificate/pull/194
+
+**Full Changelog**: https://github.com/spatie/ssl-certificate/compare/2.6.9...2.6.10
+
 ## 2.6.9 - 2025-01-31
 
 ### What's Changed
