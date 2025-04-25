@@ -120,7 +120,7 @@ it('can determine if the certificate is valid for a certain domain', function ()
         ->and($this->certificate->isValid('another.spatie.be'))->toBeFalse()
         ->and($this->certificate->isValid('www.another.spatie.be'))->toBeFalse()
         ->and($this->certificate->isValid('another.www.another.spatie.be'))->toBeFalse()
-        ->and($this->certificate->isValid('otherdomain.com'))->toBeTrue()
+        ->and($this->certificate->isValid('otherdomain.com'))->toBeFalse()
         ->and($this->certificate->isValid('www.otherdomain.com'))->toBeTrue()
         ->and($this->certificate->isValid('another.otherdomain.com'))->toBeTrue()
         ->and($this->certificate->isValid('www.another.otherdomain.com'))->toBeFalse()
@@ -128,6 +128,11 @@ it('can determine if the certificate is valid for a certain domain', function ()
         ->and($this->certificate->isValid('facebook.com'))->toBeFalse()
         ->and($this->certificate->isValid('spatie.be.facebook.com'))->toBeFalse()
         ->and($this->certificate->isValid('www.spatie.be.facebook.com'))->toBeFalse();
+});
+
+it('determines that a wildcard certificate is not valid for a root domain', function () {
+    expect($this->certificate->appliesToUrl('another.otherdomain.com'))->toBeTrue()
+        ->and($this->certificate->appliesToUrl('otherdomain.com'))->toBeFalse();
 });
 
 it('can create an instance for the given host', function () {
