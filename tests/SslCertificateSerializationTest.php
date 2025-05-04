@@ -11,7 +11,7 @@ it('cannot json encode certificate array data', function () {
 });
 
 it('can json encode serialized certificate', function () {
-    $json = json_encode(
+    json_encode(
         serialize(SslCertificate::createFromFile(__DIR__ . '/stubs/spatieCertificate.pem'))
     );
 
