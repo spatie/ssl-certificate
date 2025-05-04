@@ -30,7 +30,7 @@ $certificate->lifespanInDays(); // return the amount of days between validFromDa
 $certificate->getIssuer(); // returns "Let's Encrypt Authority X3"
 $certificate->getOrganization(); // returns the organization name when available
 $certificate->getPublicKeyAlgorithm(); // returns the public key algorithm
-$certificate->getPublicKeySize(); // returns the public key algorithm
+$certificate->getPublicKeySize(); // returns the public key size
 $certificate->getSignatureAlgorithm(); // returns the signature algorithm
 ```
 
