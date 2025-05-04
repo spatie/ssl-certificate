@@ -96,7 +96,7 @@ it('throws an exception when downloading a certificate from a host that contains
     ->throws(UnknownError::class);
 
 it('throws an exception when downloading a certificate for a missing host name from an ip address', function () {
-    $sslCertificate = SslCertificate::download()
+    SslCertificate::download()
         ->fromIpAddress('138.197.187.74')
         ->forHost('fake.subdomain.spatie.be');
 })->throws(UnknownError::class);
