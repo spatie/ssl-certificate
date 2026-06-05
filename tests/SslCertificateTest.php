@@ -38,6 +38,16 @@ it('can determine the domain')
     ->expect(fn () => $this->certificate->getDomain())
     ->toEqual('spatie.be');
 
+it('returns an empty subject organization when the subject has none')
+    ->expect(fn () => $this->certificate->getSubjectOrganization())
+    ->toEqual('');
+
+it('can determine the subject organization', function () {
+    $certificate = new SslCertificate(['subject' => ['O' => 'Spatie BV', 'CN' => 'spatie.be']]);
+
+    expect($certificate->getSubjectOrganization())->toEqual('Spatie BV');
+});
+
 it('can determine the signature algorithm')
     ->expect(fn () => $this->certificate->getSignatureAlgorithm())
     ->toEqual('RSA-SHA256');

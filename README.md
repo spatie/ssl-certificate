@@ -29,6 +29,7 @@ $certificate->lifespanInDays(); // return the amount of days between validFromDa
 
 $certificate->getIssuer(); // returns "Let's Encrypt Authority X3"
 $certificate->getOrganization(); // returns the organization name when available
+$certificate->getSubjectOrganization(); // returns the subject organization name when available
 $certificate->getPublicKeyAlgorithm(); // returns the public key algorithm
 $certificate->getPublicKeySize(); // returns the public key size
 $certificate->getSignatureAlgorithm(); // returns the signature algorithm
@@ -145,6 +146,14 @@ Returns the organization belonging to the certificate
 
 ```php
 $certificate->getOrganization(); // returns "Spatie BVBA"
+```
+
+### Getting the subject's organization
+
+Returns the organization of the certificate's subject
+
+```php
+$certificate->getSubjectOrganization(); // returns "Spatie BVBA"
 ```
 
 ### Getting the additional domain names
