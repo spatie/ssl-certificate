@@ -13,7 +13,7 @@ function starts_with($haystack, $needles): bool
     return false;
 }
 
-function ends_with(string $haystack, string | array $needles): bool
+function ends_with(string $haystack, string|array $needles): bool
 {
     foreach ((array) $needles as $needle) {
         if ((string) $needle === substr($haystack, -length($needle))) {
@@ -34,7 +34,7 @@ function length(string $value): int
     return mb_strlen($value);
 }
 
-function str_contains(string $haystack, string | array $needles): bool
+function str_contains(string $haystack, string|array $needles): bool
 {
     foreach ((array) $needles as $needle) {
         if ($needle != '' && mb_strpos($haystack, $needle) !== false) {

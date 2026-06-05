@@ -4,15 +4,15 @@ namespace Spatie\SslCertificate\Exceptions;
 
 use Exception;
 
-class InvalidUrl extends Exception
+final class InvalidUrl extends Exception
 {
     public static function couldNotValidate(string $url): static
     {
-        return new static("String `{$url}` is not a valid url.");
+        return new self("String `{$url}` is not a valid url.");
     }
 
     public static function couldNotDetermineHost(string $url): static
     {
-        return new static("Could not determine host from url `{$url}`.");
+        return new self("Could not determine host from url `{$url}`.");
     }
 }

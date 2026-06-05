@@ -17,7 +17,7 @@ class Url
         }
 
         if (function_exists('idn_to_ascii') && strlen($url) < 61) {
-            $url = idn_to_ascii($url, false, INTL_IDNA_VARIANT_UTS46);
+            $url = idn_to_ascii($url, IDNA_DEFAULT, INTL_IDNA_VARIANT_UTS46);
         }
 
         if (! $this->isValidUrl($url)) {

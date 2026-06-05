@@ -1,16 +1,15 @@
 <?php
 
 use Carbon\Carbon;
-
-use function Spatie\Snapshots\assertMatchesJsonSnapshot;
-
 use Spatie\SslCertificate\Downloader;
 use Spatie\SslCertificate\SslCertificate;
+
+use function Spatie\Snapshots\assertMatchesJsonSnapshot;
 
 beforeEach(function () {
     Carbon::setTestNow(Carbon::create('2016', '06', '01', '00', '00', '00', 'utc'));
 
-    $rawCertificateFields = json_decode(file_get_contents(__DIR__ . '/stubs/spatieCertificateFields.json'), true);
+    $rawCertificateFields = json_decode(file_get_contents(__DIR__.'/stubs/spatieCertificateFields.json'), true);
 
     $this->certificate = new SslCertificate($rawCertificateFields);
 
@@ -21,7 +20,7 @@ beforeEach(function () {
 it('can get the raw certificate fields', function () {
     $rawCertificateFields = $this->certificate->getRawCertificateFields();
 
-    $expectedFields = json_decode(file_get_contents(__DIR__ . '/stubs/spatieCertificateFields.json'), true);
+    $expectedFields = json_decode(file_get_contents(__DIR__.'/stubs/spatieCertificateFields.json'), true);
 
     expect($rawCertificateFields)->toEqual($expectedFields);
 });
@@ -54,7 +53,7 @@ it('can determine the signature algorithm')
 
 it('can determine the public key algorithm')
     ->expect(fn () => $this->certificate->getPublicKeyAlgorithm())
-    ->toEqual("Unknown");
+    ->toEqual('Unknown');
 
 it('can determine the public key size')
     ->expect(fn () => $this->certificate->getPublicKeySize())
@@ -162,7 +161,7 @@ it('provides a fluent interface to set all options', function () {
 it('provides a fluent interface to set all options with hostport', function () {
     $downloadedCertificate = SslCertificate::download()
         ->setTimeout(30)
-        ->forHost($this->domainWithDifferentPort . ':' . $this->differentPort);
+        ->forHost($this->domainWithDifferentPort.':'.$this->differentPort);
 
     expect($downloadedCertificate->getDomain())->toBe($this->domainWithDifferentPort);
 });
@@ -225,7 +224,7 @@ it('can be encoded as json', function () {
 
     expect(strlen($serializable))->toBeGreaterThan(1000);
 
-    $sslCertificate = Downloader::downloadCertificateFromUrl($this->domainWithDifferentPort . ':' . $this->differentPort);
+    $sslCertificate = Downloader::downloadCertificateFromUrl($this->domainWithDifferentPort.':'.$this->differentPort);
 
     $serializable = serialize($sslCertificate);
 
@@ -234,7 +233,7 @@ it('can be encoded as json', function () {
 
 it('does not notify on wrong domains', function () {
     $rawCertificateFields = json_decode(
-        file_get_contents(__DIR__ . '/stubs/certificateWithRandomWildcardDomains.json'),
+        file_get_contents(__DIR__.'/stubs/certificateWithRandomWildcardDomains.json'),
         true
     );
 
@@ -245,7 +244,7 @@ it('does not notify on wrong domains', function () {
 
 it('correctly compares uppercase domain names', function () {
     $rawCertificateFields = json_decode(
-        file_get_contents(__DIR__ . '/stubs/certificateWithUppercaseDomains.json'),
+        file_get_contents(__DIR__.'/stubs/certificateWithUppercaseDomains.json'),
         true
     );
 
@@ -257,12 +256,12 @@ it('correctly compares uppercase domain names', function () {
 
 it('correctly identifies pre certificates', function () {
     $rawCertificateFieldsNormalCertificate = json_decode(
-        file_get_contents(__DIR__ . '/stubs/spatieCertificateFields.json'),
+        file_get_contents(__DIR__.'/stubs/spatieCertificateFields.json'),
         true
     );
 
     $rawCertificateFieldsPreCertificate = json_decode(
-        file_get_contents(__DIR__ . '/stubs/preCertificate.json'),
+        file_get_contents(__DIR__.'/stubs/preCertificate.json'),
         true
     );
 

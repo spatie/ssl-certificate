@@ -18,7 +18,7 @@ it('can download a certificate from a host name', function () {
 });
 
 it('can download a certificate from a host name with hostport ', function () {
-    $sslCertificate = Downloader::downloadCertificateFromUrl($this->domainWithDifferentPort . ':' . $this->differentPort);
+    $sslCertificate = Downloader::downloadCertificateFromUrl($this->domainWithDifferentPort.':'.$this->differentPort);
 
     expect($sslCertificate)->toBeInstanceOf(SslCertificate::class);
 });
@@ -30,7 +30,7 @@ it('can download a certificate from a host name with strange characters', functi
 });
 
 test('can download a certificate from a host name with strange characters with hostport', function () {
-    $sslCertificate = Downloader::downloadCertificateFromUrl('https://' . $this->domainWithDifferentPort . ':' . $this->differentPort);
+    $sslCertificate = Downloader::downloadCertificateFromUrl('https://'.$this->domainWithDifferentPort.':'.$this->differentPort);
 
     expect($sslCertificate)->toBeInstanceOf(SslCertificate::class);
 });
@@ -46,7 +46,7 @@ it('can download a certificate for a host name from an ip address', function () 
 it('can download a certificate for a host name from an ip address with hostport', function () {
     $sslCertificate = SslCertificate::download()
         ->fromIpAddress($this->ipDomainWithDifferentPort)
-        ->forHost($this->domainWithDifferentPort . ':' . $this->differentPort);
+        ->forHost($this->domainWithDifferentPort.':'.$this->differentPort);
 
     expect($sslCertificate)->toBeInstanceOf(SslCertificate::class);
 });
@@ -66,19 +66,19 @@ it('sets a fingerprint on the downloaded certificate', function () {
 });
 
 it('sets a fingerprint on the downloaded certificate with hostport', function () {
-    $sslCertificate = Downloader::downloadCertificateFromUrl($this->domainWithDifferentPort . ':' . $this->differentPort);
+    $sslCertificate = Downloader::downloadCertificateFromUrl($this->domainWithDifferentPort.':'.$this->differentPort);
 
     expect($sslCertificate->getFingerprint())->not->toBeEmpty();
 });
 
 it('can download all certificates from a host name', function () {
-    $sslCertificates = (new Downloader())->getCertificates('spatie.be');
+    $sslCertificates = (new Downloader)->getCertificates('spatie.be');
 
     expect($sslCertificates)->toHaveCount(1);
 });
 
 it('can download all certificates from a host name with socket context options', function () {
-    $sslCertificates = (new Downloader())
+    $sslCertificates = (new Downloader)
         ->withSocketContextOptions([
             'bindto' => '0:0',
         ])
@@ -108,7 +108,7 @@ it('can retrieve the ip address of the server that served the certificates', fun
 });
 
 it('can retrieve the ip address of the server that served the certificates with hostport', function () {
-    $sslCertificate = Downloader::downloadCertificateFromUrl($this->domainWithDifferentPort . ':' . $this->differentPort);
+    $sslCertificate = Downloader::downloadCertificateFromUrl($this->domainWithDifferentPort.':'.$this->differentPort);
 
-    expect($sslCertificate->getRemoteAddress())->toEqual($this->ipDomainWithDifferentPort . ':' . $this->differentPort);
+    expect($sslCertificate->getRemoteAddress())->toEqual($this->ipDomainWithDifferentPort.':'.$this->differentPort);
 });

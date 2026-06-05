@@ -1,15 +1,14 @@
 <?php
 
 use Carbon\Carbon;
+use Spatie\SslCertificate\SslCertificate;
 
 use function Spatie\Snapshots\assertMatchesJsonSnapshot;
-
-use Spatie\SslCertificate\SslCertificate;
 
 beforeEach(function () {
     Carbon::setTestNow(Carbon::create('2020', '01', '13', '03', '18', '13', 'utc'));
 
-    $certificate = file_get_contents(__DIR__ . '/stubs/spatieCertificate.pem');
+    $certificate = file_get_contents(__DIR__.'/stubs/spatieCertificate.pem');
 
     $this->certificate = SslCertificate::createFromString($certificate);
 
@@ -35,7 +34,7 @@ it('can determine the signature algorithm')
 
 it('can determine the public key algorithm')
     ->expect(fn () => $this->certificate->getPublicKeyAlgorithm())
-    ->toEqual("RSA");
+    ->toEqual('RSA');
 
 it('can determine the public key size')
     ->expect(fn () => $this->certificate->getPublicKeySize())
@@ -93,7 +92,7 @@ it('provides a fluent interface to set all options', function () {
 it('provides a fluent interface to set all options with hostport', function () {
     $downloadedCertificate = SslCertificate::download()
         ->setTimeout(30)
-        ->forHost($this->domainWithDifferentPort . ':' . $this->differentPort);
+        ->forHost($this->domainWithDifferentPort.':'.$this->differentPort);
 
     expect($downloadedCertificate->getDomain())->toEqual($this->domainWithDifferentPort);
 });
@@ -140,7 +139,7 @@ it('can determine if the certificate has a certain domain', function () {
 
 it('does not notify on wrong domains', function () {
     $rawCertificateFields = json_decode(
-        file_get_contents(__DIR__ . '/stubs/certificateWithRandomWildcardDomains.json'),
+        file_get_contents(__DIR__.'/stubs/certificateWithRandomWildcardDomains.json'),
         true
     );
 
@@ -151,7 +150,7 @@ it('does not notify on wrong domains', function () {
 
 it('correctly compares uppercase domain names', function () {
     $rawCertificateFields = json_decode(
-        file_get_contents(__DIR__ . '/stubs/certificateWithUppercaseDomains.json'),
+        file_get_contents(__DIR__.'/stubs/certificateWithUppercaseDomains.json'),
         true
     );
 
@@ -163,12 +162,12 @@ it('correctly compares uppercase domain names', function () {
 
 it('correctly identifies pre certificates', function () {
     $rawCertificateFieldsNormalCertificate = json_decode(
-        file_get_contents(__DIR__ . '/stubs/spatieCertificateFields.json'),
+        file_get_contents(__DIR__.'/stubs/spatieCertificateFields.json'),
         true
     );
 
     $rawCertificateFieldsPreCertificate = json_decode(
-        file_get_contents(__DIR__ . '/stubs/preCertificate.json'),
+        file_get_contents(__DIR__.'/stubs/preCertificate.json'),
         true
     );
 

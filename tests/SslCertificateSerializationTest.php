@@ -4,7 +4,7 @@ use Spatie\SslCertificate\SslCertificate;
 
 it('cannot json encode certificate array data', function () {
     json_encode(
-        SslCertificate::createFromFile(__DIR__ . '/stubs/spatieCertificate.pem')->toArray()
+        SslCertificate::createFromFile(__DIR__.'/stubs/spatieCertificate.pem')->toArray()
     );
 
     expect(json_last_error_msg())->toEqual('Malformed UTF-8 characters, possibly incorrectly encoded');
@@ -12,16 +12,16 @@ it('cannot json encode certificate array data', function () {
 
 it('can json encode serialized certificate', function () {
     json_encode(
-        serialize(SslCertificate::createFromFile(__DIR__ . '/stubs/spatieCertificate.pem'))
+        serialize(SslCertificate::createFromFile(__DIR__.'/stubs/spatieCertificate.pem'))
     );
 
     expect(json_last_error_msg())->toEqual('No error');
 });
 
 it('can unserialize serialized certificate', function () {
-    $serialized = serialize(SslCertificate::createFromFile(__DIR__ . '/stubs/spatieCertificate.pem'));
+    $serialized = serialize(SslCertificate::createFromFile(__DIR__.'/stubs/spatieCertificate.pem'));
 
     $unserialized = unserialize($serialized);
 
-    expect($unserialized->getDomain())->toEqual("analytics.spatie.be");
+    expect($unserialized->getDomain())->toEqual('analytics.spatie.be');
 });

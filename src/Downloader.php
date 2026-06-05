@@ -134,7 +134,7 @@ class Downloader
         return array_unique($certificates);
     }
 
-    public function forHost(string $hostName): SslCertificate | bool
+    public function forHost(string $hostName): SslCertificate|bool
     {
         $url = new Url($hostName);
 
@@ -147,9 +147,9 @@ class Downloader
         return $certificates[0] ?? false;
     }
 
-    public static function downloadCertificateFromUrl(string $url, int $timeout = 30, bool $verifyCertificate = true): SslCertificate | bool
+    public static function downloadCertificateFromUrl(string $url, int $timeout = 30, bool $verifyCertificate = true): SslCertificate|bool
     {
-        return (new static())
+        return (new self)
             ->setTimeout($timeout)
             ->withVerifyPeer($verifyCertificate)
             ->withVerifyPeerName($verifyCertificate)
@@ -176,7 +176,7 @@ class Downloader
         ]);
 
         if ($this->usingIpAddress) {
-            $connectTo = ($this->isIPv6) ? "[" . $this->ipAddress . ']' : $this->ipAddress;
+            $connectTo = ($this->isIPv6) ? '['.$this->ipAddress.']' : $this->ipAddress;
         } else {
             $connectTo = $hostName;
         }

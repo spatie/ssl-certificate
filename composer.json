@@ -33,8 +33,10 @@
         "spatie/macroable": "^2.0"
     },
     "require-dev": {
-        "pestphp/pest": "^2.12.2",
-        "spatie/pest-plugin-snapshots": "^2.0.1",
+        "laravel/pint": "^1.29",
+        "pestphp/pest": "^4.0",
+        "phpstan/phpstan": "^2.2",
+        "spatie/pest-plugin-snapshots": "^2.2",
         "spatie/ray": "^1.37.2"
     },
     "autoload": {
@@ -51,7 +53,9 @@
         }
     },
     "scripts": {
-        "test": "vendor/bin/pest"
+        "analyse": "vendor/bin/phpstan analyse",
+        "test": "vendor/bin/pest",
+        "format": "vendor/bin/pint"
     },
     "config": {
         "sort-packages": true,

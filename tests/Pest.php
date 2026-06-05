@@ -1,3 +1,5 @@
 <?php
 
-uses(PHPUnit\Framework\TestCase::class)->in('.');
+use PHPUnit\Framework\TestCase;
+
+uses(TestCase::class)->in('.');
