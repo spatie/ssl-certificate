@@ -6,6 +6,7 @@ use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate\UnknownError;
 use Spatie\SslCertificate\SslCertificate;
 
 beforeEach(function () {
+    $this->ipAddress = gethostbyname('spatie.be');
     $this->domainWithDifferentPort = 'psd2.b2b.belfius.be';
     $this->ipDomainWithDifferentPort = '141.96.1.12';
     $this->differentPort = 8443;
@@ -37,7 +38,7 @@ test('can download a certificate from a host name with strange characters with h
 
 it('can download a certificate for a host name from an ip address', function () {
     $sslCertificate = SslCertificate::download()
-        ->fromIpAddress('164.92.244.169')
+        ->fromIpAddress($this->ipAddress)
         ->forHost('spatie.be');
 
     expect($sslCertificate)->toBeInstanceOf(SslCertificate::class);
@@ -104,7 +105,7 @@ it('throws an exception when downloading a certificate for a missing host name f
 it('can retrieve the ip address of the server that served the certificates', function () {
     $sslCertificate = Downloader::downloadCertificateFromUrl('spatie.be');
 
-    expect($sslCertificate->getRemoteAddress())->toEqual('164.92.244.169:443');
+    expect($sslCertificate->getRemoteAddress())->toEqual($this->ipAddress.':443');
 });
 
 it('can retrieve the ip address of the server that served the certificates with hostport', function () {
