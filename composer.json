@@ -34,9 +34,9 @@
     },
     "require-dev": {
         "laravel/pint": "^1.29",
-        "pestphp/pest": "^4.0",
+        "pestphp/pest": "^5.3.5",
         "phpstan/phpstan": "^2.2",
-        "spatie/pest-plugin-snapshots": "^2.2",
+        "spatie/pest-plugin-snapshots": "^2.4",
         "spatie/ray": "^1.37.2"
     },
     "autoload": {
