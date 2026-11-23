@@ -112,6 +112,13 @@ SslCertificate::download()
    ->forHost($hostName);
 ```
 
+By default the peer is verified against the CA bundle of your system. You can verify it against your own bundle of trusted root certificates instead.
+```php
+SslCertificate::download()
+   ->withCaFile('/path/to/cacert.pem')
+   ->forHost($hostName);
+```
+
 If the given `ipAddress` is invalid `Spatie\SslCertificate\Exceptions\InvalidIpAddress` will be thrown.
 
 If the given `hostName` is invalid `Spatie\SslCertificate\Exceptions\InvalidUrl` will be thrown.

@@ -28,6 +28,8 @@ class Downloader
 
     protected bool $verifyPeerName = true;
 
+    protected ?string $caFile = null;
+
     protected int $followLocation = 1;
 
     public function usingPort(int $port): self
@@ -68,6 +70,13 @@ class Downloader
     public function withVerifyPeerName(bool $verifyPeerName): self
     {
         $this->verifyPeerName = $verifyPeerName;
+
+        return $this;
+    }
+
+    public function withCaFile(?string $caFile): self
+    {
+        $this->caFile = $caFile;
 
         return $this;
     }
@@ -169,6 +178,10 @@ class Downloader
             'verify_peer_name' => $this->verifyPeerName,
             'follow_location' => $this->followLocation,
         ];
+
+        if ($this->caFile !== null) {
+            $sslOptions['cafile'] = $this->caFile;
+        }
 
         $streamContext = stream_context_create([
             'socket' => $this->socketContextOptions,

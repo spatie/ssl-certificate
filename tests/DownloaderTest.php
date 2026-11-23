@@ -88,6 +88,20 @@ it('can download all certificates from a host name with socket context options',
     expect($sslCertificates)->toHaveCount(1);
 });
 
+it('verifies the peer against a custom ca file', function () {
+    $sslCertificates = (new Downloader)
+        ->withCaFile(__DIR__.'/stubs/gtsRootR4.pem')
+        ->getCertificates('spatie.be');
+
+    expect($sslCertificates)->toHaveCount(1);
+});
+
+it('throws an exception when the custom ca file does not contain the root of the peer', function () {
+    (new Downloader)
+        ->withCaFile(__DIR__.'/stubs/spatieCertificate.pem')
+        ->getCertificates('spatie.be');
+})->throws(UnknownError::class);
+
 it('throws an exception for non existing host')
     ->defer(fn () => Downloader::downloadCertificateFromUrl('spatie-non-existing.be'))
     ->throws(HostDoesNotExist::class);
