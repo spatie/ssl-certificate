@@ -2,6 +2,15 @@
 
 All notable changes to `ssl-certificate` will be documented in this file
 
+## 2.7.1 - 2026-11-23
+
+### What's Changed
+
+* Test on PHP 8.6 alongside PHP 8.5 by @freekmurze in https://github.com/spatie/ssl-certificate/pull/200
+* Add withCaFile to verify the peer against a custom CA bundle by @mattiasgeniar in https://github.com/spatie/ssl-certificate/pull/201
+
+**Full Changelog**: https://github.com/spatie/ssl-certificate/compare/2.7.0...2.7.1
+
 ## 2.7.0 - 2026-06-05
 
 ### What's Changed
