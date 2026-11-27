@@ -119,6 +119,13 @@ SslCertificate::download()
    ->forHost($hostName);
 ```
 
+You can also verify the peer against a directory of trusted root certificates. The files must be named after their subject hash, which `openssl rehash /path/to/certs` (or `c_rehash`) does for you. This can be combined with `withCaFile`.
+```php
+SslCertificate::download()
+   ->withCaPath('/path/to/certs')
+   ->forHost($hostName);
+```
+
 If the given `ipAddress` is invalid `Spatie\SslCertificate\Exceptions\InvalidIpAddress` will be thrown.
 
 If the given `hostName` is invalid `Spatie\SslCertificate\Exceptions\InvalidUrl` will be thrown.

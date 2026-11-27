@@ -30,6 +30,8 @@ class Downloader
 
     protected ?string $caFile = null;
 
+    protected ?string $caPath = null;
+
     protected int $followLocation = 1;
 
     public function usingPort(int $port): self
@@ -77,6 +79,13 @@ class Downloader
     public function withCaFile(?string $caFile): self
     {
         $this->caFile = $caFile;
+
+        return $this;
+    }
+
+    public function withCaPath(?string $caPath): self
+    {
+        $this->caPath = $caPath;
 
         return $this;
     }
@@ -181,6 +190,10 @@ class Downloader
 
         if ($this->caFile !== null) {
             $sslOptions['cafile'] = $this->caFile;
+        }
+
+        if ($this->caPath !== null) {
+            $sslOptions['capath'] = $this->caPath;
         }
 
         $streamContext = stream_context_create([
