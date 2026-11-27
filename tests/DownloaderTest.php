@@ -102,6 +102,48 @@ it('throws an exception when the custom ca file does not contain the root of the
         ->getCertificates('spatie.be');
 })->throws(UnknownError::class);
 
+it('verifies the peer against a custom ca path', function () {
+    $sslCertificates = (new Downloader)
+        ->withCaPath(__DIR__.'/stubs/capath/gtsRootR4')
+        ->getCertificates('spatie.be');
+
+    expect($sslCertificates)->toHaveCount(1);
+});
+
+it('throws an exception when the custom ca path does not contain the root of the peer', function () {
+    set_error_handler(fn (int $severity, string $message) => throw new ErrorException($message, 0, $severity));
+
+    try {
+        (new Downloader)
+            ->withCaPath(__DIR__.'/stubs/capath/unrelated')
+            ->getCertificates('spatie.be');
+    } finally {
+        restore_error_handler();
+    }
+})->throws(UnknownError::class, 'certificate verify failed')
+    ->skip((bool) ini_get('openssl.cafile'), 'PHP also trusts the openssl.cafile set in php.ini');
+
+it('ignores the ca path when it is null', function () {
+    $sslCertificates = (new Downloader)
+        ->withCaPath(__DIR__.'/stubs/capath/unrelated')
+        ->withCaPath(null)
+        ->getCertificates('spatie.be');
+
+    expect($sslCertificates)->toHaveCount(1);
+});
+
+it('verifies the peer against a ca file and a ca path together', function (string $caFile, string $caPath) {
+    $sslCertificates = (new Downloader)
+        ->withCaFile(__DIR__.'/stubs/'.$caFile)
+        ->withCaPath(__DIR__.'/stubs/capath/'.$caPath)
+        ->getCertificates('spatie.be');
+
+    expect($sslCertificates)->toHaveCount(1);
+})->with([
+    'root in the ca path' => ['spatieCertificate.pem', 'gtsRootR4'],
+    'root in the ca file' => ['gtsRootR4.pem', 'unrelated'],
+]);
+
 it('throws an exception for non existing host')
     ->defer(fn () => Downloader::downloadCertificateFromUrl('spatie-non-existing.be'))
     ->throws(HostDoesNotExist::class);
